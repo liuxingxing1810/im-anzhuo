@@ -1,0 +1,13 @@
+R_DEF: Internal format may change without notice
+local
+string messages_back
+string messages_empty_subtitle
+string messages_empty_title
+string messages_more_options
+string messages_new_chat
+string messages_say_hello
+string messages_search_empty
+string messages_search_hint
+string messages_title
+string messages_video_call
+string messages_voice_call

@@ -1,0 +1,13 @@
+<resources>
+    <string name="messages_title">消息</string>
+    <string name="messages_new_chat">新消息</string>
+    <string name="messages_more_options">更多选项</string>
+    <string name="messages_search_empty">未找到相关会话</string>
+    <string name="messages_search_hint">尝试其他关键词</string>
+    <string name="messages_empty_title">暂无会话</string>
+    <string name="messages_empty_subtitle">开始新聊天吧</string>
+    <string name="messages_say_hello">和 %s 打个招呼</string>
+    <string name="messages_voice_call">语音通话</string>
+    <string name="messages_video_call">视频通话</string>
+    <string name="messages_back">返回</string>
+</resources>

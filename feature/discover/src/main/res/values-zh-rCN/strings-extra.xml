@@ -1,0 +1,19 @@
+<resources>
+    <string name="moments_title">朋友圈</string>
+    <string name="moments_back">返回</string>
+    <string name="moments_new_post">发动态</string>
+    <string name="scan_title">扫一扫</string>
+    <string name="scan_tab_scan">扫码</string>
+    <string name="scan_tab_text">提取文字</string>
+    <string name="scan_flash_on">开启闪光灯</string>
+    <string name="scan_flash_off">关闭闪光灯</string>
+    <string name="scan_hint">将二维码/条码置于框内</string>
+    <string name="scan_my_qr">我的二维码</string>
+    <string name="scan_album">相册</string>
+    <string name="scan_text_title">对准文字</string>
+    <string name="scan_text_subtitle">从图片提取并复制文本</string>
+    <string name="my_qr_title">我的二维码</string>
+    <string name="my_qr_save">保存</string>
+    <string name="my_qr_share">分享</string>
+    <string name="my_qr_hint">二维码不会改变，可以截图或保存后分享。</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="messages_back">Back</string>
+    <string name="messages_empty_subtitle">Start a new chat to begin messaging</string>
+    <string name="messages_empty_title">No conversations yet</string>
+    <string name="messages_more_options">More options</string>
+    <string name="messages_new_chat">New Chat</string>
+    <string name="messages_say_hello">Say hello to %s</string>
+    <string name="messages_search_empty">No conversations found</string>
+    <string name="messages_search_hint">Try a different search</string>
+    <string name="messages_title">Messages</string>
+    <string name="messages_video_call">Video call</string>
+    <string name="messages_voice_call">Voice call</string>
+</resources>

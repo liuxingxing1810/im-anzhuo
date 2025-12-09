@@ -1,0 +1,20 @@
+<resources>
+    <string name="discover_title">Discover</string>
+    <string name="discover_moments_title">Moments</string>
+    <string name="discover_moments_subtitle">Share your life</string>
+    <string name="discover_scan_title">Scan</string>
+    <string name="discover_scan_subtitle">QR &amp; Bar codes</string>
+    <string name="discover_nearby_title">People Nearby</string>
+    <string name="discover_nearby_subtitle">Discover around you</string>
+    <string name="discover_explore_title">Explore</string>
+    <string name="discover_explore_subtitle">Trending content</string>
+    <string name="discover_mini_apps_title">Mini Apps</string>
+    <string name="discover_mini_apps_subtitle">Light applications</string>
+    <string name="discover_games_title">Games</string>
+    <string name="discover_games_subtitle">Play with friends</string>
+    <string name="discover_shop_title">Shop</string>
+    <string name="discover_shop_subtitle">Discover products</string>
+    <string name="discover_news_title">Top Stories</string>
+    <string name="discover_news_subtitle">What is happening</string>
+    <string name="discover_search_label">Search</string>
+</resources>

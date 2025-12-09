@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discover_explore_subtitle">热门内容</string>
+    <string name="discover_explore_title">探索</string>
+    <string name="discover_games_subtitle">和朋友一起玩</string>
+    <string name="discover_games_title">游戏</string>
+    <string name="discover_mini_apps_subtitle">轻应用</string>
+    <string name="discover_mini_apps_title">小程序</string>
+    <string name="discover_moments_subtitle">分享生活点滴</string>
+    <string name="discover_moments_title">朋友圈</string>
+    <string name="discover_nearby_subtitle">发现周围的朋友</string>
+    <string name="discover_nearby_title">附近的人</string>
+    <string name="discover_news_subtitle">看看正在发生什么</string>
+    <string name="discover_news_title">热点资讯</string>
+    <string name="discover_scan_subtitle">扫码 / 条码</string>
+    <string name="discover_scan_title">扫一扫</string>
+    <string name="discover_search_label">搜索</string>
+    <string name="discover_shop_subtitle">发现好物</string>
+    <string name="discover_shop_title">购物</string>
+    <string name="discover_title">发现</string>
+    <string name="moments_back">返回</string>
+    <string name="moments_new_post">发动态</string>
+    <string name="moments_title">朋友圈</string>
+    <string name="my_qr_hint">二维码不会改变，可以截图或保存后分享。</string>
+    <string name="my_qr_save">保存</string>
+    <string name="my_qr_share">分享</string>
+    <string name="my_qr_title">我的二维码</string>
+    <string name="scan_album">相册</string>
+    <string name="scan_flash_off">关闭闪光灯</string>
+    <string name="scan_flash_on">开启闪光灯</string>
+    <string name="scan_hint">将二维码/条码置于框内</string>
+    <string name="scan_my_qr">我的二维码</string>
+    <string name="scan_tab_scan">扫码</string>
+    <string name="scan_tab_text">提取文字</string>
+    <string name="scan_text_subtitle">从图片提取并复制文本</string>
+    <string name="scan_text_title">对准文字</string>
+    <string name="scan_title">扫一扫</string>
+</resources>

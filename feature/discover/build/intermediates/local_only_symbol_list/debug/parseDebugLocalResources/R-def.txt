@@ -1,0 +1,37 @@
+R_DEF: Internal format may change without notice
+local
+string discover_explore_subtitle
+string discover_explore_title
+string discover_games_subtitle
+string discover_games_title
+string discover_mini_apps_subtitle
+string discover_mini_apps_title
+string discover_moments_subtitle
+string discover_moments_title
+string discover_nearby_subtitle
+string discover_nearby_title
+string discover_news_subtitle
+string discover_news_title
+string discover_scan_subtitle
+string discover_scan_title
+string discover_search_label
+string discover_shop_subtitle
+string discover_shop_title
+string discover_title
+string moments_back
+string moments_new_post
+string moments_title
+string my_qr_hint
+string my_qr_save
+string my_qr_share
+string my_qr_title
+string scan_album
+string scan_flash_off
+string scan_flash_on
+string scan_hint
+string scan_my_qr
+string scan_tab_scan
+string scan_tab_text
+string scan_text_subtitle
+string scan_text_title
+string scan_title

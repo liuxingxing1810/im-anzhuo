@@ -1,0 +1,27 @@
+R_DEF: Internal format may change without notice
+local
+string app_name
+string chat_empty_subtitle
+string chat_empty_title
+string chat_new
+string chat_offline
+string chat_online
+string chat_say_hello
+string chat_search_empty
+string chat_search_hint
+string common_back
+string common_cancel
+string common_confirm
+string common_delete
+string common_edit
+string common_error
+string common_loading
+string common_retry
+string common_save
+string common_search
+string date_today
+string date_yesterday
+string nav_connections
+string nav_discover
+string nav_messages
+string nav_profile

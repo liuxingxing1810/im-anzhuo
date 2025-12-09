@@ -1,0 +1,19 @@
+<resources>
+    <string name="moments_title">Moments</string>
+    <string name="moments_back">Back</string>
+    <string name="moments_new_post">New Post</string>
+    <string name="scan_title">Scan</string>
+    <string name="scan_tab_scan">Scan</string>
+    <string name="scan_tab_text">Extract Text</string>
+    <string name="scan_flash_on">Flash on</string>
+    <string name="scan_flash_off">Flash off</string>
+    <string name="scan_hint">Align QR or barcode within frame</string>
+    <string name="scan_my_qr">My QR Code</string>
+    <string name="scan_album">Album</string>
+    <string name="scan_text_title">Point camera at text</string>
+    <string name="scan_text_subtitle">Extract and copy text from images</string>
+    <string name="my_qr_title">My QR Code</string>
+    <string name="my_qr_save">Save</string>
+    <string name="my_qr_share">Share</string>
+    <string name="my_qr_hint">Your QR code will not change. It can be saved or shared anytime.</string>
+</resources>
