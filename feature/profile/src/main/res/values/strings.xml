@@ -1,8 +1,8 @@
 <resources>
     <!-- Profile -->
     <string name="profile_title">Profile</string>
-    <string name="profile_header_wave_id">Wave ID: %1$s</string>
-    <string name="profile_header_bio_default">Hello, I am using Aurora Wave!</string>
+    <string name="profile_header_wave_id">Star ID: %1$s</string>
+    <string name="profile_header_bio_default">Hello, I am using StarIM!</string>
     <string name="profile_services">Services</string>
     <string name="profile_services_sub">Pay, Cards, Transit</string>
     <string name="profile_favorites">Favorites</string>
@@ -17,7 +17,7 @@
     <string name="profile_appearance">Appearance</string>
     <string name="profile_appearance_sub">Theme, Font size</string>
     <string name="profile_help">Help &amp; Support</string>
-    <string name="profile_about">About Aurora Wave</string>
+    <string name="profile_about">About StarIM</string>
     <string name="profile_about_version">Version 1.0.0</string>
     
     <!-- Settings -->

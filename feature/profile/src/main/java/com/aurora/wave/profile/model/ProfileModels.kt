@@ -56,10 +56,10 @@ data class StorageInfo(
  * About app information
  */
 data class AppInfo(
-    val appName: String = "Aurora Wave",
+    val appName: String = "星星IM",
     val version: String = "1.0.0",
     val buildNumber: String = "2024.06.001",
-    val copyright: String = "© 2024 Aurora Labs"
+    val copyright: String = "© 2024 星星IM"
 )
 
 /**

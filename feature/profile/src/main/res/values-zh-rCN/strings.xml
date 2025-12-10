@@ -1,8 +1,8 @@
 <resources>
     <!-- Profile -->
     <string name="profile_title">我</string>
-    <string name="profile_header_wave_id">Wave ID: %1$s</string>
-    <string name="profile_header_bio_default">你好，我正在使用 Aurora Wave!</string>
+    <string name="profile_header_wave_id">星星ID: %1$s</string>
+    <string name="profile_header_bio_default">你好，我正在使用星星IM!</string>
     <string name="profile_services">服务</string>
     <string name="profile_services_sub">支付、卡包、出行</string>
     <string name="profile_favorites">收藏</string>
@@ -17,7 +17,7 @@
     <string name="profile_appearance">外观</string>
     <string name="profile_appearance_sub">主题、字体大小</string>
     <string name="profile_help">帮助与支持</string>
-    <string name="profile_about">关于 Aurora Wave</string>
+    <string name="profile_about">关于星星IM</string>
     <string name="profile_about_version">版本 1.0.0</string>
     
     <!-- Settings -->

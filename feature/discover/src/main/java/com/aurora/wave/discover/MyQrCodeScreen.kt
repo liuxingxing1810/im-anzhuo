@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import com.aurora.wave.discover.R
+import com.aurora.wave.design.WhiteStatusBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,6 +55,9 @@ fun MyQrCodeScreen(
     onShareClick: () -> Unit = {},
     onSaveClick: () -> Unit = {}
 ) {
+    // 白色状态栏
+    WhiteStatusBar()
+    
     Scaffold(
         topBar = {
             TopAppBar(

@@ -49,6 +49,7 @@ import com.aurora.wave.design.WhiteStatusBar
 @Composable
 fun AboutScreen(
     onBackClick: () -> Unit,
+    onCheckUpdateClick: () -> Unit = {},
     onRateClick: () -> Unit = {},
     onPrivacyClick: () -> Unit = {},
     onTermsClick: () -> Unit = {},
@@ -60,7 +61,7 @@ fun AboutScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("About", fontWeight = FontWeight.SemiBold) },
+                title = { Text("关于", fontWeight = FontWeight.SemiBold) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
@@ -75,17 +76,16 @@ fun AboutScreen(
             )
         }
     ) { padding ->
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding),
-            contentPadding = PaddingValues(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            contentAlignment = Alignment.Center
         ) {
-            // App logo and info
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(24.dp)
+            ) {
                 // App icon
                 Surface(
                     modifier = Modifier.size(100.dp),
@@ -105,7 +105,7 @@ fun AboutScreen(
                 Spacer(modifier = Modifier.height(20.dp))
                 
                 Text(
-                    text = "Aurora Wave",
+                    text = "星星IM",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -131,118 +131,130 @@ fun AboutScreen(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "Up to date",
+                        text = "已是最新版本",
                         style = MaterialTheme.typography.bodySmall,
                         color = Color(0xFF4CAF50)
                     )
                 }
                 
                 Spacer(modifier = Modifier.height(32.dp))
-            }
-            
-            // Rate app card
-            item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    )
+                
+                // 检查更新按钮
+                Button(
+                    onClick = onCheckUpdateClick,
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.fillMaxWidth(0.6f)
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(20.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = null,
-                            modifier = Modifier.size(32.dp),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = "Enjoying Aurora Wave?",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = "Rate us on the Play Store!",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Button(
-                            onClick = onRateClick,
-                            shape = RoundedCornerShape(12.dp)
-                        ) {
-                            Text("Rate Now")
-                        }
-                    }
+                    Text("检查更新")
                 }
-                
-                Spacer(modifier = Modifier.height(24.dp))
-            }
-            
-            // Legal section
-            item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-                ) {
-                    Column {
-                        AboutListItem(
-                            title = "Privacy Policy",
-                            onClick = onPrivacyClick
-                        )
-                        HorizontalDivider(
-                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-                        )
-                        AboutListItem(
-                            title = "Terms of Service",
-                            onClick = onTermsClick
-                        )
-                        HorizontalDivider(
-                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-                        )
-                        AboutListItem(
-                            title = "Open Source Licenses",
-                            onClick = onLicensesClick
-                        )
-                    }
-                }
-                
-                Spacer(modifier = Modifier.height(32.dp))
-            }
-            
-            // Copyright
-            item {
-                Text(
-                    text = "© 2024 Aurora Labs",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                    textAlign = TextAlign.Center
-                )
-                
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                Text(
-                    text = "Made with ❤️ for better communication",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                    textAlign = TextAlign.Center
-                )
-                
-                Spacer(modifier = Modifier.height(24.dp))
             }
         }
     }
+}
+
+// 保留但不显示的原始卡片组件代码
+@Composable
+private fun HiddenCards(
+    onRateClick: () -> Unit = {},
+    onPrivacyClick: () -> Unit = {},
+    onTermsClick: () -> Unit = {},
+    onLicensesClick: () -> Unit = {}
+) {
+    // Rate app card - 已隐藏
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                modifier = Modifier.size(32.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = "喜欢星星IM吗？",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "在应用商店给我们评分吧！",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = onRateClick,
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text("立即评分")
+            }
+        }
+    }
+    
+    Spacer(modifier = Modifier.height(24.dp))
+    
+    // Legal section - 已隐藏
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+    ) {
+        Column {
+            AboutListItem(
+                title = "隐私政策",
+                onClick = onPrivacyClick
+            )
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+            )
+            AboutListItem(
+                title = "服务条款",
+                onClick = onTermsClick
+            )
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+            )
+            AboutListItem(
+                title = "开源许可",
+                onClick = onLicensesClick
+            )
+        }
+    }
+            
+}
+
+// 版权信息组件 - 已移除
+@Composable
+private fun CopyrightInfo() {
+    Text(
+        text = "© 2024 星星IM",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+        textAlign = TextAlign.Center
+    )
+    
+    Spacer(modifier = Modifier.height(8.dp))
+    
+    Text(
+        text = "用心沟通，连接你我",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+        textAlign = TextAlign.Center
+    )
 }
 
 @Composable

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -35,9 +36,8 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -46,19 +46,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.aurora.wave.design.GrayStatusBar
 import com.aurora.wave.discover.model.DiscoverMenuItem
 
+/**
+ * 发现页面主屏幕
+ * 
+ * 架构说明：
+ * - 不使用内部 Scaffold，由 MainActivity 的 Scaffold 统一管理 WindowInsets
+ * - padding 参数来自 MainActivity，包含顶部状态栏和底部导航栏的内边距
+ * - TopAppBar 设置 windowInsets = WindowInsets(0, 0, 0, 0) 禁用自动 insets 处理
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiscoverRootScreen(
     padding: PaddingValues,
     onItemClick: (String) -> Unit = {}
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    // 灰色状态栏
+    GrayStatusBar()
     
     val menuItems = listOf(
         // Social section
@@ -118,80 +127,82 @@ fun DiscoverRootScreen(
         )
     )
     
-    Scaffold(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = padding.calculateBottomPadding())
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeTopAppBar(
+            .padding(padding) // 应用来自 MainActivity 的 padding
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            // TopAppBar - 禁用自动 WindowInsets 处理
+            CenterAlignedTopAppBar(
                 title = {
                     Text(
                         text = stringResource(R.string.discover_title),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Medium,
+                        style = MaterialTheme.typography.titleMedium
                     )
                 },
-                scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.largeTopAppBarColors(
+                windowInsets = WindowInsets(0, 0, 0, 0), // 禁用自动 insets
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.surface
+                    scrolledContainerColor = MaterialTheme.colorScheme.background
                 )
             )
-        }
-    ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentPadding = PaddingValues(
-                horizontal = 16.dp,
-                vertical = 8.dp
-            ),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            // Search bar
-            item {
-                SearchBar(
-                    onClick = { onItemClick("search") }
-                )
-            }
             
-            item { Spacer(modifier = Modifier.height(4.dp)) }
-            
-            // Menu sections
-            item {
-                MenuSection(
-                    items = menuItems.take(1),
-                    onItemClick = onItemClick
-                )
-            }
-            
-            item {
-                MenuSection(
-                    items = menuItems.subList(1, 2),
-                    onItemClick = onItemClick
-                )
-            }
-            
-            item {
-                MenuSection(
-                    items = menuItems.subList(2, 3),
-                    onItemClick = onItemClick
-                )
-            }
-            
-            item {
-                MenuSection(
-                    items = menuItems.subList(3, 6),
-                    onItemClick = onItemClick
-                )
-            }
-            
-            item {
-                MenuSection(
-                    items = menuItems.subList(6, 8),
-                    onItemClick = onItemClick
-                )
+            // 内容区域
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(
+                    horizontal = 16.dp,
+                    vertical = 8.dp
+                ),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // Search bar
+                item {
+                    SearchBar(
+                        onClick = { onItemClick("search") }
+                    )
+                }
+                
+                item { Spacer(modifier = Modifier.height(4.dp)) }
+                
+                // Menu sections
+                item {
+                    MenuSection(
+                        items = menuItems.take(1),
+                        onItemClick = onItemClick
+                    )
+                }
+                
+                item {
+                    MenuSection(
+                        items = menuItems.subList(1, 2),
+                        onItemClick = onItemClick
+                    )
+                }
+                
+                item {
+                    MenuSection(
+                        items = menuItems.subList(2, 3),
+                        onItemClick = onItemClick
+                    )
+                }
+                
+                item {
+                    MenuSection(
+                        items = menuItems.subList(3, 6),
+                        onItemClick = onItemClick
+                    )
+                }
+                
+                item {
+                    MenuSection(
+                        items = menuItems.subList(6, 8),
+                        onItemClick = onItemClick
+                    )
+                }
             }
         }
     }

@@ -138,7 +138,7 @@ private fun getMockSearchResults(query: String): List<SearchResult> {
         SearchResult(
             id = "group_3",
             type = SearchResultType.GROUP,
-            title = "Aurora Wave 官方群",
+            title = "星星IM官方群",
             subtitle = "1000人 · 最近活跃",
             avatarColor = Color(0xFF07C160)
         ),

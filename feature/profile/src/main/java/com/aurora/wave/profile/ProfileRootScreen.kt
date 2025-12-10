@@ -172,7 +172,7 @@ fun ProfileRootScreen(
         
         WeChatMenuDivider()
         
-        // 关于 Aurora Wave
+        // 关于星星IM
         WeChatMenuItem(
             icon = Icons.Default.Info,
             iconColor = Color(0xFF5B6B7D),

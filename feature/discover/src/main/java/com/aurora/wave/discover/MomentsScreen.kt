@@ -55,6 +55,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.aurora.wave.discover.model.MomentPost
 import com.aurora.wave.discover.R
+import com.aurora.wave.design.WhiteStatusBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,6 +65,9 @@ fun MomentsScreen(
     onNewPostClick: () -> Unit = {}
 ) {
     val posts = remember { generateFakeMoments() }
+    
+    // 白色状态栏
+    WhiteStatusBar()
     
     Scaffold(
         topBar = {

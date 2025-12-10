@@ -48,14 +48,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.aurora.wave.design.GrayStatusBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,6 +74,9 @@ fun ContactDetailScreen(
     val contactBio = "Life is beautiful 🌸"
     val isOnline = true
     var isMuted by remember { mutableStateOf(false) }
+    
+    // 灰色状态栏
+    GrayStatusBar()
     
     Scaffold(
         topBar = {
@@ -93,7 +99,8 @@ fun ContactDetailScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
+                    containerColor = Color(0xFFEDEDED),
+                    scrolledContainerColor = Color(0xFFEDEDED)
                 )
             )
         }
@@ -156,7 +163,7 @@ fun ContactDetailScreen(
             
             // Status
             Text(
-                text = if (isOnline) "Online" else "Last seen recently",
+                text = if (isOnline) stringResource(R.string.contact_online) else stringResource(R.string.contact_last_seen),
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (isOnline) {
                     MaterialTheme.colorScheme.tertiary
@@ -174,22 +181,22 @@ fun ContactDetailScreen(
             ) {
                 ActionButton(
                     icon = Icons.AutoMirrored.Filled.Chat,
-                    label = "Chat",
+                    label = stringResource(R.string.contact_chat),
                     onClick = onChatClick
                 )
                 ActionButton(
                     icon = Icons.Default.Call,
-                    label = "Call",
+                    label = stringResource(R.string.contact_call),
                     onClick = onCallClick
                 )
                 ActionButton(
                     icon = Icons.Default.Videocam,
-                    label = "Video",
+                    label = stringResource(R.string.contact_video),
                     onClick = onVideoCallClick
                 )
                 ActionButton(
                     icon = Icons.Default.Share,
-                    label = "Share",
+                    label = stringResource(R.string.contact_share),
                     onClick = { }
                 )
             }
@@ -210,7 +217,7 @@ fun ContactDetailScreen(
                     modifier = Modifier.padding(16.dp)
                 ) {
                     Text(
-                        text = "About",
+                        text = stringResource(R.string.contact_about),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold
@@ -238,7 +245,7 @@ fun ContactDetailScreen(
                 Column {
                     SettingsRow(
                         icon = if (isMuted) Icons.Default.NotificationsOff else Icons.Default.Notifications,
-                        title = "Mute Notifications",
+                        title = stringResource(R.string.contact_mute_notifications),
                         trailing = {
                             Switch(
                                 checked = isMuted,
@@ -264,13 +271,13 @@ fun ContactDetailScreen(
                 Column {
                     SettingsRow(
                         icon = Icons.Default.Block,
-                        title = "Block Contact",
+                        title = stringResource(R.string.contact_block),
                         titleColor = MaterialTheme.colorScheme.error,
                         onClick = { }
                     )
                     SettingsRow(
                         icon = Icons.Default.Delete,
-                        title = "Delete Contact",
+                        title = stringResource(R.string.contact_delete),
                         titleColor = MaterialTheme.colorScheme.error,
                         onClick = { }
                     )

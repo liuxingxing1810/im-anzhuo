@@ -1,13 +1,18 @@
 package com.aurora.wave.design
 
+import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 /**
  * 微信风格配色方案
@@ -27,8 +32,8 @@ private val WeChatGreenDark = Color(0xFF06AD56)  // 深绿
 private val LightColors = lightColorScheme(
     primary = WeChatGreen,
     onPrimary = Color.White,
-    primaryContainer = Color(0xFFD7F5E3),
-    onPrimaryContainer = Color(0xFF002110),
+    primaryContainer = Color.White,              // 卡片背景改为白色
+    onPrimaryContainer = Color(0xFF191C1A),
     secondary = Color(0xFF576B5C),
     onSecondary = Color.White,
     secondaryContainer = Color(0xFFDAE8DC),
@@ -72,7 +77,7 @@ private val DarkColors = darkColorScheme(
 )
 
 /**
- * Aurora Wave 主题
+ * 星星IM 主题
  * @param themeState 全局主题状态，用于控制 Dark Mode
  * @param content Composable 内容
  */
@@ -93,4 +98,59 @@ fun AuroraTheme(
             content = content
         )
     }
+}
+
+/**
+ * 设置状态栏图标颜色（Edge-to-Edge 模式）
+ * 状态栏背景是透明的，只需要控制图标颜色
+ * @param darkIcons 是否使用深色图标（浅色背景时为true）
+ */
+@Composable
+fun StatusBarStyle(darkIcons: Boolean) {
+    val view = LocalView.current
+    
+    if (!view.isInEditMode) {
+        DisposableEffect(view, darkIcons) {
+            val window = (view.context as Activity).window
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkIcons
+            onDispose {}
+        }
+    }
+}
+
+/**
+ * 灰色/深色背景页面的状态栏 - 用于主页面 (消息、联系人、发现等)
+ * Edge-to-Edge 模式：只设置图标颜色，背景由页面内容提供
+ */
+@Composable
+fun GrayStatusBar() {
+    val isDark = LocalThemeState.current.let { themeState ->
+        val isSystemDark = isSystemInDarkTheme()
+        if (themeState.useSystemTheme) isSystemDark else themeState.isDarkMode
+    }
+    // 浅色模式用深色图标，深色模式用浅色图标
+    StatusBarStyle(darkIcons = !isDark)
+}
+
+/**
+ * 白色/Surface 背景页面的状态栏 - 用于二级页面 (我的、设置、关于等)
+ * Edge-to-Edge 模式：只设置图标颜色，背景由页面内容提供
+ */
+@Composable
+fun WhiteStatusBar() {
+    val isDark = LocalThemeState.current.let { themeState ->
+        val isSystemDark = isSystemInDarkTheme()
+        if (themeState.useSystemTheme) isSystemDark else themeState.isDarkMode
+    }
+    // 浅色模式用深色图标，深色模式用浅色图标
+    StatusBarStyle(darkIcons = !isDark)
+}
+
+/**
+ * 透明状态栏 - 用于全屏页面（开屏页、图片查看等）
+ * @param darkIcons 是否使用深色图标
+ */
+@Composable
+fun TransparentStatusBar(darkIcons: Boolean = false) {
+    StatusBarStyle(darkIcons = darkIcons)
 }

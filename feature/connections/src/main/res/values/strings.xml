@@ -1,0 +1,22 @@
+<resources>
+    <string name="connections_title">Connections</string>
+    <string name="contacts_tab">Contacts</string>
+    <string name="new_friends_tab">New Friends</string>
+    <string name="new_friends_entry">New Friends</string>
+    <string name="groups_entry">Group Chats</string>
+    <string name="tags_entry">Tags</string>
+    <string name="official_accounts_entry">Official Accounts</string>
+    <string name="no_contacts">No contacts yet</string>
+    
+    <!-- Contact Detail -->
+    <string name="contact_online">Online</string>
+    <string name="contact_last_seen">Last seen recently</string>
+    <string name="contact_chat">Chat</string>
+    <string name="contact_call">Call</string>
+    <string name="contact_video">Video</string>
+    <string name="contact_share">Share</string>
+    <string name="contact_about">About</string>
+    <string name="contact_mute_notifications">Mute Notifications</string>
+    <string name="contact_block">Block Contact</string>
+    <string name="contact_delete">Delete Contact</string>
+</resources>
