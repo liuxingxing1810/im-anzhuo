@@ -1,6 +1,7 @@
 package com.aurora.wave.messages.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aurora.wave.data.model.DeliveryStatus
@@ -39,17 +41,33 @@ import com.aurora.wave.messages.model.MessageUiModel
 @Composable
 fun MessageBubble(
     message: MessageUiModel,
+    onAvatarClick: (String) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val isOutgoing = message.isOutgoing
     
+    // 计算最大气泡宽度：屏幕宽度 - 头像(40dp) - 间距(8dp) - 两侧边距(24dp) ≈ 70%屏幕宽度
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val maxBubbleWidth = screenWidth * 0.7f
+    
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = if (isOutgoing) Arrangement.End else Arrangement.Start
+        horizontalArrangement = if (isOutgoing) Arrangement.End else Arrangement.Start,
+        verticalAlignment = Alignment.Top
     ) {
+        // 左侧头像 (对方消息)
+        if (!isOutgoing) {
+            MessageAvatar(
+                initial = message.senderName?.firstOrNull()?.toString() ?: "?",
+                isOutgoing = false,
+                onClick = { message.senderId?.let { onAvatarClick(it) } }
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+        
         Column(
             horizontalAlignment = if (isOutgoing) Alignment.End else Alignment.Start,
-            modifier = Modifier.widthIn(max = 300.dp)
+            modifier = Modifier.widthIn(max = maxBubbleWidth)
         ) {
             // Sender name for group chats (incoming messages only)
             if (!isOutgoing && message.isFirstInGroup && message.senderName != null) {
@@ -58,7 +76,7 @@ fun MessageBubble(
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(start = 12.dp, bottom = 2.dp)
+                    modifier = Modifier.padding(start = 4.dp, bottom = 2.dp)
                 )
             }
             
@@ -105,8 +123,7 @@ fun MessageBubble(
                     // Timestamp and status
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.End,
-                        modifier = Modifier.fillMaxWidth()
+                        horizontalArrangement = Arrangement.End
                     ) {
                         Text(
                             text = message.timestamp,
@@ -129,6 +146,52 @@ fun MessageBubble(
                 }
             }
         }
+        
+        // 右侧头像 (自己的消息)
+        if (isOutgoing) {
+            Spacer(modifier = Modifier.width(8.dp))
+            MessageAvatar(
+                initial = "我",
+                isOutgoing = true,
+                onClick = { /* 自己的头像暂不处理 */ }
+            )
+        }
+    }
+}
+
+/**
+ * 消息头像组件
+ */
+@Composable
+private fun MessageAvatar(
+    initial: String,
+    isOutgoing: Boolean,
+    onClick: () -> Unit = {}
+) {
+    Box(
+        modifier = Modifier
+            .size(40.dp)
+            .clip(RoundedCornerShape(4.dp))
+            .clickable(onClick = onClick)
+            .background(
+                if (isOutgoing) {
+                    MaterialTheme.colorScheme.primaryContainer
+                } else {
+                    MaterialTheme.colorScheme.tertiaryContainer
+                }
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = initial,
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold,
+            color = if (isOutgoing) {
+                MaterialTheme.colorScheme.onPrimaryContainer
+            } else {
+                MaterialTheme.colorScheme.onTertiaryContainer
+            }
+        )
     }
 }
 

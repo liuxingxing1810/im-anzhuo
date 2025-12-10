@@ -6,6 +6,9 @@
     <string name="profile_services">服务</string>
     <string name="profile_services_sub">支付、卡包、出行</string>
     <string name="profile_favorites">收藏</string>
+    <string name="profile_moments">朋友圈</string>
+    <string name="profile_shop">视频号</string>
+    <string name="profile_stickers">表情</string>
     <string name="profile_collections">收藏夹</string>
     <string name="profile_settings">设置</string>
     <string name="profile_notifications">通知</string>
@@ -80,13 +83,6 @@
     <string name="settings_save_to_gallery_sub">将收到的媒体保存到相册</string>
     <string name="settings_clear_cache">清除缓存</string>
     
-    <!-- Storage Dialog -->
-    <string name="storage_images">图片</string>
-    <string name="storage_videos">视频</string>
-    <string name="storage_audio">音频</string>
-    <string name="storage_documents">文档</string>
-    <string name="storage_total">总缓存</string>
-    
     <!-- Actions -->
     <string name="settings_logout">退出登录</string>
     <string name="confirm">确认</string>
@@ -95,6 +91,95 @@
     <string name="clear_all">全部清除</string>
     <string name="loading">加载中…</string>
     <string name="cache_cleared">缓存已清除</string>
+    <string name="data_cleared">所有数据已清除</string>
     <string name="clear_cache_confirm">确定要清除所有缓存吗？此操作无法撤销。</string>
     <string name="logout_confirm">确定要退出登录吗？</string>
+    
+    <!-- Notifications Screen -->
+    <string name="notifications_title">通知</string>
+    <string name="notifications_general">通用</string>
+    <string name="notifications_push">推送通知</string>
+    <string name="notifications_push_desc">应用关闭时也能接收通知</string>
+    <string name="notifications_messages">消息通知</string>
+    <string name="notifications_new_messages">新消息</string>
+    <string name="notifications_new_messages_desc">收到新消息时提醒</string>
+    <string name="notifications_group">群聊通知</string>
+    <string name="notifications_group_desc">接收群聊消息通知</string>
+    <string name="notifications_mentions">@提醒</string>
+    <string name="notifications_mentions_desc">有人@你时提醒</string>
+    <string name="notifications_style">通知方式</string>
+    <string name="notifications_sound">声音</string>
+    <string name="notifications_sound_desc">通知时播放声音</string>
+    <string name="notifications_vibration">振动</string>
+    <string name="notifications_vibration_desc">通知时振动</string>
+    <string name="notifications_preview">显示预览</string>
+    <string name="notifications_preview_desc">在通知中显示消息内容</string>
+    <string name="notifications_dnd">勿扰模式</string>
+    <string name="notifications_dnd_title">系统勿扰模式</string>
+    <string name="notifications_dnd_desc">在系统设置中配置</string>
+    
+    <!-- Privacy Screen -->
+    <string name="privacy_title">隐私与安全</string>
+    <string name="privacy_account_security">账户安全</string>
+    <string name="privacy_password">密码</string>
+    <string name="privacy_password_desc">修改您的密码</string>
+    <string name="privacy_biometric">生物识别锁定</string>
+    <string name="privacy_biometric_desc">使用指纹或面容解锁</string>
+    <string name="privacy_devices">已登录设备</string>
+    <string name="privacy_devices_desc">管理您的登录设备</string>
+    <string name="privacy_visibility">可见性</string>
+    <string name="privacy_last_seen">最后上线时间</string>
+    <string name="privacy_last_seen_desc">显示您上次在线的时间</string>
+    <string name="privacy_online_status">在线状态</string>
+    <string name="privacy_online_status_desc">显示您是否在线</string>
+    <string name="privacy_profile_photo">头像</string>
+    <string name="privacy_photo_everyone">所有人</string>
+    <string name="privacy_photo_contacts">仅联系人</string>
+    <string name="privacy_photo_nobody">不展示</string>
+    <string name="privacy_messages">消息隐私</string>
+    <string name="privacy_read_receipts">已读回执</string>
+    <string name="privacy_read_receipts_desc">让对方知道您已读消息</string>
+    <string name="privacy_typing">正在输入</string>
+    <string name="privacy_typing_desc">显示您正在输入</string>
+    <string name="privacy_add_me">添加我的方式</string>
+    <string name="privacy_add_by_phone">通过手机号</string>
+    <string name="privacy_add_by_phone_desc">允许他人通过手机号找到您</string>
+    <string name="privacy_add_by_qr">通过二维码</string>
+    <string name="privacy_add_by_qr_desc">允许他人通过扫描二维码添加您</string>
+    <string name="privacy_add_by_group">通过群聊</string>
+    <string name="privacy_add_by_group_desc">允许群成员添加您</string>
+    <string name="privacy_blocked">黑名单</string>
+    <string name="privacy_blocked_users">黑名单</string>
+    <string name="privacy_blocked_users_desc">管理已屏蔽的用户</string>
+    
+    <!-- Storage Screen -->
+    <string name="storage_title">存储与数据</string>
+    <string name="storage_usage">存储使用</string>
+    <string name="storage_total_used">已使用</string>
+    <string name="storage_details">存储详情</string>
+    <string name="storage_images">图片</string>
+    <string name="storage_videos">视频</string>
+    <string name="storage_audio">音频</string>
+    <string name="storage_documents">文档</string>
+    <string name="storage_cache">缓存</string>
+    <string name="storage_total">总计</string>
+    <string name="storage_auto_download">自动下载</string>
+    <string name="storage_auto_download_media">自动下载媒体</string>
+    <string name="storage_auto_download_desc">自动下载媒体文件</string>
+    <string name="storage_download_wifi">Wi-Fi下自动下载</string>
+    <string name="storage_download_wifi_desc">连接Wi-Fi时自动下载</string>
+    <string name="storage_download_mobile">移动数据下载</string>
+    <string name="storage_download_mobile_desc">使用移动数据自动下载</string>
+    <string name="storage_media_settings">媒体设置</string>
+    <string name="storage_save_gallery">保存到相册</string>
+    <string name="storage_save_gallery_desc">自动将收到的媒体保存到相册</string>
+    <string name="storage_data_saver">省流量模式</string>
+    <string name="storage_data_saver_desc">加载低质量媒体以减少流量消耗</string>
+    <string name="storage_cleanup">存储清理</string>
+    <string name="storage_clear_cache">清除缓存</string>
+    <string name="storage_clear_cache_desc">清除缓存数据以释放空间</string>
+    <string name="storage_clear_cache_confirm">确定要清除缓存吗？这不会删除您的消息或媒体文件。</string>
+    <string name="storage_clear_all">清除所有数据</string>
+    <string name="storage_clear_all_desc">删除所有已下载的媒体和缓存</string>
+    <string name="storage_clear_all_confirm">确定要清除所有数据吗？这将删除所有已下载的媒体和缓存。您的消息不会受到影响。</string>
 </resources>

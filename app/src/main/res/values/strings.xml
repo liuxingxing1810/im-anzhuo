@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">Aurora Wave</string>
+    <string name="app_name">星星IM</string>
     <string name="nav_messages">Messages</string>
     <string name="nav_connections">Connections</string>
     <string name="nav_discover">Discover</string>
     <string name="nav_profile">Profile</string>
+    
+    <!-- Connections Tab -->
+    <string name="contacts_tab">Contacts</string>
+    <string name="new_friends_tab">New Friends</string>
     
     <!-- Common -->
     <string name="common_loading">Loading…</string>

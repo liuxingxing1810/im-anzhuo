@@ -14,407 +14,390 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.CreditCard
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCode2
-import androidx.compose.material.icons.filled.Security
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Storage
-import androidx.compose.material3.Badge
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.aurora.wave.profile.model.ProfileMenuItem
-import com.aurora.wave.profile.model.ProfileStrings
-import com.aurora.wave.profile.model.SettingsSection
-import com.aurora.wave.profile.model.UserProfile
+import androidx.compose.ui.unit.sp
+import com.aurora.wave.design.WhiteStatusBar
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * 我的页面主屏幕
+ * 
+ * 架构说明：
+ * - 不使用内部 Scaffold，由 MainActivity 的 Scaffold 统一管理 WindowInsets
+ * - padding 参数来自 MainActivity，包含顶部状态栏和底部导航栏的内边距
+ */
 @Composable
 fun ProfileRootScreen(
     padding: PaddingValues,
     onProfileClick: () -> Unit = {},
     onSettingsClick: (String) -> Unit = {}
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-
-    // 使用 ProfileStrings data class 简化 remember 参数
-    val strings = ProfileStrings(
-        defaultBio = stringResource(R.string.profile_header_bio_default),
-        servicesTitle = stringResource(R.string.profile_services),
-        servicesSub = stringResource(R.string.profile_services_sub),
-        favoritesTitle = stringResource(R.string.profile_favorites),
-        collectionsTitle = stringResource(R.string.profile_collections),
-        settingsTitle = stringResource(R.string.profile_settings),
-        notificationsTitle = stringResource(R.string.profile_notifications),
-        privacyTitle = stringResource(R.string.profile_privacy),
-        storageTitle = stringResource(R.string.profile_storage),
-        appearanceTitle = stringResource(R.string.profile_appearance),
-        appearanceSubTitle = stringResource(R.string.profile_appearance_sub),
-        helpTitle = stringResource(R.string.profile_help),
-        aboutTitle = stringResource(R.string.profile_about),
-        aboutVersion = stringResource(R.string.profile_about_version)
-    )
+    val scrollState = rememberScrollState()
+    var showLogoutDialog by remember { mutableStateOf(false) }
     
-    val currentUser = remember(strings) {
-        UserProfile(
-            id = "user_001",
-            displayName = "Aurora User",
-            username = "aurora_wave_001",
-            bio = strings.defaultBio
-        )
-    }
+    // 为我的页面设置状态栏颜色（跟随主题，使用 surface 色）
+    WhiteStatusBar()
     
-    val settingsSections = remember(strings) {
-        buildSettingsSections(strings)
-    }
-    
-    Scaffold(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = padding.calculateBottomPadding())
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.profile_title),
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    ) { innerPadding ->
-        LazyColumn(
+            .padding(padding) // 应用来自 MainActivity 的 padding
+            .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(scrollState)
+    ) {
+        // 用户信息卡片
+        ProfileHeader(
+            userName = "Aurora User",
+            waveId = "aurora_001",
+            onProfileClick = onProfileClick
+        )
+        
+        Spacer(modifier = Modifier.height(8.dp))
+        
+        // 服务与支付
+        WeChatMenuItem(
+            icon = Icons.Default.CreditCard,
+            iconColor = Color(0xFF07C160),
+            title = stringResource(R.string.profile_services),
+            onClick = { onSettingsClick("services") }
+        )
+        
+        Spacer(modifier = Modifier.height(8.dp))
+        
+        // 收藏
+        WeChatMenuItem(
+            icon = Icons.Default.Bookmark,
+            iconColor = Color(0xFFFA9D3B),
+            title = stringResource(R.string.profile_favorites),
+            onClick = { onSettingsClick("favorites") }
+        )
+        
+        Spacer(modifier = Modifier.height(8.dp))
+        
+        // 语言设置 - 放在通知上面
+        WeChatMenuItem(
+            icon = Icons.Default.Language,
+            iconColor = Color(0xFF576B95),
+            title = stringResource(R.string.settings_language),
+            onClick = { onSettingsClick("language") }
+        )
+        
+        WeChatMenuDivider()
+        
+        // 通知
+        WeChatMenuItem(
+            icon = Icons.Default.Notifications,
+            iconColor = Color(0xFFFA5151),
+            title = stringResource(R.string.profile_notifications),
+            onClick = { onSettingsClick("notifications") }
+        )
+        
+        WeChatMenuDivider()
+        
+        // 隐私与安全
+        WeChatMenuItem(
+            icon = Icons.Default.Lock,
+            iconColor = Color(0xFF07C160),
+            title = stringResource(R.string.profile_privacy),
+            onClick = { onSettingsClick("privacy") }
+        )
+        
+        WeChatMenuDivider()
+        
+        // 存储与数据
+        WeChatMenuItem(
+            icon = Icons.Default.Storage,
+            iconColor = Color(0xFF10AEFF),
+            title = stringResource(R.string.profile_storage),
+            onClick = { onSettingsClick("storage") }
+        )
+        
+        WeChatMenuDivider()
+        
+        // 外观
+        WeChatMenuItem(
+            icon = Icons.Default.Palette,
+            iconColor = Color(0xFFE75A4D),
+            title = stringResource(R.string.profile_appearance),
+            subtitle = stringResource(R.string.profile_appearance_sub),
+            onClick = { onSettingsClick("appearance") }
+        )
+        
+        Spacer(modifier = Modifier.height(8.dp))
+        
+        // 帮助与支持
+        WeChatMenuItem(
+            icon = Icons.Default.Help,
+            iconColor = Color(0xFF4B8BE5),
+            title = stringResource(R.string.profile_help),
+            onClick = { onSettingsClick("help") }
+        )
+        
+        WeChatMenuDivider()
+        
+        // 关于 Aurora Wave
+        WeChatMenuItem(
+            icon = Icons.Default.Info,
+            iconColor = Color(0xFF5B6B7D),
+            title = stringResource(R.string.profile_about),
+            subtitle = stringResource(R.string.profile_about_version),
+            onClick = { onSettingsClick("about") }
+        )
+        
+        // 退出登录按钮 - 上边距较大防止误触
+        Spacer(modifier = Modifier.height(48.dp))
+        
+        Card(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            )
         ) {
-            // Profile header card
-            item {
-                ProfileHeaderCard(
-                    user = currentUser,
-                    onClick = onProfileClick
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { showLogoutDialog = true }
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.Logout,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = stringResource(R.string.settings_logout),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.error,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(32.dp))
+    }
+    
+    // 退出登录确认对话框
+    if (showLogoutDialog) {
+        AlertDialog(
+            onDismissRequest = { showLogoutDialog = false },
+            title = { Text(stringResource(R.string.settings_logout)) },
+            text = { Text(stringResource(R.string.logout_confirm)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        onSettingsClick("logout")
+                        showLogoutDialog = false
+                    }
+                ) {
+                    Text(stringResource(R.string.settings_logout), color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showLogoutDialog = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
+}
+
+/**
+ * 微信风格的用户信息头部
+ */
+@Composable
+private fun ProfileHeader(
+    userName: String,
+    waveId: String,
+    onProfileClick: () -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onProfileClick),
+        color = MaterialTheme.colorScheme.surface
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 32.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // 头像 - 稍微放大
+            Box(
+                modifier = Modifier
+                    .size(76.dp)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(MaterialTheme.colorScheme.primaryContainer),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = null,
+                    modifier = Modifier.size(44.dp),
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
             
-            // Settings sections
-            items(settingsSections) { section ->
-                SettingsSectionCard(
-                    section = section,
-                    onItemClick = onSettingsClick
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            // 用户信息 - 垂直居中
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = userName,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Wave号：$waveId",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             
-            // Bottom spacer
-            item {
-                Spacer(modifier = Modifier.height(16.dp))
+            // 二维码和箭头 - 垂直居中
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Default.QrCode2,
+                    contentDescription = "QR Code",
+                    modifier = Modifier.size(20.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                
+                Spacer(modifier = Modifier.width(8.dp))
+                
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                )
             }
         }
     }
 }
 
+/**
+ * 微信风格的菜单项
+ */
 @Composable
-private fun ProfileHeaderCard(
-    user: UserProfile,
+private fun WeChatMenuItem(
+    icon: ImageVector,
+    iconColor: Color,
+    title: String,
+    subtitle: String? = null,
     onClick: () -> Unit
 ) {
-    Card(
+    Surface(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
-        shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        color = MaterialTheme.colorScheme.surface
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(horizontal = 16.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Avatar
-            Surface(
-                modifier = Modifier.size(72.dp),
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.primaryContainer
+            // 图标
+            Box(
+                modifier = Modifier
+                    .size(24.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp),
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                }
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(22.dp),
+                    tint = iconColor
+                )
             }
             
             Spacer(modifier = Modifier.width(16.dp))
             
-            // User info
-            Column(modifier = Modifier.weight(1f)) {
+            // 标题
+            Text(
+                text = title,
+                modifier = Modifier.weight(1f),
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            
+            // 副标题
+            if (subtitle != null) {
                 Text(
-                    text = user.displayName,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                        text = stringResource(R.string.profile_header_wave_id, user.username),
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = subtitle,
+                    fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                if (!user.bio.isNullOrEmpty()) {
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = user.bio,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                        maxLines = 1
-                    )
-                }
+                Spacer(modifier = Modifier.width(4.dp))
             }
             
-            // QR code button
-            Surface(
-                modifier = Modifier.size(40.dp),
-                shape = RoundedCornerShape(10.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = Icons.Default.QrCode2,
-                        contentDescription = "QR Code",
-                        modifier = Modifier.size(24.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.width(8.dp))
-            
+            // 箭头
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
+                modifier = Modifier.size(20.dp),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
             )
         }
     }
 }
 
-@Composable
-private fun SettingsSectionCard(
-    section: SettingsSection,
-    onItemClick: (String) -> Unit
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-    ) {
-        Column {
-            section.items.forEachIndexed { index, item ->
-                SettingsMenuItem(
-                    item = item,
-                    onClick = { onItemClick(item.id) }
-                )
-                if (item.showDivider && index < section.items.size - 1) {
-                    HorizontalDivider(
-                        modifier = Modifier.padding(start = 56.dp),
-                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-                    )
-                }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun SettingsMenuItem(
-    item: ProfileMenuItem,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 14.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Icon
-        Box(
-            modifier = Modifier
-                .size(32.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = item.icon,
-                contentDescription = null,
-                modifier = Modifier.size(18.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
-        
-        Spacer(modifier = Modifier.width(12.dp))
-        
-        // Title and subtitle
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = item.title,
-                style = MaterialTheme.typography.bodyLarge
-            )
-            if (!item.subtitle.isNullOrEmpty()) {
-                Text(
-                    text = item.subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-        
-        // Badge
-        if (!item.badge.isNullOrEmpty()) {
-            Badge(
-                containerColor = MaterialTheme.colorScheme.primary
-            ) {
-                Text(
-                    text = item.badge,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-        
-        // Arrow
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-            modifier = Modifier.size(20.dp)
-        )
-    }
-}
-
 /**
- * 构建设置菜单区块
- * Build settings sections from localized strings
+ * 菜单分隔线
  */
-private fun buildSettingsSections(strings: ProfileStrings): List<SettingsSection> = listOf(
-    SettingsSection(
-        items = listOf(
-            ProfileMenuItem(
-                id = "services",
-                title = strings.servicesTitle,
-                subtitle = strings.servicesSub,
-                icon = Icons.Default.CreditCard
-            )
-        )
-    ),
-    SettingsSection(
-        items = listOf(
-            ProfileMenuItem(
-                id = "favorites",
-                title = strings.favoritesTitle,
-                icon = Icons.Default.Bookmark
-            ),
-            ProfileMenuItem(
-                id = "collections",
-                title = strings.collectionsTitle,
-                icon = Icons.Default.Favorite,
-                badge = "3"
-            )
-        )
-    ),
-    SettingsSection(
-        items = listOf(
-            ProfileMenuItem(
-                id = "settings",
-                title = strings.settingsTitle,
-                icon = Icons.Default.Settings
-            ),
-            ProfileMenuItem(
-                id = "notifications",
-                title = strings.notificationsTitle,
-                icon = Icons.Default.Notifications
-            ),
-            ProfileMenuItem(
-                id = "privacy",
-                title = strings.privacyTitle,
-                icon = Icons.Default.Security
-            ),
-            ProfileMenuItem(
-                id = "storage",
-                title = strings.storageTitle,
-                icon = Icons.Default.Storage
-            ),
-            ProfileMenuItem(
-                id = "appearance",
-                title = strings.appearanceTitle,
-                subtitle = strings.appearanceSubTitle,
-                icon = Icons.Default.Palette
-            )
-        )
-    ),
-    SettingsSection(
-        items = listOf(
-            ProfileMenuItem(
-                id = "help",
-                title = strings.helpTitle,
-                icon = Icons.AutoMirrored.Filled.Help
-            ),
-            ProfileMenuItem(
-                id = "about",
-                title = strings.aboutTitle,
-                subtitle = strings.aboutVersion,
-                icon = Icons.Default.Info,
-                showDivider = false
-            )
-        )
+@Composable
+private fun WeChatMenuDivider() {
+    HorizontalDivider(
+        modifier = Modifier.padding(start = 56.dp),
+        thickness = 0.5.dp,
+        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
     )
-)
+}

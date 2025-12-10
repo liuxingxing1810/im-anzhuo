@@ -6,6 +6,9 @@
     <string name="profile_services">服務</string>
     <string name="profile_services_sub">支付、卡包、出行</string>
     <string name="profile_favorites">收藏</string>
+    <string name="profile_moments">朋友圈</string>
+    <string name="profile_shop">視頻號</string>
+    <string name="profile_stickers">表情</string>
     <string name="profile_collections">收藏夾</string>
     <string name="profile_settings">設定</string>
     <string name="profile_notifications">通知</string>

@@ -61,6 +61,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aurora.wave.data.settings.SettingsDataStore
 import com.aurora.wave.design.LocalThemeState
+import com.aurora.wave.design.WhiteStatusBar
 import kotlinx.coroutines.launch
 
 /**
@@ -83,6 +84,9 @@ fun AppearanceScreen(
     
     // 字体大小（本地状态，后续可持久化）
     var fontScale by remember { mutableFloatStateOf(1.0f) }
+    
+    // 白色状态栏
+    WhiteStatusBar()
     
     Scaffold(
         topBar = {
@@ -218,9 +222,9 @@ private fun AppearanceSection(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
+                containerColor = Color.White
             ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
         ) {
             content()
         }
@@ -248,7 +252,7 @@ private fun ThemeModeItem(
                 .size(40.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(
-                    if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                    if (isSelected) Color(0xFFF5F5F5)  // 浅灰色背景
                     else MaterialTheme.colorScheme.surfaceVariant
                 ),
             contentAlignment = Alignment.Center
@@ -257,7 +261,7 @@ private fun ThemeModeItem(
                 imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier.size(22.dp),
-                tint = if (isSelected) MaterialTheme.colorScheme.primary
+                tint = if (isSelected) Color(0xFF07C160)  // 微信绿
                        else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

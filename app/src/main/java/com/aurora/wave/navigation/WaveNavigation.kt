@@ -5,6 +5,13 @@ package com.aurora.wave.navigation
  * Type-safe navigation routes using sealed class
  */
 sealed class WaveRoute(val route: String) {
+    // Splash
+    data object Splash : WaveRoute("splash")
+    
+    // Auth
+    data object Login : WaveRoute("login")
+    data object Register : WaveRoute("register")
+    
     // Main tabs
     data object Messages : WaveRoute("messages")
     data object Connections : WaveRoute("connections")
@@ -37,8 +44,17 @@ sealed class WaveRoute(val route: String) {
     data object Settings : WaveRoute("settings")
     data object Appearance : WaveRoute("appearance")
     data object About : WaveRoute("about")
+    data object Notifications : WaveRoute("notifications")
+    data object Privacy : WaveRoute("privacy")
+    data object Storage : WaveRoute("storage")
+    data object Language : WaveRoute("language")
     
     companion object {
+        // Auth routes
+        val authRoutes: Set<String> by lazy {
+            setOf(Login.route, Register.route)
+        }
+        
         // 使用 lazy 避免静态初始化循环依赖
         val mainTabRoutes: Set<String> by lazy {
             setOf(

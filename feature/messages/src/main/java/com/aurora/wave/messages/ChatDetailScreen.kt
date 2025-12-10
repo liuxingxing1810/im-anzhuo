@@ -1,6 +1,7 @@
 package com.aurora.wave.messages
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +11,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -35,21 +39,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.aurora.wave.design.GrayStatusBar
 import com.aurora.wave.messages.ui.ChatInputBar
 import com.aurora.wave.messages.ui.MessageBubble
+
+// 统一的灰色 TopAppBar 颜色
+private val TopBarColor = androidx.compose.ui.graphics.Color(0xFFEDEDED)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatDetailScreen(
     conversationId: String,
     onBackClick: () -> Unit,
+    onContactClick: (String) -> Unit = {},
     onCallClick: () -> Unit = {},
     onVideoCallClick: () -> Unit = {},
     onMoreClick: () -> Unit = {},
@@ -61,6 +72,9 @@ fun ChatDetailScreen(
     
     val state by viewModel.state.collectAsState()
     val listState = rememberLazyListState()
+    
+    // 灰色状态栏
+    GrayStatusBar()
     
     // 首次加载完成后滚动到底部（不使用动画，立即跳转）
     LaunchedEffect(state.isLoading, state.messages.size) {
@@ -81,12 +95,30 @@ fun ChatDetailScreen(
         }
     }
     
-    Scaffold(
-        topBar = {
+    // 监听键盘状态，键盘弹出时自动滚动到底部
+    val density = LocalDensity.current
+    val imeHeight = WindowInsets.ime.getBottom(density)
+    val currentMessages by rememberUpdatedState(state.messages)
+    
+    LaunchedEffect(imeHeight) {
+        // 键盘弹出时 (imeHeight > 0) 滚动到底部
+        if (imeHeight > 0 && currentMessages.isNotEmpty()) {
+            listState.animateScrollToItem(currentMessages.lastIndex)
+        }
+    }
+    
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .imePadding()
+    ) {
+        Scaffold(
+            topBar = {
             TopAppBar(
                 title = {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { onContactClick(conversationId) }
                     ) {
                         // Avatar
                         Box(
@@ -157,7 +189,8 @@ fun ChatDetailScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = TopBarColor,
+                    scrolledContainerColor = TopBarColor
                 )
             )
         },
@@ -257,6 +290,7 @@ fun ChatDetailScreen(
                         ) { message ->
                             MessageBubble(
                                 message = message,
+                                onAvatarClick = { senderId -> onContactClick(senderId) },
                                 modifier = Modifier.padding(vertical = 2.dp)
                             )
                         }
@@ -265,6 +299,7 @@ fun ChatDetailScreen(
             }
         }
     }
+    }  // 关闭 imePadding Box
 }
 
 @Composable

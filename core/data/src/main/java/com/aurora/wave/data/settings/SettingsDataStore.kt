@@ -29,15 +29,26 @@ class SettingsDataStore(private val context: Context) {
         private val KEY_MESSAGE_NOTIFICATIONS = booleanPreferencesKey("message_notifications")
         private val KEY_SOUND_ENABLED = booleanPreferencesKey("sound_enabled")
         private val KEY_VIBRATION_ENABLED = booleanPreferencesKey("vibration_enabled")
+        private val KEY_SHOW_NOTIFICATION_PREVIEW = booleanPreferencesKey("show_notification_preview")
+        private val KEY_GROUP_NOTIFICATIONS = booleanPreferencesKey("group_notifications")
+        private val KEY_MENTION_NOTIFICATIONS = booleanPreferencesKey("mention_notifications")
         
         // 隐私设置
         private val KEY_READ_RECEIPTS = booleanPreferencesKey("read_receipts")
         private val KEY_TYPING_INDICATOR = booleanPreferencesKey("typing_indicator")
         private val KEY_LAST_SEEN = booleanPreferencesKey("last_seen")
+        private val KEY_ONLINE_STATUS = booleanPreferencesKey("online_status")
+        private val KEY_PROFILE_PHOTO_VISIBILITY = stringPreferencesKey("profile_photo_visibility")
+        private val KEY_ADD_BY_PHONE = booleanPreferencesKey("add_by_phone")
+        private val KEY_ADD_BY_QR_CODE = booleanPreferencesKey("add_by_qr_code")
+        private val KEY_ADD_BY_GROUP = booleanPreferencesKey("add_by_group")
         
         // 存储设置
         private val KEY_AUTO_DOWNLOAD_MEDIA = booleanPreferencesKey("auto_download_media")
+        private val KEY_AUTO_DOWNLOAD_ON_WIFI = booleanPreferencesKey("auto_download_on_wifi")
+        private val KEY_AUTO_DOWNLOAD_ON_MOBILE = booleanPreferencesKey("auto_download_on_mobile")
         private val KEY_SAVE_TO_GALLERY = booleanPreferencesKey("save_to_gallery")
+        private val KEY_DATA_USAGE_OPTIMIZATION = booleanPreferencesKey("data_usage_optimization")
     }
     
     // ========== 语言设置 ==========
@@ -119,6 +130,36 @@ class SettingsDataStore(private val context: Context) {
         }
     }
     
+    val showNotificationPreviewFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_SHOW_NOTIFICATION_PREVIEW] ?: true
+    }
+    
+    suspend fun setShowNotificationPreview(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_SHOW_NOTIFICATION_PREVIEW] = enabled
+        }
+    }
+    
+    val groupNotificationsFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_GROUP_NOTIFICATIONS] ?: true
+    }
+    
+    suspend fun setGroupNotifications(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_GROUP_NOTIFICATIONS] = enabled
+        }
+    }
+    
+    val mentionNotificationsFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_MENTION_NOTIFICATIONS] ?: true
+    }
+    
+    suspend fun setMentionNotifications(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_MENTION_NOTIFICATIONS] = enabled
+        }
+    }
+    
     // ========== 隐私设置 ==========
     
     val readReceiptsFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
@@ -151,6 +192,56 @@ class SettingsDataStore(private val context: Context) {
         }
     }
     
+    val onlineStatusFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_ONLINE_STATUS] ?: true
+    }
+    
+    suspend fun setOnlineStatus(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_ONLINE_STATUS] = enabled
+        }
+    }
+    
+    val profilePhotoVisibilityFlow: Flow<String> = context.dataStore.data.map { preferences ->
+        preferences[KEY_PROFILE_PHOTO_VISIBILITY] ?: "everyone"
+    }
+    
+    suspend fun setProfilePhotoVisibility(visibility: String) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_PROFILE_PHOTO_VISIBILITY] = visibility
+        }
+    }
+    
+    val addByPhoneFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_ADD_BY_PHONE] ?: true
+    }
+    
+    suspend fun setAddByPhone(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_ADD_BY_PHONE] = enabled
+        }
+    }
+    
+    val addByQrCodeFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_ADD_BY_QR_CODE] ?: true
+    }
+    
+    suspend fun setAddByQrCode(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_ADD_BY_QR_CODE] = enabled
+        }
+    }
+    
+    val addByGroupFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_ADD_BY_GROUP] ?: true
+    }
+    
+    suspend fun setAddByGroup(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_ADD_BY_GROUP] = enabled
+        }
+    }
+    
     // ========== 存储设置 ==========
     
     val autoDownloadMediaFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
@@ -163,6 +254,26 @@ class SettingsDataStore(private val context: Context) {
         }
     }
     
+    val autoDownloadOnWifiFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_AUTO_DOWNLOAD_ON_WIFI] ?: true
+    }
+    
+    suspend fun setAutoDownloadOnWifi(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_AUTO_DOWNLOAD_ON_WIFI] = enabled
+        }
+    }
+    
+    val autoDownloadOnMobileFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_AUTO_DOWNLOAD_ON_MOBILE] ?: false
+    }
+    
+    suspend fun setAutoDownloadOnMobile(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_AUTO_DOWNLOAD_ON_MOBILE] = enabled
+        }
+    }
+    
     val saveToGalleryFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
         preferences[KEY_SAVE_TO_GALLERY] ?: false
     }
@@ -170,6 +281,16 @@ class SettingsDataStore(private val context: Context) {
     suspend fun setSaveToGallery(enabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[KEY_SAVE_TO_GALLERY] = enabled
+        }
+    }
+    
+    val dataUsageOptimizationFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_DATA_USAGE_OPTIMIZATION] ?: false
+    }
+    
+    suspend fun setDataUsageOptimization(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_DATA_USAGE_OPTIMIZATION] = enabled
         }
     }
     

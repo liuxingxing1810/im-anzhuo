@@ -77,6 +77,7 @@ import com.aurora.wave.data.settings.SettingsDataStore
 import com.aurora.wave.data.settings.StorageInfo
 import com.aurora.wave.data.settings.StorageManager
 import com.aurora.wave.design.LocalThemeState
+import com.aurora.wave.design.WhiteStatusBar
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -124,6 +125,9 @@ fun SettingsScreen(
         storageInfo = storageManager.getStorageInfo()
         isLoadingStorage = false
     }
+    
+    // 白色状态栏
+    WhiteStatusBar()
     
     Scaffold(
         topBar = {
@@ -198,7 +202,12 @@ fun SettingsScreen(
                             }
                         }
                     )
-                    SettingsDivider()
+                }
+            }
+            
+            // 语言区块 - 放在通知上面
+            item {
+                SettingsSection(title = stringResource(R.string.settings_language)) {
                     SettingsItem(
                         icon = Icons.Default.Language,
                         title = stringResource(R.string.settings_language),

@@ -1,111 +1,100 @@
 package com.aurora.wave.messages
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.aurora.wave.design.GrayStatusBar
 import com.aurora.wave.messages.ui.ConversationItem
-import com.aurora.wave.messages.ui.SearchBar
 
+/**
+ * 消息列表主页面
+ * 
+ * 架构说明：
+ * - 不使用内部 Scaffold，由 MainActivity 的 Scaffold 统一管理 WindowInsets
+ * - padding 参数来自 MainActivity，包含顶部状态栏和底部导航栏的内边距
+ * - TopAppBar 设置 windowInsets = WindowInsets(0, 0, 0, 0) 禁用自动 insets 处理
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MessagesRootScreen(
     padding: PaddingValues,
     onConversationClick: (String) -> Unit = {},
+    onSearchClick: () -> Unit = {},
     viewModel: ConversationListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val listState = rememberLazyListState()
     
-    // FAB 可见性
-    val showFab by remember {
-        derivedStateOf { listState.firstVisibleItemIndex < 3 }
-    }
+    // 灰色状态栏
+    GrayStatusBar()
     
-    Scaffold(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = padding.calculateBottomPadding())
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            MessagesTopBar(scrollBehavior = scrollBehavior)
-        },
-        floatingActionButton = {
-            ModernFAB(
-                visible = showFab,
-                onClick = { /* TODO: New chat */ }
-            )
-        },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            // 微信风格搜索栏 - 放在白色区域内
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background)
-            ) {
-                SearchBar(
-                    query = state.searchQuery,
-                    onQueryChange = viewModel::onSearchQueryChange
+            .padding(padding) // 应用来自 MainActivity 的 padding
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            // TopAppBar - 禁用自动 WindowInsets 处理，因为外部 Scaffold 已处理
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(R.string.messages_title),
+                        fontWeight = FontWeight.Medium,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                },
+                actions = {
+                    IconButton(onClick = onSearchClick) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "搜索"
+                        )
+                    }
+                    IconButton(onClick = { /* TODO: More */ }) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = "更多"
+                        )
+                    }
+                },
+                windowInsets = WindowInsets(0, 0, 0, 0), // 禁用自动 insets
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    scrolledContainerColor = MaterialTheme.colorScheme.background
                 )
-            }
+            )
             
+            // 内容区域
             when {
                 state.isLoading -> {
                     LoadingContent()
@@ -123,49 +112,6 @@ fun MessagesRootScreen(
                         listState = listState
                     )
                 }
-            }
-        }
-    }
-}
-
-/**
- * 现代化 FAB
- */
-@Composable
-private fun ModernFAB(
-    visible: Boolean,
-    onClick: () -> Unit
-) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = scaleIn(spring()) + fadeIn(),
-        exit = scaleOut(spring()) + fadeOut()
-    ) {
-        Surface(
-            onClick = onClick,
-            shape = CircleShape,
-            shadowElevation = 8.dp,
-            modifier = Modifier.size(56.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.linearGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
-                            )
-                        )
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Create,
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(24.dp)
-                )
             }
         }
     }
@@ -212,42 +158,6 @@ private fun ConversationList(
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun MessagesTopBar(
-    scrollBehavior: TopAppBarScrollBehavior
-) {
-    // 现代化顶部栏
-    TopAppBar(
-        title = {
-            Text(
-                text = stringResource(R.string.messages_title),
-                fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.titleLarge
-            )
-        },
-        actions = {
-            IconButton(onClick = { /* TODO: Search */ }) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "搜索"
-                )
-            }
-            IconButton(onClick = { /* TODO: More */ }) {
-                Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = "更多"
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.background,
-            scrolledContainerColor = MaterialTheme.colorScheme.background
-        )
-    )
 }
 
 @Composable

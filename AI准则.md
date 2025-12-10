@@ -136,7 +136,107 @@ Claude，你是一个实用主义的高级工程师：
 
 ------------------------------------------------------------------------
 
-## 十一、变更记录模板
+## 十一、Android 模拟器测试流程
+
+### 测试环境准备
+
+```bash
+# 1. 创建 ARM64 模拟器（Apple Silicon Mac 必须用 arm64）
+yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;arm64-v8a"
+
+echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd \
+  -n Test_API30 \
+  -k "system-images;android-30;google_apis;arm64-v8a" \
+  -d "pixel_4" --force
+
+# 2. 启动模拟器
+$ANDROID_HOME/emulator/emulator -avd Test_API30 -no-snapshot -gpu host -memory 2048 -no-audio &
+
+# 3. 等待启动完成
+adb wait-for-device shell getprop sys.boot_completed
+```
+
+### 构建与部署
+
+```bash
+# 构建 Debug APK
+./gradlew :app:assembleDebug
+
+# 安装到模拟器
+adb -s emulator-5554 install -r app/build/outputs/apk/debug/app-debug.apk
+
+# 启动应用
+adb -s emulator-5554 shell am start -n com.aurora.wave.dev/com.aurora.wave.MainActivity
+```
+
+### UI Automator 自动化测试（推荐）
+
+UI Automator 是 Android SDK 自带的测试工具，无需额外安装，AI 可以直接使用。
+
+#### 获取界面结构
+
+```bash
+# dump 当前界面的 UI 元素树
+adb shell uiautomator dump /sdcard/ui.xml
+adb pull /sdcard/ui.xml /tmp/ui.xml
+
+# 解析元素文本和坐标
+grep -oE '(text|bounds)="[^"]*"' /tmp/ui.xml
+```
+
+#### 操控界面
+
+```bash
+# 点击指定坐标（从 bounds 计算中心点）
+adb shell input tap <x> <y>
+
+# 输入文字
+adb shell input text "hello"
+
+# 滑动
+adb shell input swipe <x1> <y1> <x2> <y2> <duration_ms>
+
+# 按键
+adb shell input keyevent KEYCODE_BACK    # 返回
+adb shell input keyevent KEYCODE_HOME    # Home
+adb shell input keyevent KEYCODE_ENTER   # 确认
+```
+
+#### UI XML 结构说明
+
+```xml
+<node text="登录" bounds="[100,200][300,280]" clickable="true" />
+```
+
+- `text` - 元素显示文本
+- `bounds="[x1,y1][x2,y2]"` - 元素坐标区域
+- `clickable` - 是否可点击
+- `content-desc` - 无障碍描述（用于图标）
+
+#### 坐标计算
+
+点击坐标 = bounds 中心点：
+- X = (x1 + x2) / 2
+- Y = (y1 + y2) / 2
+
+例如 `bounds="[100,200][300,280]"` → 点击 `(200, 240)`
+
+### AI 测试工作流
+
+1. **dump 界面** → 获取 UI 结构
+2. **解析 XML** → 找到目标元素坐标
+3. **执行操作** → tap/input/swipe
+4. **再次 dump** → 验证结果
+
+**优势**：
+- ✅ 无需额外安装
+- ✅ 精确获取元素位置
+- ✅ 可编程操控界面
+- ✅ 比截图分析快很多
+
+------------------------------------------------------------------------
+
+## 十二、变更记录模板
 
 ``` md
 【时间】：YYYY-MM-DD HH:MM

@@ -52,6 +52,27 @@ class StorageManager(private val context: Context) {
     }
     
     /**
+     * 清除缓存 (别名)
+     */
+    suspend fun clearCache(): Boolean = clearAllCache()
+    
+    /**
+     * 清除所有数据
+     */
+    suspend fun clearAllData(): Boolean = withContext(Dispatchers.IO) {
+        try {
+            deleteDir(context.cacheDir)
+            context.externalCacheDir?.let { deleteDir(it) }
+            deleteDir(context.filesDir)
+            context.getExternalFilesDir(null)?.let { deleteDir(it) }
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+    
+    /**
      * 清除图片缓存
      */
     suspend fun clearImageCache(): Boolean = withContext(Dispatchers.IO) {
@@ -155,9 +176,14 @@ data class StorageInfo(
     val otherFiles: Long
 ) {
     val total: Long get() = totalCache + otherFiles
+    val totalBytes: Long get() = total
     
     fun formatTotal(): String = StorageManager.formatSize(total)
     fun formatTotalCache(): String = StorageManager.formatSize(totalCache)
+    fun formatImages(): String = StorageManager.formatSize(imageCache)
+    fun formatVideos(): String = StorageManager.formatSize(videoCache)
+    fun formatAudio(): String = StorageManager.formatSize(audioCache)
+    fun formatDocuments(): String = StorageManager.formatSize(documentCache)
     fun formatImageCache(): String = StorageManager.formatSize(imageCache)
     fun formatVideoCache(): String = StorageManager.formatSize(videoCache)
     fun formatAudioCache(): String = StorageManager.formatSize(audioCache)

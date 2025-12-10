@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aurora.wave.design.WhiteStatusBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,6 +54,9 @@ fun AboutScreen(
     onTermsClick: () -> Unit = {},
     onLicensesClick: () -> Unit = {}
 ) {
+    // 白色状态栏
+    WhiteStatusBar()
+    
     Scaffold(
         topBar = {
             TopAppBar(
@@ -86,14 +90,14 @@ fun AboutScreen(
                 Surface(
                     modifier = Modifier.size(100.dp),
                     shape = RoundedCornerShape(24.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer
+                    color = MaterialTheme.colorScheme.surface
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Default.Waves,
                             contentDescription = null,
                             modifier = Modifier.size(56.dp),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color(0xFF07C160)  // 微信绿
                         )
                     }
                 }
@@ -142,7 +146,7 @@ fun AboutScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                        containerColor = MaterialTheme.colorScheme.surface
                     )
                 ) {
                     Column(
