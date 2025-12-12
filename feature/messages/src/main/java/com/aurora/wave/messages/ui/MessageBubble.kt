@@ -1,7 +1,16 @@
 package com.aurora.wave.messages.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.widget.Toast
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,11 +35,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aurora.wave.data.model.DeliveryStatus
@@ -42,16 +60,56 @@ import com.aurora.wave.messages.model.MessageUiModel
 fun MessageBubble(
     message: MessageUiModel,
     onAvatarClick: (String) -> Unit = {},
+    onMessageAction: (MessageAction, MessageUiModel) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier
 ) {
     val isOutgoing = message.isOutgoing
+    val context = LocalContext.current
+    val hapticFeedback = LocalHapticFeedback.current
+    
+    // 长按菜单状态
+    var showContextMenu by remember { mutableStateOf(false) }
+    
+    // 按压缩放动画
+    var isPressed by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.97f else 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessHigh
+        ),
+        label = "bubble_scale"
+    )
     
     // 计算最大气泡宽度：屏幕宽度 - 头像(40dp) - 间距(8dp) - 两侧边距(24dp) ≈ 70%屏幕宽度
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val maxBubbleWidth = screenWidth * 0.7f
     
+    // 判断消息是否可撤回（2分钟内）
+    val canRecall = isOutgoing && (System.currentTimeMillis() - message.fullTimestamp < 2 * 60 * 1000)
+    
+    // 消息操作处理
+    fun handleAction(action: MessageAction) {
+        when (action) {
+            MessageAction.COPY -> {
+                val textContent = when (val content = message.content) {
+                    is MessageContent.Text -> content.text
+                    else -> null
+                }
+                textContent?.let {
+                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    clipboard.setPrimaryClip(ClipData.newPlainText("message", it))
+                    Toast.makeText(context, "已复制", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else -> onMessageAction(action, message)
+        }
+    }
+    
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .scale(scale),
         horizontalArrangement = if (isOutgoing) Arrangement.End else Arrangement.Start,
         verticalAlignment = Alignment.Top
     ) {
@@ -87,7 +145,24 @@ fun MessageBubble(
                 } else {
                     MaterialTheme.colorScheme.surfaceVariant
                 },
-                tonalElevation = if (isOutgoing) 0.dp else 1.dp
+                tonalElevation = if (isOutgoing) 0.dp else 1.dp,
+                modifier = Modifier.pointerInput(Unit) {
+                    detectTapGestures(
+                        onLongPress = {
+                            isPressed = false
+                            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                            showContextMenu = true
+                        },
+                        onPress = {
+                            isPressed = true
+                            try {
+                                awaitRelease()
+                            } finally {
+                                isPressed = false
+                            }
+                        }
+                    )
+                }
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
                     // Message content based on type
@@ -157,6 +232,15 @@ fun MessageBubble(
             )
         }
     }
+    
+    // 长按上下文菜单
+    MessageContextMenu(
+        isVisible = showContextMenu,
+        isOutgoing = isOutgoing,
+        canRecall = canRecall,
+        onDismiss = { showContextMenu = false },
+        onAction = { action -> handleAction(action) }
+    )
 }
 
 /**

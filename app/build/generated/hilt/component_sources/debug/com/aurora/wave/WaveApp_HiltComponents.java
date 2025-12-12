@@ -1,6 +1,8 @@
 package com.aurora.wave;
 
 import com.aurora.wave.connections.ContactsViewModel_HiltModules;
+import com.aurora.wave.connections.NewFriendsViewModel_HiltModules;
+import com.aurora.wave.di.DatabaseModule;
 import com.aurora.wave.messages.ChatDetailViewModel_HiltModules;
 import com.aurora.wave.messages.ConversationListViewModel_HiltModules;
 import dagger.Binds;
@@ -128,6 +130,7 @@ public final class WaveApp_HiltComponents {
   @Component(
       modules = {
           ApplicationContextModule.class,
+          DatabaseModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
           ActivityRetainedCBuilderModule.class,
           ServiceCBuilderModule.class
@@ -158,6 +161,7 @@ public final class WaveApp_HiltComponents {
           ConversationListViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
+          NewFriendsViewModel_HiltModules.KeyModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class
       }
@@ -198,7 +202,8 @@ public final class WaveApp_HiltComponents {
           ChatDetailViewModel_HiltModules.BindsModule.class,
           ContactsViewModel_HiltModules.BindsModule.class,
           ConversationListViewModel_HiltModules.BindsModule.class,
-          HiltWrapper_HiltViewModelFactory_ViewModelModule.class
+          HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          NewFriendsViewModel_HiltModules.BindsModule.class
       }
   )
   @ViewModelScoped

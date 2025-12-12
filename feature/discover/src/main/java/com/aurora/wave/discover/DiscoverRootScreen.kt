@@ -20,16 +20,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Article
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Explore
-import androidx.compose.material.icons.filled.Games
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.ShoppingBag
-import androidx.compose.material.icons.filled.Widgets
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -83,48 +76,14 @@ fun DiscoverRootScreen(
             title = stringResource(R.string.discover_scan_title),
             subtitle = stringResource(R.string.discover_scan_subtitle),
             icon = Icons.Default.QrCodeScanner
-        ),
-        // Location section
-        DiscoverMenuItem(
-            id = "nearby",
-            title = stringResource(R.string.discover_nearby_title),
-            subtitle = stringResource(R.string.discover_nearby_subtitle),
-            icon = Icons.Default.LocationOn
-        ),
-        // Entertainment section
-        DiscoverMenuItem(
-            id = "explore",
-            title = stringResource(R.string.discover_explore_title),
-            subtitle = stringResource(R.string.discover_explore_subtitle),
-            icon = Icons.Default.Explore,
-            badge = "5"
-        ),
-        DiscoverMenuItem(
-            id = "mini_apps",
-            title = stringResource(R.string.discover_mini_apps_title),
-            subtitle = stringResource(R.string.discover_mini_apps_subtitle),
-            icon = Icons.Default.Widgets
-        ),
-        DiscoverMenuItem(
-            id = "games",
-            title = stringResource(R.string.discover_games_title),
-            subtitle = stringResource(R.string.discover_games_subtitle),
-            icon = Icons.Default.Games
-        ),
-        // Services section
-        DiscoverMenuItem(
-            id = "shop",
-            title = stringResource(R.string.discover_shop_title),
-            subtitle = stringResource(R.string.discover_shop_subtitle),
-            icon = Icons.Default.ShoppingBag
-        ),
-        DiscoverMenuItem(
-            id = "news",
-            title = stringResource(R.string.discover_news_title),
-            subtitle = stringResource(R.string.discover_news_subtitle),
-            icon = Icons.AutoMirrored.Filled.Article,
-            showDot = true
         )
+        // 以下项目已隐藏:
+        // - nearby (附近的人)
+        // - explore (探索)
+        // - mini_apps (小程序)
+        // - games (游戏)
+        // - shop (购物)
+        // - news (热点资讯)
     )
     
     Box(
@@ -171,35 +130,14 @@ fun DiscoverRootScreen(
                 // Menu sections
                 item {
                     MenuSection(
-                        items = menuItems.take(1),
+                        items = menuItems.take(1), // 朋友圈
                         onItemClick = onItemClick
                     )
                 }
                 
                 item {
                     MenuSection(
-                        items = menuItems.subList(1, 2),
-                        onItemClick = onItemClick
-                    )
-                }
-                
-                item {
-                    MenuSection(
-                        items = menuItems.subList(2, 3),
-                        onItemClick = onItemClick
-                    )
-                }
-                
-                item {
-                    MenuSection(
-                        items = menuItems.subList(3, 6),
-                        onItemClick = onItemClick
-                    )
-                }
-                
-                item {
-                    MenuSection(
-                        items = menuItems.subList(6, 8),
+                        items = menuItems.subList(1, 2), // 扫一扫
                         onItemClick = onItemClick
                     )
                 }

@@ -19,12 +19,15 @@ data class ContactUiModel(
  */
 data class FriendRequestUiModel(
     val id: String,
-    val userId: String,
-    val userName: String,
+    val userId: String = "",
+    val userName: String = "",
+    val name: String,
     val userAvatar: String? = null,
-    val message: String? = null,
-    val timestamp: String,
-    val status: FriendRequestStatus = FriendRequestStatus.PENDING
+    val avatarColor: String = "blue",
+    val message: String = "",
+    val timestamp: String = "",
+    val status: FriendRequestStatus = FriendRequestStatus.PENDING,
+    val isRecent: Boolean = true
 )
 
 enum class FriendRequestStatus {

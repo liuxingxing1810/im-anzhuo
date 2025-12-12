@@ -18,6 +18,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    
     val composeBom = rootProject.extra["composeBom"] as String
     implementation(platform("androidx.compose:compose-bom:$composeBom"))
     implementation("androidx.compose.ui:ui")
@@ -25,6 +27,8 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

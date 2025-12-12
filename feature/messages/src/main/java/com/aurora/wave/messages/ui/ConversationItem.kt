@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +13,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,6 +25,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.NotificationsOff
 import androidx.compose.material.icons.filled.PushPin
@@ -31,7 +36,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,18 +47,168 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aurora.wave.data.model.ConversationType
 import com.aurora.wave.messages.model.ConversationUiModel
+import kotlin.math.roundToInt
+
+// 滑动菜单宽度常量
+private val ACTION_BUTTON_WIDTH = 72.dp
+private val TOTAL_ACTION_WIDTH = 144.dp // 两个按钮
 
 /**
- * 现代化会话列表项 - 参考 Telegram/WhatsApp 设计
+ * 可滑动会话列表项 - 类似 Telegram 左滑菜单
+ * 左滑显示：置顶、删除
+ * 
+ * @param isExpanded 外部控制的展开状态
+ * @param onExpandChange 展开状态变化回调
  */
 @Composable
-fun ConversationItem(
+fun SwipeableConversationItem(
+    conversation: ConversationUiModel,
+    isExpanded: Boolean,
+    onExpandChange: (Boolean) -> Unit,
+    onClick: () -> Unit,
+    onPinClick: () -> Unit,
+    onDeleteClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // 最大滑动距离（像素）
+    val density = androidx.compose.ui.platform.LocalDensity.current
+    val maxSwipeDistance = with(density) { TOTAL_ACTION_WIDTH.toPx() }
+    
+    // 内部滑动偏移量（用于拖动时）
+    var dragOffset by remember { mutableFloatStateOf(0f) }
+    var isDragging by remember { mutableStateOf(false) }
+    
+    // 目标偏移量：展开时为 -maxSwipeDistance，否则为 0
+    val targetOffset = if (isExpanded) -maxSwipeDistance else 0f
+    
+    // 动画效果：非拖动时使用动画
+    val animatedOffsetX by animateFloatAsState(
+        targetValue = if (isDragging) dragOffset else targetOffset,
+        animationSpec = tween(durationMillis = 200),
+        label = "offsetX"
+    )
+    
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(76.dp)
+    ) {
+        // 背景操作按钮（固定在右侧）
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // 置顶按钮
+            Box(
+                modifier = Modifier
+                    .width(ACTION_BUTTON_WIDTH)
+                    .fillMaxHeight()
+                    .background(
+                        if (conversation.isPinned) Color(0xFFFF9800) else Color(0xFF2196F3)
+                    )
+                    .clickable { onPinClick() },
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.PushPin,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = if (conversation.isPinned) "取消" else "置顶",
+                        color = Color.White,
+                        style = MaterialTheme.typography.labelSmall,
+                        fontSize = 11.sp
+                    )
+                }
+            }
+            
+            // 删除按钮
+            Box(
+                modifier = Modifier
+                    .width(ACTION_BUTTON_WIDTH)
+                    .fillMaxHeight()
+                    .background(Color(0xFFF44336))
+                    .clickable { onDeleteClick() },
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "删除",
+                        color = Color.White,
+                        style = MaterialTheme.typography.labelSmall,
+                        fontSize = 11.sp
+                    )
+                }
+            }
+        }
+        
+        // 前景内容（可滑动）- 必须有背景色才能遮住后面的按钮
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
+                .background(MaterialTheme.colorScheme.surface)
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures(
+                        onDragStart = {
+                            isDragging = true
+                            // 初始化拖动位置
+                            dragOffset = if (isExpanded) -maxSwipeDistance else 0f
+                        },
+                        onDragEnd = {
+                            isDragging = false
+                            // 松手时决定是展开还是收回
+                            val shouldExpand = dragOffset < -maxSwipeDistance / 2
+                            onExpandChange(shouldExpand)
+                        },
+                        onHorizontalDrag = { _, dragAmount ->
+                            // 限制在 [-maxSwipeDistance, 0] 范围内
+                            dragOffset = (dragOffset + dragAmount).coerceIn(-maxSwipeDistance, 0f)
+                        }
+                    )
+                }
+        ) {
+            ConversationItemContent(
+                conversation = conversation,
+                onClick = onClick
+            )
+        }
+    }
+}
+
+/**
+ * 现代化会话列表项内容 - 参考 Telegram/WhatsApp 设计
+ */
+@Composable
+private fun ConversationItemContent(
     conversation: ConversationUiModel,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -213,6 +371,23 @@ fun ConversationItem(
             }
         }
     }
+}
+
+/**
+ * 现代化会话列表项 - 参考 Telegram/WhatsApp 设计
+ * @deprecated 使用 SwipeableConversationItem 代替
+ */
+@Composable
+fun ConversationItem(
+    conversation: ConversationUiModel,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    ConversationItemContent(
+        conversation = conversation,
+        onClick = onClick,
+        modifier = modifier
+    )
 }
 
 /**

@@ -35,6 +35,13 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:common"))
     implementation(project(":core:data"))
+    
+    // CameraX dependencies for video call
+    val cameraVersion = "1.3.4"
+    implementation("androidx.camera:camera-core:$cameraVersion")
+    implementation("androidx.camera:camera-camera2:$cameraVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraVersion")
+    implementation("androidx.camera:camera-view:$cameraVersion")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

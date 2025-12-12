@@ -1,17 +1,26 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-29:12
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-29:12
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-29:12
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-29:12
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
 MERGED from [:feature:messages] /Users/lxx/im-anzhuo/feature/messages/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:feature:connections] /Users/lxx/im-anzhuo/feature/connections/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:feature:discover] /Users/lxx/im-anzhuo/feature/discover/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:feature:profile] /Users/lxx/im-anzhuo/feature/profile/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:feature:settings] /Users/lxx/im-anzhuo/feature/settings/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:feature:auth] /Users/lxx/im-anzhuo/feature/auth/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [:core:design] /Users/lxx/im-anzhuo/core/design/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:core:common] /Users/lxx/im-anzhuo/core/common/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:core:network] /Users/lxx/im-anzhuo/core/network/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:core:data] /Users/lxx/im-anzhuo/core/data/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [com.airbnb.android:lottie-compose:6.4.0] /Users/lxx/.gradle/caches/transforms-4/3863d9bc5012b02c144e60c4716c8740/transformed/lottie-compose-6.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.camera:camera-video:1.3.4] /Users/lxx/.gradle/caches/transforms-4/dc080b50d224f262519a8327c387bc27/transformed/camera-video-1.3.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-lifecycle:1.3.4] /Users/lxx/.gradle/caches/transforms-4/1737ff9970657220035bcafb5cc8b673/transformed/camera-lifecycle-1.3.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.camera:camera-view:1.3.4] /Users/lxx/.gradle/caches/transforms-4/f0b7da83bf632ef71ef2523adc10641b/transformed/camera-view-1.3.4/AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose:2.6.0] /Users/lxx/.gradle/caches/transforms-4/54fd0506873a478f9c900cb04aad2056/transformed/coil-compose-2.6.0/AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose-base:2.6.0] /Users/lxx/.gradle/caches/transforms-4/c37f80d55881b72790e4cb300beebcfa/transformed/coil-compose-base-2.6.0/AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil:2.6.0] /Users/lxx/.gradle/caches/transforms-4/5e9d1166c06584a8233e73bb8a69280b/transformed/coil-2.6.0/AndroidManifest.xml:2:1-7:12
@@ -26,7 +35,6 @@ MERGED from [androidx.navigation:navigation-runtime:2.8.0] /Users/lxx/.gradle/ca
 MERGED from [androidx.navigation:navigation-common-ktx:2.8.0] /Users/lxx/.gradle/caches/transforms-4/ef9d6902ff70f8eb62e557963a3c3885/transformed/navigation-common-ktx-2.8.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.0] /Users/lxx/.gradle/caches/transforms-4/ccc19675f948e77cd0d3e7dda34bd76c/transformed/navigation-runtime-ktx-2.8.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-compose:2.8.0] /Users/lxx/.gradle/caches/transforms-4/34355d33e1238d2972b7c04c1a81c456/transformed/navigation-compose-2.8.0/AndroidManifest.xml:2:1-7:12
-MERGED from [:core:design] /Users/lxx/im-anzhuo/core/design/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material3:material3-android:1.2.1] /Users/lxx/.gradle/caches/transforms-4/24fa1b8e7be710ee497dc9d97e66f611/transformed/material3-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.fragment:fragment:1.5.4] /Users/lxx/.gradle/caches/transforms-4/2acdf3bd45e461694af23caf2d2c4341/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/lxx/.gradle/caches/transforms-4/9ee15289f29f8fd1170b1de3cfd308a4/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
@@ -49,13 +57,13 @@ MERGED from [androidx.compose.ui:ui-graphics-android:1.7.0] /Users/lxx/.gradle/c
 MERGED from [androidx.compose.ui:ui-test-manifest:1.7.0] /Users/lxx/.gradle/caches/transforms-4/45ba0b3ced33e54af546cf4f8e216ce1/transformed/ui-test-manifest-1.7.0/AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.compose.ui:ui-text-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/2095f3ca838cc4e1ebf0f3a863a41c8b/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lxx/.gradle/caches/transforms-4/7e82225c5f8cdf885724262240813fab/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.loader:loader:1.0.0] /Users/lxx/.gradle/caches/transforms-4/c094f00a5892d0cf1f4832f56cf720c0/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.3] /Users/lxx/.gradle/caches/transforms-4/9ff1dce4cac6d56d7458e0ae422e8fae/transformed/lifecycle-livedata-core-ktx-2.8.3/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.3] /Users/lxx/.gradle/caches/transforms-4/0749bad3f188f42ad912b8fb6456d68e/transformed/lifecycle-livedata-2.8.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.3] /Users/lxx/.gradle/caches/transforms-4/581528ad2657be1922ab939a3d489424/transformed/lifecycle-process-2.8.3/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/lxx/.gradle/caches/transforms-4/c094f00a5892d0cf1f4832f56cf720c0/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.3] /Users/lxx/.gradle/caches/transforms-4/cb80d7ea5f650e4186916e220f61de04/transformed/lifecycle-viewmodel-2.8.3/AndroidManifest.xml:2:1-5:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/d2ec006f3f4b675c0f5649246b7566f0/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/f31a603aa4258e7c26c2c45a789417d6/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.3] /Users/lxx/.gradle/caches/transforms-4/0749bad3f188f42ad912b8fb6456d68e/transformed/lifecycle-livedata-2.8.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/7960e209f837f15bc583a4e1c8d1b5e2/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.3] /Users/lxx/.gradle/caches/transforms-4/dd040f73d7e36211ce1c1100097f7019/transformed/lifecycle-livedata-core-2.8.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3] /Users/lxx/.gradle/caches/transforms-4/61d1e3408546068dc03b6dbf11b0470e/transformed/lifecycle-viewmodel-ktx-2.8.3/AndroidManifest.xml:2:1-7:12
@@ -116,9 +124,23 @@ uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:6:5-79
 	android:name
 		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:7:5-71
+	android:name
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:7:22-68
+uses-permission#android.permission.CAMERA
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:8:5-65
+	android:name
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:8:22-62
 application
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:8:5-27:19
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:8:5-27:19
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:5-30:19
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:5-30:19
+MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.7.0] /Users/lxx/.gradle/caches/transforms-4/45ba0b3ced33e54af546cf4f8e216ce1/transformed/ui-test-manifest-1.7.0/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.7.0] /Users/lxx/.gradle/caches/transforms-4/45ba0b3ced33e54af546cf4f8e216ce1/transformed/ui-test-manifest-1.7.0/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lxx/.gradle/caches/transforms-4/7e82225c5f8cdf885724262240813fab/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
@@ -141,44 +163,46 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lxx/.gradle/caches/t
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lxx/.gradle/caches/transforms-4/b81350ed2b6155edc1b9b979ba02c9ee/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
 		INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
+	android:localeConfig
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:16:9-51
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] /Users/lxx/.gradle/caches/transforms-4/10ef9852b61b121028159666982d9f93/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:15:9-35
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:18:9-35
 	android:label
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:13:9-35
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:15:9-41
 	android:roundIcon
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:14:9-63
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:17:9-54
 	tools:targetApi
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:17:9-35
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:20:9-35
 	android:icon
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:12:9-58
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:14:9-43
 	android:allowBackup
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:9-35
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:12:9-35
 	android:theme
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:16:9-72
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:19:9-72
 	android:enableOnBackInvokedCallback
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:11:9-51
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:13:9-51
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:9:9-32
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:11:9-32
 activity#com.aurora.wave.MainActivity
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:18:9-26:20
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:21:9-29:20
 	android:windowSoftInputMode
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:21:13-55
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:24:13-55
 	android:exported
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:20:13-36
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:23:13-36
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:19:13-41
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:22:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:22:13-25:29
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:25:13-28:29
 action#android.intent.action.MAIN
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:23:17-69
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:23:25-66
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:24:17-77
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:24:27-74
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:27:27-74
 uses-sdk
 INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
@@ -193,12 +217,30 @@ MERGED from [:feature:profile] /Users/lxx/im-anzhuo/feature/profile/build/interm
 MERGED from [:feature:profile] /Users/lxx/im-anzhuo/feature/profile/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:feature:settings] /Users/lxx/im-anzhuo/feature/settings/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:feature:settings] /Users/lxx/im-anzhuo/feature/settings/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:feature:auth] /Users/lxx/im-anzhuo/feature/auth/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:feature:auth] /Users/lxx/im-anzhuo/feature/auth/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:core:design] /Users/lxx/im-anzhuo/core/design/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:core:design] /Users/lxx/im-anzhuo/core/design/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:core:common] /Users/lxx/im-anzhuo/core/common/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:core:common] /Users/lxx/im-anzhuo/core/common/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:core:network] /Users/lxx/im-anzhuo/core/network/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:core:network] /Users/lxx/im-anzhuo/core/network/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:core:data] /Users/lxx/im-anzhuo/core/data/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:core:data] /Users/lxx/im-anzhuo/core/data/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [com.airbnb.android:lottie-compose:6.4.0] /Users/lxx/.gradle/caches/transforms-4/3863d9bc5012b02c144e60c4716c8740/transformed/lottie-compose-6.4.0/AndroidManifest.xml:5:5-44
+MERGED from [com.airbnb.android:lottie-compose:6.4.0] /Users/lxx/.gradle/caches/transforms-4/3863d9bc5012b02c144e60c4716c8740/transformed/lottie-compose-6.4.0/AndroidManifest.xml:5:5-44
+MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:5:5-44
+MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-video:1.3.4] /Users/lxx/.gradle/caches/transforms-4/dc080b50d224f262519a8327c387bc27/transformed/camera-video-1.3.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-video:1.3.4] /Users/lxx/.gradle/caches/transforms-4/dc080b50d224f262519a8327c387bc27/transformed/camera-video-1.3.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-lifecycle:1.3.4] /Users/lxx/.gradle/caches/transforms-4/1737ff9970657220035bcafb5cc8b673/transformed/camera-lifecycle-1.3.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-lifecycle:1.3.4] /Users/lxx/.gradle/caches/transforms-4/1737ff9970657220035bcafb5cc8b673/transformed/camera-lifecycle-1.3.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-view:1.3.4] /Users/lxx/.gradle/caches/transforms-4/f0b7da83bf632ef71ef2523adc10641b/transformed/camera-view-1.3.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-view:1.3.4] /Users/lxx/.gradle/caches/transforms-4/f0b7da83bf632ef71ef2523adc10641b/transformed/camera-view-1.3.4/AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose:2.6.0] /Users/lxx/.gradle/caches/transforms-4/54fd0506873a478f9c900cb04aad2056/transformed/coil-compose-2.6.0/AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose:2.6.0] /Users/lxx/.gradle/caches/transforms-4/54fd0506873a478f9c900cb04aad2056/transformed/coil-compose-2.6.0/AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose-base:2.6.0] /Users/lxx/.gradle/caches/transforms-4/c37f80d55881b72790e4cb300beebcfa/transformed/coil-compose-base-2.6.0/AndroidManifest.xml:5:5-44
@@ -227,8 +269,6 @@ MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.0] /Users/lxx/.gradl
 MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.0] /Users/lxx/.gradle/caches/transforms-4/ccc19675f948e77cd0d3e7dda34bd76c/transformed/navigation-runtime-ktx-2.8.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.navigation:navigation-compose:2.8.0] /Users/lxx/.gradle/caches/transforms-4/34355d33e1238d2972b7c04c1a81c456/transformed/navigation-compose-2.8.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.navigation:navigation-compose:2.8.0] /Users/lxx/.gradle/caches/transforms-4/34355d33e1238d2972b7c04c1a81c456/transformed/navigation-compose-2.8.0/AndroidManifest.xml:5:5-44
-MERGED from [:core:design] /Users/lxx/im-anzhuo/core/design/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
-MERGED from [:core:design] /Users/lxx/im-anzhuo/core/design/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.material3:material3-android:1.2.1] /Users/lxx/.gradle/caches/transforms-4/24fa1b8e7be710ee497dc9d97e66f611/transformed/material3-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material3:material3-android:1.2.1] /Users/lxx/.gradle/caches/transforms-4/24fa1b8e7be710ee497dc9d97e66f611/transformed/material3-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.5.4] /Users/lxx/.gradle/caches/transforms-4/2acdf3bd45e461694af23caf2d2c4341/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
@@ -273,20 +313,20 @@ MERGED from [androidx.compose.ui:ui-text-android:1.7.0] /Users/lxx/.gradle/cache
 MERGED from [androidx.compose.ui:ui-text-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/2095f3ca838cc4e1ebf0f3a863a41c8b/transformed/ui-text-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lxx/.gradle/caches/transforms-4/7e82225c5f8cdf885724262240813fab/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lxx/.gradle/caches/transforms-4/7e82225c5f8cdf885724262240813fab/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.loader:loader:1.0.0] /Users/lxx/.gradle/caches/transforms-4/c094f00a5892d0cf1f4832f56cf720c0/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /Users/lxx/.gradle/caches/transforms-4/c094f00a5892d0cf1f4832f56cf720c0/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.3] /Users/lxx/.gradle/caches/transforms-4/9ff1dce4cac6d56d7458e0ae422e8fae/transformed/lifecycle-livedata-core-ktx-2.8.3/AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.3] /Users/lxx/.gradle/caches/transforms-4/9ff1dce4cac6d56d7458e0ae422e8fae/transformed/lifecycle-livedata-core-ktx-2.8.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.3] /Users/lxx/.gradle/caches/transforms-4/0749bad3f188f42ad912b8fb6456d68e/transformed/lifecycle-livedata-2.8.3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.3] /Users/lxx/.gradle/caches/transforms-4/0749bad3f188f42ad912b8fb6456d68e/transformed/lifecycle-livedata-2.8.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.3] /Users/lxx/.gradle/caches/transforms-4/581528ad2657be1922ab939a3d489424/transformed/lifecycle-process-2.8.3/AndroidManifest.xml:21:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.3] /Users/lxx/.gradle/caches/transforms-4/581528ad2657be1922ab939a3d489424/transformed/lifecycle-process-2.8.3/AndroidManifest.xml:21:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/lxx/.gradle/caches/transforms-4/c094f00a5892d0cf1f4832f56cf720c0/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/lxx/.gradle/caches/transforms-4/c094f00a5892d0cf1f4832f56cf720c0/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.3] /Users/lxx/.gradle/caches/transforms-4/cb80d7ea5f650e4186916e220f61de04/transformed/lifecycle-viewmodel-2.8.3/AndroidManifest.xml:4:5-43
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.3] /Users/lxx/.gradle/caches/transforms-4/cb80d7ea5f650e4186916e220f61de04/transformed/lifecycle-viewmodel-2.8.3/AndroidManifest.xml:4:5-43
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/d2ec006f3f4b675c0f5649246b7566f0/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/d2ec006f3f4b675c0f5649246b7566f0/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/f31a603aa4258e7c26c2c45a789417d6/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/f31a603aa4258e7c26c2c45a789417d6/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.3] /Users/lxx/.gradle/caches/transforms-4/0749bad3f188f42ad912b8fb6456d68e/transformed/lifecycle-livedata-2.8.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.3] /Users/lxx/.gradle/caches/transforms-4/0749bad3f188f42ad912b8fb6456d68e/transformed/lifecycle-livedata-2.8.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/7960e209f837f15bc583a4e1c8d1b5e2/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.3] /Users/lxx/.gradle/caches/transforms-4/7960e209f837f15bc583a4e1c8d1b5e2/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.3] /Users/lxx/.gradle/caches/transforms-4/dd040f73d7e36211ce1c1100097f7019/transformed/lifecycle-livedata-core-2.8.3/AndroidManifest.xml:20:5-44
@@ -375,6 +415,26 @@ MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/lxx/.gradle/caches/t
 		INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
+service#androidx.camera.core.impl.MetadataHolderService
+ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:24:9-33:19
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:29:9-33:78
+MERGED from [androidx.camera:camera-core:1.3.4] /Users/lxx/.gradle/caches/transforms-4/a584dfd40f33203cdb62988d5bb6453e/transformed/camera-core-1.3.4/AndroidManifest.xml:29:9-33:78
+	tools:node
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:29:13-31
+	android:enabled
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:26:13-36
+	android:exported
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:28:13-75
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:25:13-75
+meta-data#androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER
+ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:30:13-32:89
+	android:value
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:32:17-86
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:31:17-103
 activity#androidx.activity.ComponentActivity
 ADDED from [androidx.compose.ui:ui-test-manifest:1.7.0] /Users/lxx/.gradle/caches/transforms-4/45ba0b3ced33e54af546cf4f8e216ce1/transformed/ui-test-manifest-1.7.0/AndroidManifest.xml:23:9-25:39
 	android:exported

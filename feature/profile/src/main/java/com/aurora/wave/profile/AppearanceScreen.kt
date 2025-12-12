@@ -222,7 +222,7 @@ private fun AppearanceSection(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
         ) {
@@ -252,7 +252,7 @@ private fun ThemeModeItem(
                 .size(40.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(
-                    if (isSelected) Color(0xFFF5F5F5)  // 浅灰色背景
+                    if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
                     else MaterialTheme.colorScheme.surfaceVariant
                 ),
             contentAlignment = Alignment.Center

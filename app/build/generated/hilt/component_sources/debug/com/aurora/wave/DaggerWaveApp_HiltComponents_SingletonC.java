@@ -8,6 +8,8 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 import com.aurora.wave.connections.ContactsViewModel;
 import com.aurora.wave.connections.ContactsViewModel_HiltModules;
+import com.aurora.wave.connections.NewFriendsViewModel;
+import com.aurora.wave.connections.NewFriendsViewModel_HiltModules;
 import com.aurora.wave.messages.ChatDetailViewModel;
 import com.aurora.wave.messages.ChatDetailViewModel_HiltModules;
 import com.aurora.wave.messages.ConversationListViewModel;
@@ -377,7 +379,7 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(3).put(LazyClassKeyProvider.com_aurora_wave_messages_ChatDetailViewModel, ChatDetailViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_aurora_wave_connections_ContactsViewModel, ContactsViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_aurora_wave_messages_ConversationListViewModel, ConversationListViewModel_HiltModules.KeyModule.provide()).build());
+      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(4).put(LazyClassKeyProvider.com_aurora_wave_messages_ChatDetailViewModel, ChatDetailViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_aurora_wave_connections_ContactsViewModel, ContactsViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_aurora_wave_messages_ConversationListViewModel, ConversationListViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_aurora_wave_connections_NewFriendsViewModel, NewFriendsViewModel_HiltModules.KeyModule.provide()).build());
     }
 
     @Override
@@ -399,18 +401,23 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
     private static final class LazyClassKeyProvider {
       static String com_aurora_wave_messages_ConversationListViewModel = "com.aurora.wave.messages.ConversationListViewModel";
 
+      static String com_aurora_wave_connections_ContactsViewModel = "com.aurora.wave.connections.ContactsViewModel";
+
       static String com_aurora_wave_messages_ChatDetailViewModel = "com.aurora.wave.messages.ChatDetailViewModel";
 
-      static String com_aurora_wave_connections_ContactsViewModel = "com.aurora.wave.connections.ContactsViewModel";
+      static String com_aurora_wave_connections_NewFriendsViewModel = "com.aurora.wave.connections.NewFriendsViewModel";
 
       @KeepFieldType
       ConversationListViewModel com_aurora_wave_messages_ConversationListViewModel2;
 
       @KeepFieldType
+      ContactsViewModel com_aurora_wave_connections_ContactsViewModel2;
+
+      @KeepFieldType
       ChatDetailViewModel com_aurora_wave_messages_ChatDetailViewModel2;
 
       @KeepFieldType
-      ContactsViewModel com_aurora_wave_connections_ContactsViewModel2;
+      NewFriendsViewModel com_aurora_wave_connections_NewFriendsViewModel2;
     }
   }
 
@@ -426,6 +433,8 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
     private Provider<ContactsViewModel> contactsViewModelProvider;
 
     private Provider<ConversationListViewModel> conversationListViewModelProvider;
+
+    private Provider<NewFriendsViewModel> newFriendsViewModelProvider;
 
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
@@ -443,11 +452,12 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
       this.chatDetailViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
       this.contactsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
       this.conversationListViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
+      this.newFriendsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
     }
 
     @Override
     public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(3).put(LazyClassKeyProvider.com_aurora_wave_messages_ChatDetailViewModel, ((Provider) chatDetailViewModelProvider)).put(LazyClassKeyProvider.com_aurora_wave_connections_ContactsViewModel, ((Provider) contactsViewModelProvider)).put(LazyClassKeyProvider.com_aurora_wave_messages_ConversationListViewModel, ((Provider) conversationListViewModelProvider)).build());
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(4).put(LazyClassKeyProvider.com_aurora_wave_messages_ChatDetailViewModel, ((Provider) chatDetailViewModelProvider)).put(LazyClassKeyProvider.com_aurora_wave_connections_ContactsViewModel, ((Provider) contactsViewModelProvider)).put(LazyClassKeyProvider.com_aurora_wave_messages_ConversationListViewModel, ((Provider) conversationListViewModelProvider)).put(LazyClassKeyProvider.com_aurora_wave_connections_NewFriendsViewModel, ((Provider) newFriendsViewModelProvider)).build());
     }
 
     @Override
@@ -457,20 +467,25 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_aurora_wave_messages_ChatDetailViewModel = "com.aurora.wave.messages.ChatDetailViewModel";
-
       static String com_aurora_wave_messages_ConversationListViewModel = "com.aurora.wave.messages.ConversationListViewModel";
 
       static String com_aurora_wave_connections_ContactsViewModel = "com.aurora.wave.connections.ContactsViewModel";
 
-      @KeepFieldType
-      ChatDetailViewModel com_aurora_wave_messages_ChatDetailViewModel2;
+      static String com_aurora_wave_messages_ChatDetailViewModel = "com.aurora.wave.messages.ChatDetailViewModel";
+
+      static String com_aurora_wave_connections_NewFriendsViewModel = "com.aurora.wave.connections.NewFriendsViewModel";
 
       @KeepFieldType
       ConversationListViewModel com_aurora_wave_messages_ConversationListViewModel2;
 
       @KeepFieldType
       ContactsViewModel com_aurora_wave_connections_ContactsViewModel2;
+
+      @KeepFieldType
+      ChatDetailViewModel com_aurora_wave_messages_ChatDetailViewModel2;
+
+      @KeepFieldType
+      NewFriendsViewModel com_aurora_wave_connections_NewFriendsViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -502,6 +517,9 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
 
           case 2: // com.aurora.wave.messages.ConversationListViewModel 
           return (T) new ConversationListViewModel();
+
+          case 3: // com.aurora.wave.connections.NewFriendsViewModel 
+          return (T) new NewFriendsViewModel();
 
           default: throw new AssertionError(id);
         }

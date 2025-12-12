@@ -24,11 +24,23 @@ import androidx.compose.material.icons.outlined.CompassCalibration
 import androidx.compose.material.icons.outlined.Contacts
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -62,7 +74,10 @@ import com.aurora.wave.auth.LoginScreen
 import com.aurora.wave.auth.RegisterScreen
 import com.aurora.wave.messages.MessagesRootScreen
 import com.aurora.wave.messages.ChatDetailScreen
+import com.aurora.wave.messages.ChatInfoScreen
 import com.aurora.wave.messages.SearchScreen
+import com.aurora.wave.messages.call.VoiceCallScreen
+import com.aurora.wave.messages.call.VideoCallScreen
 import com.aurora.wave.connections.ConnectionsRootScreen
 import com.aurora.wave.connections.ContactDetailScreen
 import com.aurora.wave.discover.DiscoverRootScreen
@@ -77,7 +92,19 @@ import com.aurora.wave.profile.NotificationsScreen
 import com.aurora.wave.profile.PrivacySecurityScreen
 import com.aurora.wave.profile.StorageDataScreen
 import com.aurora.wave.profile.LanguageScreen
+import com.aurora.wave.profile.EditProfileScreen
+import com.aurora.wave.profile.FavoritesScreen
+import com.aurora.wave.profile.ServicesScreen
+import com.aurora.wave.profile.HelpSupportScreen
+import com.aurora.wave.connections.NewFriendsScreen
+import com.aurora.wave.connections.GroupChatsScreen
+import com.aurora.wave.connections.AddFriendScreen
+import com.aurora.wave.connections.CreateGroupScreen
+import com.aurora.wave.connections.TagsScreen
+import com.aurora.wave.connections.OfficialAccountsScreen
 import com.aurora.wave.navigation.WaveRoute
+import com.aurora.wave.navigation.navigateSafely
+import com.aurora.wave.navigation.popBackStackSafely
 import com.aurora.wave.splash.SplashScreen
 import com.aurora.wave.data.settings.LanguageManager
 import com.aurora.wave.data.settings.AppLanguage
@@ -86,6 +113,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
+import java.net.URLEncoder
+import java.net.URLDecoder
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -151,10 +180,10 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
     val isLoggedIn by userDataStore.isLoggedInFlow.collectAsState(initial = null)
     
     val items = listOf(
-        NavItem(WaveRoute.Messages.route, stringResource(R.string.nav_messages)) { Icon(Icons.AutoMirrored.Outlined.Chat, contentDescription = null) },
-        NavItem(WaveRoute.Connections.route, stringResource(R.string.nav_connections)) { Icon(Icons.Outlined.Contacts, contentDescription = null) },
-        NavItem(WaveRoute.Discover.route, stringResource(R.string.nav_discover)) { Icon(Icons.Outlined.CompassCalibration, contentDescription = null) },
-        NavItem(WaveRoute.Profile.route, stringResource(R.string.nav_profile)) { Icon(Icons.Outlined.AccountCircle, contentDescription = null) }
+        NavItem(WaveRoute.Messages.route, stringResource(R.string.nav_messages)) { Icon(Icons.AutoMirrored.Outlined.Chat, contentDescription = null, modifier = Modifier.size(24.dp)) },
+        NavItem(WaveRoute.Connections.route, stringResource(R.string.nav_connections)) { Icon(Icons.Outlined.Contacts, contentDescription = null, modifier = Modifier.size(24.dp)) },
+        NavItem(WaveRoute.Discover.route, stringResource(R.string.nav_discover)) { Icon(Icons.Outlined.CompassCalibration, contentDescription = null, modifier = Modifier.size(24.dp)) },
+        NavItem(WaveRoute.Profile.route, stringResource(R.string.nav_profile)) { Icon(Icons.Outlined.AccountCircle, contentDescription = null, modifier = Modifier.size(24.dp)) }
     )
     
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -176,7 +205,7 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
             ) {
                 BottomNavBar(currentRoute, items) { route ->
                     Timber.d("Navigate to: $route")
-                    navController.navigate(route) {
+                    navController.navigateSafely(route) {
                         popUpTo(navController.graph.startDestinationId) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
@@ -283,22 +312,31 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                     MessagesRootScreen(
                         padding = padding,
                         onConversationClick = { conversationId ->
-                            navController.navigate(WaveRoute.Chat(conversationId).route)
+                            navController.navigateSafely(WaveRoute.Chat(conversationId).route)
                         },
                         onSearchClick = {
-                            navController.navigate(WaveRoute.Search.route)
+                            navController.navigateSafely(WaveRoute.Search.route)
+                        },
+                        onGroupChatClick = {
+                            navController.navigateSafely(WaveRoute.CreateGroup.route)
+                        },
+                        onAddFriendClick = {
+                            navController.navigateSafely(WaveRoute.AddFriend.route)
+                        },
+                        onScanClick = {
+                            navController.navigateSafely(WaveRoute.Scan.route)
                         }
                     ) 
                 }
                 
                 composable(WaveRoute.Search.route) {
                     SearchScreen(
-                        onBackClick = { navController.popBackStack() },
+                        onBackClick = { navController.popBackStackSafely() },
                         onResultClick = { result ->
                             // 根据结果类型导航到不同页面
                             when (result.type.name) {
-                                "CONTACT" -> navController.navigate(WaveRoute.Contact(result.id).route)
-                                "GROUP", "CHAT_RECORD" -> navController.navigate(WaveRoute.Chat(result.id).route)
+                                "CONTACT" -> navController.navigateSafely(WaveRoute.Contact(result.id).route)
+                                "GROUP", "CHAT_RECORD" -> navController.navigateSafely(WaveRoute.Chat(result.id).route)
                             }
                         }
                     )
@@ -311,10 +349,72 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                     val conversationId = backStackEntry.arguments?.getString(WaveRoute.Chat.ARG_CONVERSATION_ID) ?: ""
                     ChatDetailScreen(
                         conversationId = conversationId,
-                        onBackClick = { navController.popBackStack() },
+                        onBackClick = { navController.popBackStackSafely() },
                         onContactClick = { contactId ->
-                            navController.navigate(WaveRoute.Contact(contactId).route)
+                            navController.navigateSafely(WaveRoute.Contact(contactId).route)
+                        },
+                        onMoreClick = {
+                            navController.navigateSafely(WaveRoute.ChatInfo(conversationId).route)
+                        },
+                        onCallClick = {
+                            val encodedName = URLEncoder.encode("对方", "UTF-8")
+                            val route = WaveRoute.VoiceCall(conversationId, encodedName).route
+                            Timber.d("MainActivity: navigating to voice call route=$route")
+                            navController.navigateSafely(route)
+                        },
+                        onVideoCallClick = {
+                            val encodedName = URLEncoder.encode("对方", "UTF-8")
+                            val route = WaveRoute.VideoCall(conversationId, encodedName).route
+                            Timber.d("MainActivity: navigating to video call route=$route")
+                            navController.navigateSafely(route)
                         }
+                    )
+                }
+                
+                composable(
+                    route = WaveRoute.ChatInfo.ROUTE_PATTERN,
+                    arguments = listOf(navArgument(WaveRoute.ChatInfo.ARG_CONVERSATION_ID) { type = NavType.StringType })
+                ) { backStackEntry ->
+                    val conversationId = backStackEntry.arguments?.getString(WaveRoute.ChatInfo.ARG_CONVERSATION_ID) ?: ""
+                    ChatInfoScreen(
+                        conversationId = conversationId,
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                // 语音通话页面
+                composable(
+                    route = WaveRoute.VoiceCall.ROUTE_PATTERN,
+                    arguments = listOf(
+                        navArgument(WaveRoute.VoiceCall.ARG_CONVERSATION_ID) { type = NavType.StringType },
+                        navArgument(WaveRoute.VoiceCall.ARG_CONTACT_NAME) { type = NavType.StringType }
+                    )
+                ) { backStackEntry ->
+                    val conversationId = backStackEntry.arguments?.getString(WaveRoute.VoiceCall.ARG_CONVERSATION_ID) ?: ""
+                    val rawContactName = backStackEntry.arguments?.getString(WaveRoute.VoiceCall.ARG_CONTACT_NAME) ?: ""
+                    val contactName = try { URLDecoder.decode(rawContactName, "UTF-8") } catch (e: Exception) { rawContactName }
+                    VoiceCallScreen(
+                        conversationId = conversationId,
+                        contactName = contactName,
+                        onEndCall = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                // 视频通话页面
+                composable(
+                    route = WaveRoute.VideoCall.ROUTE_PATTERN,
+                    arguments = listOf(
+                        navArgument(WaveRoute.VideoCall.ARG_CONVERSATION_ID) { type = NavType.StringType },
+                        navArgument(WaveRoute.VideoCall.ARG_CONTACT_NAME) { type = NavType.StringType }
+                    )
+                ) { backStackEntry ->
+                    val conversationId = backStackEntry.arguments?.getString(WaveRoute.VideoCall.ARG_CONVERSATION_ID) ?: ""
+                    val rawContactName = backStackEntry.arguments?.getString(WaveRoute.VideoCall.ARG_CONTACT_NAME) ?: ""
+                    val contactName = try { URLDecoder.decode(rawContactName, "UTF-8") } catch (e: Exception) { rawContactName }
+                    VideoCallScreen(
+                        conversationId = conversationId,
+                        contactName = contactName,
+                        onEndCall = { navController.popBackStackSafely() }
                     )
                 }
                 
@@ -322,10 +422,25 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                     ConnectionsRootScreen(
                         padding = padding,
                         onContactClick = { contactId ->
-                            navController.navigate(WaveRoute.Contact(contactId).route)
+                            navController.navigateSafely(WaveRoute.Contact(contactId).route)
                         },
                         onSearchClick = {
-                            navController.navigate(WaveRoute.Search.route)
+                            navController.navigateSafely(WaveRoute.Search.route)
+                        },
+                        onNewFriendsClick = {
+                            navController.navigateSafely(WaveRoute.NewFriends.route)
+                        },
+                        onGroupsClick = {
+                            navController.navigateSafely(WaveRoute.GroupChats.route)
+                        },
+                        onAddFriendClick = {
+                            navController.navigateSafely(WaveRoute.AddFriend.route)
+                        },
+                        onTagsClick = {
+                            navController.navigateSafely(WaveRoute.Tags.route)
+                        },
+                        onOfficialAccountsClick = {
+                            navController.navigateSafely(WaveRoute.OfficialAccounts.route)
                         }
                     ) 
                 }
@@ -337,9 +452,9 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                     val contactId = backStackEntry.arguments?.getString(WaveRoute.Contact.ARG_CONTACT_ID) ?: ""
                     ContactDetailScreen(
                         contactId = contactId,
-                        onBackClick = { navController.popBackStack() },
+                        onBackClick = { navController.popBackStackSafely() },
                         onChatClick = {
-                            navController.navigate(WaveRoute.Chat(contactId).route) {
+                            navController.navigateSafely(WaveRoute.Chat(contactId).route) {
                                 popUpTo(WaveRoute.Connections.route)
                             }
                         }
@@ -350,43 +465,49 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                     DiscoverRootScreen(
                         padding = padding,
                         onItemClick = { route ->
-                            navController.navigate(route)
+                            navController.navigateSafely(route)
                         }
                     ) 
                 }
                 
                 composable(WaveRoute.Moments.route) {
                     MomentsScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.Scan.route) {
                     ScanScreen(
-                        onBackClick = { navController.popBackStack() },
-                        onMyQrCodeClick = { navController.navigate(WaveRoute.MyQrCode.route) }
+                        onBackClick = { navController.popBackStackSafely() },
+                        onMyQrCodeClick = { navController.navigateSafely(WaveRoute.MyQrCode.route) }
                     )
                 }
                 
                 composable(WaveRoute.MyQrCode.route) {
                     MyQrCodeScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.Profile.route) { 
                     ProfileRootScreen(
                         padding = padding,
+                        onProfileClick = {
+                            navController.navigateSafely(WaveRoute.EditProfile.route)
+                        },
                         onSettingsClick = { settingId ->
                             Timber.d("Profile menu clicked: $settingId")
                             when (settingId) {
-                                "settings" -> navController.navigate(WaveRoute.Settings.route)
-                                "appearance" -> navController.navigate(WaveRoute.Appearance.route)
-                                "about" -> navController.navigate(WaveRoute.About.route)
-                                "notifications" -> navController.navigate(WaveRoute.Notifications.route)
-                                "privacy" -> navController.navigate(WaveRoute.Privacy.route)
-                                "storage" -> navController.navigate(WaveRoute.Storage.route)
-                                "language" -> navController.navigate(WaveRoute.Language.route)
+                                "settings" -> navController.navigateSafely(WaveRoute.Settings.route)
+                                "appearance" -> navController.navigateSafely(WaveRoute.Appearance.route)
+                                "about" -> navController.navigateSafely(WaveRoute.About.route)
+                                "notifications" -> navController.navigateSafely(WaveRoute.Notifications.route)
+                                "privacy" -> navController.navigateSafely(WaveRoute.Privacy.route)
+                                "storage" -> navController.navigateSafely(WaveRoute.Storage.route)
+                                "language" -> navController.navigateSafely(WaveRoute.Language.route)
+                                "favorites" -> navController.navigateSafely(WaveRoute.Favorites.route)
+                                "services" -> navController.navigateSafely(WaveRoute.Services.route)
+                                "help" -> navController.navigateSafely(WaveRoute.HelpSupport.route)
                                 "logout" -> {
                                     // 退出登录 - 清除缓存并返回登录页
                                     scope.launch {
@@ -404,44 +525,134 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                 
                 composable(WaveRoute.Settings.route) {
                     SettingsScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.Appearance.route) {
                     AppearanceScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.About.route) {
                     AboutScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.Notifications.route) {
                     NotificationsScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.Privacy.route) {
                     PrivacySecurityScreen(
-                        onBackClick = { navController.popBackStack() },
+                        onBackClick = { navController.popBackStackSafely() },
                         onBlockedUsersClick = { /* TODO: Navigate to blocked users */ }
                     )
                 }
                 
                 composable(WaveRoute.Storage.route) {
                     StorageDataScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
                 
                 composable(WaveRoute.Language.route) {
                     LanguageScreen(
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                // 通讯录子页面
+                composable(WaveRoute.NewFriends.route) {
+                    NewFriendsScreen(
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                composable(WaveRoute.GroupChats.route) {
+                    GroupChatsScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onGroupClick = { groupId ->
+                            navController.navigateSafely(WaveRoute.Chat(groupId).route)
+                        }
+                    )
+                }
+                
+                composable(WaveRoute.AddFriend.route) {
+                    AddFriendScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onScanClick = {
+                            navController.navigateSafely(WaveRoute.Scan.route)
+                        }
+                    )
+                }
+                
+                composable(WaveRoute.CreateGroup.route) {
+                    CreateGroupScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onCreateGroup = { contactIds ->
+                            // 创建群聊后导航到聊天页面
+                            val groupId = "group_${System.currentTimeMillis()}"
+                            navController.navigateSafely(WaveRoute.Chat(groupId).route) {
+                                popUpTo(WaveRoute.Messages.route)
+                            }
+                        }
+                    )
+                }
+                
+                composable(WaveRoute.Tags.route) {
+                    TagsScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onContactClick = { contactId ->
+                            navController.navigateSafely(WaveRoute.Contact(contactId).route)
+                        }
+                    )
+                }
+                
+                composable(WaveRoute.OfficialAccounts.route) {
+                    OfficialAccountsScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onAccountClick = { accountId ->
+                            navController.navigateSafely(WaveRoute.Chat(accountId).route)
+                        }
+                    )
+                }
+                
+                // 个人资料子页面
+                composable(WaveRoute.EditProfile.route) {
+                    EditProfileScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onQrCodeClick = {
+                            navController.navigateSafely(WaveRoute.MyQrCode.route)
+                        }
+                    )
+                }
+                
+                composable(WaveRoute.Favorites.route) {
+                    FavoritesScreen(
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                composable(WaveRoute.Services.route) {
+                    ServicesScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onServiceClick = { serviceId ->
+                            when (serviceId) {
+                                "scan" -> navController.navigateSafely(WaveRoute.Scan.route)
+                                else -> { /* Handle other services */ }
+                            }
+                        }
+                    )
+                }
+                
+                composable(WaveRoute.HelpSupport.route) {
+                    HelpSupportScreen(
+                        onBackClick = { navController.popBackStackSafely() }
                     )
                 }
             }
@@ -451,35 +662,65 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
 
 /**
  * 微信风格底部导航栏
- * 特点：白色背景、简洁图标、绿色选中
+ * 特点：紧凑高度(56dp)、24dp图标、10sp文字
  */
 @Composable
 private fun BottomNavBar(currentRoute: String?, items: List<NavItem>, onSelect: (String) -> Unit) {
-    // Material 3 NavigationBar 默认已正确处理 navigationBars insets
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 0.dp
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface)
     ) {
-        items.forEach { item ->
-            val selected = currentRoute == item.route
-            NavigationBarItem(
-                selected = selected,
-                onClick = { onSelect(item.route) },
-                icon = item.icon,
-                label = { 
+        // 顶部分隔线
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5.dp)
+                .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+        )
+        // 导航栏内容
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp), // 微信风格紧凑高度
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            items.forEach { item ->
+                val selected = currentRoute == item.route
+                val color = if (selected) {
+                    MaterialTheme.colorScheme.primary
+                } else {
+                    MaterialTheme.colorScheme.outline
+                }
+                
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { onSelect(item.route) },
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
+                        androidx.compose.runtime.CompositionLocalProvider(
+                            androidx.compose.material3.LocalContentColor provides color
+                        ) {
+                            item.icon()
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = item.label,
-                        style = MaterialTheme.typography.labelSmall
-                    ) 
-                },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.outline,
-                    unselectedTextColor = MaterialTheme.colorScheme.outline,
-                    indicatorColor = MaterialTheme.colorScheme.surface
-                )
-            )
+                        color = color,
+                        fontSize = 10.sp,
+                        fontWeight = if (selected) FontWeight.Medium else FontWeight.Normal
+                    )
+                }
+            }
         }
+        // 系统导航栏安全区
+        Spacer(modifier = Modifier.navigationBarsPadding())
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="error_empty_password">Please enter password</string>
+    <string name="error_empty_username">Please enter username</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="error_username_too_short">Username must be at least 4 characters</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="invite_code_hint">Invite Code</string>
+    <string name="invite_code_optional">Optional: Enter a friend\'s invite code for bonus rewards</string>
+    <string name="login_button">Sign In</string>
+    <string name="login_now">Sign In</string>
+    <string name="login_subtitle">Sign in to your StarIM account</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="password_hint">Password</string>
+    <string name="register_button">Sign Up</string>
+    <string name="register_now">Sign Up</string>
+    <string name="register_subtitle">Join StarIM for a new social experience</string>
+    <string name="username_hint">Username</string>
+    <string name="welcome_back">Welcome Back</string>
+</resources>

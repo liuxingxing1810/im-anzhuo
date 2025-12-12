@@ -21,6 +21,9 @@ import hilt_aggregated_deps._com_aurora_wave_MainActivity_GeneratedInjector;
 import hilt_aggregated_deps._com_aurora_wave_WaveApp_GeneratedInjector;
 import hilt_aggregated_deps._com_aurora_wave_connections_ContactsViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._com_aurora_wave_connections_ContactsViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._com_aurora_wave_connections_NewFriendsViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_aurora_wave_connections_NewFriendsViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._com_aurora_wave_di_DatabaseModule;
 import hilt_aggregated_deps._com_aurora_wave_messages_ChatDetailViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._com_aurora_wave_messages_ChatDetailViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._com_aurora_wave_messages_ConversationListViewModel_HiltModules_BindsModule;
@@ -69,6 +72,9 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _com_aurora_wave_WaveApp_GeneratedInjector.class,
         _com_aurora_wave_connections_ContactsViewModel_HiltModules_BindsModule.class,
         _com_aurora_wave_connections_ContactsViewModel_HiltModules_KeyModule.class,
+        _com_aurora_wave_connections_NewFriendsViewModel_HiltModules_BindsModule.class,
+        _com_aurora_wave_connections_NewFriendsViewModel_HiltModules_KeyModule.class,
+        _com_aurora_wave_di_DatabaseModule.class,
         _com_aurora_wave_messages_ChatDetailViewModel_HiltModules_BindsModule.class,
         _com_aurora_wave_messages_ChatDetailViewModel_HiltModules_KeyModule.class,
         _com_aurora_wave_messages_ConversationListViewModel_HiltModules_BindsModule.class,

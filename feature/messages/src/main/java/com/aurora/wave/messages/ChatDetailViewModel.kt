@@ -46,7 +46,7 @@ class ChatDetailViewModel @Inject constructor() : ViewModel() {
                 conversationName = conversation?.name ?: "Chat",
                 conversationAvatar = conversation?.avatarUrl,
                 isOnline = conversation?.isOnline ?: false,
-                messages = messages.reversed(), // Oldest first for display
+                messages = messages, // Oldest first for display (newest at bottom)
                 isLoading = false
             )
         }

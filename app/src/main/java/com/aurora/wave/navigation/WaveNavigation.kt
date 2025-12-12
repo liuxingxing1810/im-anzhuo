@@ -26,6 +26,14 @@ sealed class WaveRoute(val route: String) {
         }
     }
     
+    // Chat Info (聊天信息页面)
+    data class ChatInfo(val conversationId: String = "{conversationId}") : WaveRoute("chat_info/$conversationId") {
+        companion object {
+            const val ROUTE_PATTERN = "chat_info/{conversationId}"
+            const val ARG_CONVERSATION_ID = "conversationId"
+        }
+    }
+    
     // Contact
     data class Contact(val contactId: String = "{contactId}") : WaveRoute("contact/$contactId") {
         companion object {
@@ -33,6 +41,14 @@ sealed class WaveRoute(val route: String) {
             const val ARG_CONTACT_ID = "contactId"
         }
     }
+    
+    // Contacts sub-routes
+    data object NewFriends : WaveRoute("new_friends")
+    data object GroupChats : WaveRoute("group_chats")
+    data object AddFriend : WaveRoute("add_friend")
+    data object CreateGroup : WaveRoute("create_group")
+    data object Tags : WaveRoute("tags")
+    data object OfficialAccounts : WaveRoute("official_accounts")
     
     // Discover sub-routes
     data object Moments : WaveRoute("moments")
@@ -48,6 +64,29 @@ sealed class WaveRoute(val route: String) {
     data object Privacy : WaveRoute("privacy")
     data object Storage : WaveRoute("storage")
     data object Language : WaveRoute("language")
+    data object EditProfile : WaveRoute("edit_profile")
+    data object Favorites : WaveRoute("favorites")
+    data object Services : WaveRoute("services")
+    data object HelpSupport : WaveRoute("help_support")
+    
+    // Call routes
+    data class VoiceCall(val conversationId: String = "{conversationId}", val contactName: String = "{contactName}") : 
+        WaveRoute("voice_call/$conversationId/$contactName") {
+        companion object {
+            const val ROUTE_PATTERN = "voice_call/{conversationId}/{contactName}"
+            const val ARG_CONVERSATION_ID = "conversationId"
+            const val ARG_CONTACT_NAME = "contactName"
+        }
+    }
+    
+    data class VideoCall(val conversationId: String = "{conversationId}", val contactName: String = "{contactName}") : 
+        WaveRoute("video_call/$conversationId/$contactName") {
+        companion object {
+            const val ROUTE_PATTERN = "video_call/{conversationId}/{contactName}"
+            const val ARG_CONVERSATION_ID = "conversationId"
+            const val ARG_CONTACT_NAME = "contactName"
+        }
+    }
     
     companion object {
         // Auth routes

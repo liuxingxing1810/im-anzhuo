@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connections_title">联系人</string>
+    <string name="contact_about">个人简介</string>
+    <string name="contact_block">加入黑名单</string>
+    <string name="contact_call">语音</string>
+    <string name="contact_chat">发消息</string>
+    <string name="contact_delete">删除联系人</string>
+    <string name="contact_last_seen">最近活跃</string>
+    <string name="contact_mute_notifications">消息免打扰</string>
+    <string name="contact_online">在线</string>
+    <string name="contact_share">分享</string>
+    <string name="contact_video">视频</string>
+    <string name="contacts_tab">联系人</string>
+    <string name="groups_entry">群聊</string>
+    <string name="new_friends_entry">新的朋友</string>
+    <string name="new_friends_tab">新的朋友</string>
+    <string name="no_contacts">暂无联系人</string>
+    <string name="official_accounts_entry">公众号</string>
+    <string name="tags_entry">标签</string>
+</resources>

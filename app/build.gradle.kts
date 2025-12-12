@@ -50,6 +50,7 @@ android {
 dependencies {
     val composeBom = rootProject.extra["composeBom"] as String
     val hiltVersion = rootProject.extra["hiltVersion"] as String
+    val roomVersion = rootProject.extra["roomVersion"] as String
     
     implementation(platform("androidx.compose:compose-bom:$composeBom"))
     implementation("androidx.core:core-ktx:1.13.1")
@@ -64,9 +65,11 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.room:room-runtime:$roomVersion")
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.airbnb.android:lottie-compose:6.4.0")
 
     implementation(project(":core:design"))
     implementation(project(":core:common"))
@@ -77,6 +80,7 @@ dependencies {
     implementation(project(":feature:discover"))
     implementation(project(":feature:profile"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:auth"))
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

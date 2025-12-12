@@ -99,8 +99,8 @@ fun ContactDetailScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFFEDEDED),
-                    scrolledContainerColor = Color(0xFFEDEDED)
+                    containerColor = MaterialTheme.colorScheme.background,
+                    scrolledContainerColor = MaterialTheme.colorScheme.background
                 )
             )
         }

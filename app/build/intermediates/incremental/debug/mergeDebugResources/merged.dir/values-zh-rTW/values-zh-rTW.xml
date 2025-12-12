@@ -63,9 +63,22 @@
     <string msgid="406453423630273620" name="close_drawer">"關閉導覽選單"</string>
     <string msgid="7573152094250666567" name="close_sheet">"關閉功能表"</string>
     <string name="confirm">確認</string>
+    <string name="connections_title">聯繫人</string>
+    <string name="contact_about">個人簡介</string>
+    <string name="contact_block">加入黑名單</string>
+    <string name="contact_call">語音</string>
+    <string name="contact_chat">發訊息</string>
+    <string name="contact_delete">刪除聯繫人</string>
+    <string name="contact_last_seen">最近活躍</string>
+    <string name="contact_mute_notifications">訊息免打擾</string>
+    <string name="contact_online">在線</string>
+    <string name="contact_share">分享</string>
+    <string name="contact_video">視頻</string>
+    <string name="contacts_tab">聯繫人</string>
     <string msgid="8038256446254964252" name="default_error_message">"輸入內容無效"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"彈出式視窗"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"下拉式選單"</string>
+    <string name="groups_entry">群聊</string>
     <string msgid="6827826412747255547" name="in_progress">"處理中"</string>
     <string msgid="7933458017204019916" name="indeterminate">"部分檢查"</string>
     <string name="loading">載入中…</string>
@@ -127,21 +140,28 @@
     <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"顯示工具提示"</string>
     <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"工具提示"</string>
     <string msgid="542007171693138492" name="navigation_menu">"導覽選單"</string>
+    <string name="new_friends_entry">新的朋友</string>
+    <string name="new_friends_tab">新的朋友</string>
+    <string name="no_contacts">暫無聯繫人</string>
     <string msgid="6610465462668679431" name="not_selected">"未選取"</string>
-    <string name="profile_about">關於 Aurora Wave</string>
+    <string name="official_accounts_entry">公眾號</string>
+    <string name="profile_about">關於星星IM</string>
     <string name="profile_about_version">版本 1.0.0</string>
     <string name="profile_appearance">外觀</string>
     <string name="profile_appearance_sub">主題、字型大小</string>
     <string name="profile_collections">收藏夾</string>
     <string name="profile_favorites">收藏</string>
-    <string name="profile_header_bio_default">你好，我正在使用 Aurora Wave!</string>
-    <string name="profile_header_wave_id">Wave ID: %1$s</string>
+    <string name="profile_header_bio_default">你好，我正在使用星星IM!</string>
+    <string name="profile_header_wave_id">星星ID: %1$s</string>
     <string name="profile_help">幫助與支援</string>
+    <string name="profile_moments">朋友圈</string>
     <string name="profile_notifications">通知</string>
     <string name="profile_privacy">隱私與安全</string>
     <string name="profile_services">服務</string>
     <string name="profile_services_sub">支付、卡包、出行</string>
     <string name="profile_settings">設定</string>
+    <string name="profile_shop">視頻號</string>
+    <string name="profile_stickers">表情</string>
     <string name="profile_storage">儲存與資料</string>
     <string name="profile_title">我</string>
     <string msgid="5941395253238309765" name="range_end">"範圍終點"</string>
@@ -188,6 +208,7 @@
     <string name="storage_videos">影片</string>
     <string msgid="2561197295334830845" name="switch_role">"切換鈕"</string>
     <string msgid="1672349317127674378" name="tab">"Tab 鍵"</string>
+    <string name="tags_entry">標籤</string>
     <string msgid="5946805113151406391" name="template_percent">"百分之 <ns1:g id="PERCENTAGE">%1$d</ns1:g>。"</string>
     <string msgid="3765533235322692011" name="tooltip_description">"工具提示"</string>
     <string msgid="3124740595719787496" name="tooltip_label">"顯示工具提示"</string>

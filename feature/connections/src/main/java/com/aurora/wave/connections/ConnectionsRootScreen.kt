@@ -71,6 +71,11 @@ fun ConnectionsRootScreen(
     padding: PaddingValues,
     onContactClick: (String) -> Unit = {},
     onSearchClick: () -> Unit = {},
+    onNewFriendsClick: () -> Unit = {},
+    onGroupsClick: () -> Unit = {},
+    onAddFriendClick: () -> Unit = {},
+    onTagsClick: () -> Unit = {},
+    onOfficialAccountsClick: () -> Unit = {},
     viewModel: ContactsViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -103,7 +108,7 @@ fun ConnectionsRootScreen(
                             contentDescription = "Search"
                         )
                     }
-                    IconButton(onClick = { /* TODO: Add contact */ }) {
+                    IconButton(onClick = onAddFriendClick) {
                         Icon(
                             imageVector = Icons.Default.PersonAdd,
                             contentDescription = "Add Contact"
@@ -129,10 +134,10 @@ fun ConnectionsRootScreen(
                     item(key = "function_entries") {
                         WeChatFunctionEntries(
                             newFriendCount = state.friendRequests.size,
-                            onNewFriendsClick = { viewModel.onTabSelected(ContactsTab.NEW_FRIENDS) },
-                            onGroupsClick = { /* TODO */ },
-                            onTagsClick = { /* TODO */ },
-                            onOfficialClick = { /* TODO */ }
+                            onNewFriendsClick = onNewFriendsClick,
+                            onGroupsClick = onGroupsClick,
+                            onTagsClick = onTagsClick,
+                            onOfficialClick = onOfficialAccountsClick
                         )
                     }
                     

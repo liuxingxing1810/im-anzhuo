@@ -25,5 +25,6 @@ include(
     ":feature:connections",
     ":feature:discover",
     ":feature:profile",
-    ":feature:settings"
+    ":feature:settings",
+    ":feature:auth"
 )

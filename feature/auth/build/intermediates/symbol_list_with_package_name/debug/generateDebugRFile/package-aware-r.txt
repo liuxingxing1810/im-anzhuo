@@ -1,0 +1,21 @@
+com.aurora.wave.auth
+string confirm_password_hint
+string create_account
+string error_empty_password
+string error_empty_username
+string error_password_mismatch
+string error_password_too_short
+string error_username_too_short
+string have_account
+string invite_code_hint
+string invite_code_optional
+string login_button
+string login_now
+string login_subtitle
+string no_account
+string password_hint
+string register_button
+string register_now
+string register_subtitle
+string username_hint
+string welcome_back

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aurora Wave</string>
+    <string name="app_name">星星IM</string>
     <string name="chat_empty_subtitle">Start a new chat to begin messaging</string>
     <string name="chat_empty_title">No conversations yet</string>
     <string name="chat_new">New Chat</string>
@@ -19,10 +19,12 @@
     <string name="common_retry">Retry</string>
     <string name="common_save">Save</string>
     <string name="common_search">Search</string>
+    <string name="contacts_tab">Contacts</string>
     <string name="date_today">Today</string>
     <string name="date_yesterday">Yesterday</string>
     <string name="nav_connections">Connections</string>
     <string name="nav_discover">Discover</string>
     <string name="nav_messages">Messages</string>
     <string name="nav_profile">Profile</string>
+    <string name="new_friends_tab">New Friends</string>
 </resources>

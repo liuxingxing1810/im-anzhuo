@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connections_title">聯繫人</string>
+    <string name="contact_about">個人簡介</string>
+    <string name="contact_block">加入黑名單</string>
+    <string name="contact_call">語音</string>
+    <string name="contact_chat">發訊息</string>
+    <string name="contact_delete">刪除聯繫人</string>
+    <string name="contact_last_seen">最近活躍</string>
+    <string name="contact_mute_notifications">訊息免打擾</string>
+    <string name="contact_online">在線</string>
+    <string name="contact_share">分享</string>
+    <string name="contact_video">視頻</string>
+    <string name="contacts_tab">聯繫人</string>
+    <string name="groups_entry">群聊</string>
+    <string name="new_friends_entry">新的朋友</string>
+    <string name="new_friends_tab">新的朋友</string>
+    <string name="no_contacts">暫無聯繫人</string>
+    <string name="official_accounts_entry">公眾號</string>
+    <string name="tags_entry">標籤</string>
+</resources>

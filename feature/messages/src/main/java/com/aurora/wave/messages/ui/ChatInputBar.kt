@@ -88,7 +88,8 @@ import androidx.compose.ui.unit.sp
 enum class BottomPanelType {
     NONE,       // 无面板
     EMOJI,      // 表情面板
-    EXTENSION   // 扩展功能面板
+    EXTENSION,  // 扩展功能面板
+    VOICE       // 语音输入模式
 }
 
 @Composable
@@ -102,12 +103,17 @@ fun ChatInputBar(
     onCameraClick: () -> Unit,
     modifier: Modifier = Modifier,
     isSending: Boolean = false,
-    onPanelStateChange: (Boolean) -> Unit = {}  // 面板状态变化回调：true=打开, false=关闭
+    onPanelStateChange: (Boolean) -> Unit = {},  // 面板状态变化回调：true=打开, false=关闭
+    onVoiceRecordStart: () -> Unit = {},
+    onVoiceRecordStop: () -> Unit = {}
 ) {
     val hasText = text.isNotBlank()
     
     // 面板状态
     var currentPanel by remember { mutableStateOf(BottomPanelType.NONE) }
+    
+    // 语音模式状态
+    var isVoiceMode by remember { mutableStateOf(false) }
     
     // 键盘控制器
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -118,10 +124,13 @@ fun ChatInputBar(
     val imeHeight = WindowInsets.ime.getBottom(density)
     val isKeyboardVisible = imeHeight > 0
     
-    // 键盘打开时，关闭面板
+    // 键盘打开时，关闭面板并切换到文字模式
     LaunchedEffect(isKeyboardVisible) {
         if (isKeyboardVisible && currentPanel != BottomPanelType.NONE) {
             currentPanel = BottomPanelType.NONE
+        }
+        if (isKeyboardVisible && isVoiceMode) {
+            isVoiceMode = false
         }
     }
     
@@ -146,7 +155,25 @@ fun ChatInputBar(
                 hasText = hasText,
                 isSending = isSending,
                 currentPanel = currentPanel,
-                onVoiceClick = onVoiceClick,
+                isVoiceMode = isVoiceMode,
+                onVoiceClick = {
+                    // 切换语音/键盘模式
+                    isVoiceMode = !isVoiceMode
+                    if (isVoiceMode) {
+                        // 切换到语音模式时，隐藏键盘和面板
+                        keyboardController?.hide()
+                        focusManager.clearFocus()
+                        currentPanel = BottomPanelType.NONE
+                    }
+                },
+                onVoiceRecordStart = {
+                    currentPanel = BottomPanelType.VOICE
+                    onVoiceRecordStart()
+                },
+                onVoiceRecordStop = {
+                    currentPanel = BottomPanelType.NONE
+                    onVoiceRecordStop()
+                },
                 onEmojiClick = {
                     if (currentPanel == BottomPanelType.EMOJI) {
                         currentPanel = BottomPanelType.NONE
@@ -154,6 +181,7 @@ fun ChatInputBar(
                         // 打开表情面板前，先隐藏键盘
                         keyboardController?.hide()
                         focusManager.clearFocus()
+                        isVoiceMode = false
                         currentPanel = BottomPanelType.EMOJI
                     }
                 },
@@ -228,7 +256,10 @@ private fun InputRow(
     hasText: Boolean,
     isSending: Boolean,
     currentPanel: BottomPanelType,
+    isVoiceMode: Boolean,
     onVoiceClick: () -> Unit,
+    onVoiceRecordStart: () -> Unit,
+    onVoiceRecordStop: () -> Unit,
     onEmojiClick: () -> Unit,
     onAttachClick: () -> Unit,
     onSendClick: () -> Unit
@@ -240,55 +271,66 @@ private fun InputRow(
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        // Voice button
+        // Voice/Keyboard toggle button
         IconButton(
             onClick = onVoiceClick,
             modifier = Modifier.size(40.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.Mic,
-                contentDescription = "Voice message",
+                imageVector = if (isVoiceMode) Icons.Default.Keyboard else Icons.Default.Mic,
+                contentDescription = if (isVoiceMode) "Switch to keyboard" else "Switch to voice",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         
-        // Input field
-        Surface(
-            modifier = Modifier
-                .weight(1f)
-                .height(40.dp),
-            shape = RoundedCornerShape(6.dp),
-            color = MaterialTheme.colorScheme.surfaceContainerHighest
-        ) {
-            Row(
-                modifier = Modifier.padding(horizontal = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
+        // Input field or Voice record button
+        if (isVoiceMode) {
+            // 语音录制按钮
+            VoiceRecordButton(
+                isRecording = currentPanel == BottomPanelType.VOICE,
+                onStartRecording = onVoiceRecordStart,
+                onStopRecording = onVoiceRecordStop,
+                modifier = Modifier.weight(1f)
+            )
+        } else {
+            // 文字输入框
+            Surface(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(40.dp),
+                shape = RoundedCornerShape(6.dp),
+                color = MaterialTheme.colorScheme.surfaceContainerHighest
             ) {
-                BasicTextField(
-                    value = text,
-                    onValueChange = onTextChange,
-                    modifier = Modifier.weight(1f),
-                    textStyle = TextStyle(
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = MaterialTheme.typography.bodyLarge.fontSize
-                    ),
-                    cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                    decorationBox = { innerTextField ->
-                        Box(
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            if (text.isEmpty()) {
-                                Text(
-                                    text = "",
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                                )
+                Row(
+                    modifier = Modifier.padding(horizontal = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    BasicTextField(
+                        value = text,
+                        onValueChange = onTextChange,
+                        modifier = Modifier.weight(1f),
+                        textStyle = TextStyle(
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize
+                        ),
+                        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                        decorationBox = { innerTextField ->
+                            Box(
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                if (text.isEmpty()) {
+                                    Text(
+                                        text = "",
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                                    )
+                                }
+                                innerTextField()
                             }
-                            innerTextField()
-                        }
-                    },
-                    maxLines = 4
-                )
+                        },
+                        maxLines = 4
+                    )
+                }
             }
         }
         
@@ -309,7 +351,7 @@ private fun InputRow(
         }
         
         // Add/Send button
-        if (hasText) {
+        if (hasText && !isVoiceMode) {
             // Send button
             IconButton(
                 onClick = onSendClick,

@@ -1,2 +1,20 @@
 R_DEF: Internal format may change without notice
 local
+string connections_title
+string contact_about
+string contact_block
+string contact_call
+string contact_chat
+string contact_delete
+string contact_last_seen
+string contact_mute_notifications
+string contact_online
+string contact_share
+string contact_video
+string contacts_tab
+string groups_entry
+string new_friends_entry
+string new_friends_tab
+string no_contacts
+string official_accounts_entry
+string tags_entry

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -39,7 +40,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,9 +55,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aurora.wave.design.GrayStatusBar
 import com.aurora.wave.messages.ui.ChatInputBar
 import com.aurora.wave.messages.ui.MessageBubble
-
-// 统一的灰色 TopAppBar 颜色
-private val TopBarColor = androidx.compose.ui.graphics.Color(0xFFEDEDED)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -104,6 +105,19 @@ fun ChatDetailScreen(
         // 键盘弹出时 (imeHeight > 0) 滚动到底部
         if (imeHeight > 0 && currentMessages.isNotEmpty()) {
             listState.animateScrollToItem(currentMessages.lastIndex)
+        }
+    }
+    
+    // 面板打开状态
+    var isPanelOpen by remember { mutableStateOf(false) }
+    
+    // 面板打开时滚动到底部（等待面板动画完成）
+    LaunchedEffect(isPanelOpen) {
+        if (isPanelOpen && currentMessages.isNotEmpty()) {
+            // 等待面板展开动画完成（动画是250ms，等400ms确保布局稳定）
+            kotlinx.coroutines.delay(400)
+            // 使用scrollToItem确保立即到位，不使用动画避免与面板动画冲突
+            listState.scrollToItem(currentMessages.lastIndex)
         }
     }
     
@@ -189,12 +203,112 @@ fun ChatDetailScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = TopBarColor,
-                    scrolledContainerColor = TopBarColor
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    scrolledContainerColor = MaterialTheme.colorScheme.surface
                 )
             )
-        },
-        bottomBar = {
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = paddingValues.calculateTopPadding())
+                .navigationBarsPadding()
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            // 消息列表区域 - 占据剩余空间
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                when {
+                    state.isLoading -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
+                    
+                    state.error != null -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "Error loading chat",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = state.error ?: "",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                    
+                    state.messages.isEmpty() -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "👋",
+                                    style = MaterialTheme.typography.displayLarge
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = "Say hello to ${state.conversationName}",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                    
+                    else -> {
+                        LazyColumn(
+                            state = listState,
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(
+                                horizontal = 12.dp,
+                                vertical = 8.dp
+                            ),
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            // Date header - 动态计算日期
+                            val firstMessageTimestamp = state.messages.firstOrNull()?.fullTimestamp ?: System.currentTimeMillis()
+                            item {
+                                DateHeader(date = formatDateHeader(firstMessageTimestamp))
+                            }
+                            
+                            items(
+                                items = state.messages,
+                                key = { it.id }
+                            ) { message ->
+                                MessageBubble(
+                                    message = message,
+                                    onAvatarClick = { senderId -> onContactClick(senderId) },
+                                    modifier = Modifier.padding(vertical = 2.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // 输入栏和面板 - 放在底部
             ChatInputBar(
                 text = state.inputText,
                 onTextChange = viewModel::onInputTextChange,
@@ -203,100 +317,9 @@ fun ChatDetailScreen(
                 onEmojiClick = { /* TODO */ },
                 onAttachClick = { /* TODO */ },
                 onCameraClick = { /* TODO */ },
-                isSending = state.isSending
+                isSending = state.isSending,
+                onPanelStateChange = { isOpen -> isPanelOpen = isOpen }
             )
-        }
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(MaterialTheme.colorScheme.background)
-        ) {
-            when {
-                state.isLoading -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
-                
-                state.error != null -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "Error loading chat",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = state.error ?: "",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-                
-                state.messages.isEmpty() -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "👋",
-                                style = MaterialTheme.typography.displayLarge
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = "Say hello to ${state.conversationName}",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-                
-                else -> {
-                    LazyColumn(
-                        state = listState,
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(
-                            horizontal = 12.dp,
-                            vertical = 8.dp
-                        ),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        // Date header - 动态计算日期
-                        val firstMessageTimestamp = state.messages.firstOrNull()?.fullTimestamp ?: System.currentTimeMillis()
-                        item {
-                            DateHeader(date = formatDateHeader(firstMessageTimestamp))
-                        }
-                        
-                        items(
-                            items = state.messages,
-                            key = { it.id }
-                        ) { message ->
-                            MessageBubble(
-                                message = message,
-                                onAvatarClick = { senderId -> onContactClick(senderId) },
-                                modifier = Modifier.padding(vertical = 2.dp)
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
     }  // 关闭 imePadding Box

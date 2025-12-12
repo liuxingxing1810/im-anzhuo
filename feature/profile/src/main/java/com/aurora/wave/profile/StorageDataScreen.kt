@@ -403,7 +403,7 @@ private fun StorageSection(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
         ) {
@@ -468,7 +468,7 @@ private fun StorageUsageCard(
                     .fillMaxWidth()
                     .height(8.dp),
                 color = Color(0xFF10AEFF),
-                trackColor = Color(0xFFE5E5E5),
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
             )
             
             Spacer(modifier = Modifier.height(8.dp))

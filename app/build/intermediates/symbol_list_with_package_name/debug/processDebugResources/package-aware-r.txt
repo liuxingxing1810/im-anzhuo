@@ -190,6 +190,7 @@ attr iconTint
 attr iconTintMode
 attr iconifiedByDefault
 attr imageButtonStyle
+attr implementationMode
 attr indeterminateProgressStyle
 attr initialActivityCount
 attr isLightTheme
@@ -216,6 +217,28 @@ attr listPreferredItemPaddingRight
 attr listPreferredItemPaddingStart
 attr logo
 attr logoDescription
+attr lottieAnimationViewStyle
+attr lottie_asyncUpdates
+attr lottie_autoPlay
+attr lottie_cacheComposition
+attr lottie_clipTextToBoundingBox
+attr lottie_clipToCompositionBounds
+attr lottie_colorFilter
+attr lottie_defaultFontFileExtension
+attr lottie_enableMergePathsForKitKatAndAbove
+attr lottie_fallbackRes
+attr lottie_fileName
+attr lottie_ignoreDisabledSystemAnimations
+attr lottie_imageAssetsFolder
+attr lottie_loop
+attr lottie_progress
+attr lottie_rawRes
+attr lottie_renderMode
+attr lottie_repeatCount
+attr lottie_repeatMode
+attr lottie_speed
+attr lottie_url
+attr lottie_useCompositionFrameRate
 attr maxButtonHeight
 attr measureWithLargestChild
 attr menu
@@ -256,6 +279,7 @@ attr ratingBarStyleIndicator
 attr ratingBarStyleSmall
 attr restoreState
 attr route
+attr scaleType
 attr searchHintIcon
 attr searchIcon
 attr searchViewStyle
@@ -647,6 +671,8 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_launcher_background
+drawable ic_launcher_foreground
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -726,6 +752,7 @@ id alertTitle
 id always
 id androidx_compose_ui_view_composition_context
 id async
+id automatic
 id beginning
 id blocking
 id bottom
@@ -736,6 +763,7 @@ id checked
 id chronometer
 id coil_request_manager
 id collapseActionView
+id compatible
 id compose_view_saveable_id_tag
 id consume_window_insets_tag
 id content
@@ -746,14 +774,23 @@ id decor_content_parent
 id default_activity_button
 id dialog_button
 id disableHome
+id disabled
 id edit_query
 id edit_text_id
+id enabled
 id end
 id expand_activities_button
 id expanded_menu
+id fillCenter
+id fillEnd
+id fillStart
+id fitCenter
+id fitEnd
+id fitStart
 id forever
 id fragment_container_view_tag
 id group_divider
+id hardware
 id hide_graphics_layer_in_inspector_tag
 id hide_ime_id
 id hide_in_inspector_tag
@@ -771,6 +808,7 @@ id line1
 id line3
 id listMode
 id list_item
+id lottie_layer_name
 id message
 id middle
 id multiply
@@ -784,11 +822,14 @@ id notification_main_column_container
 id off
 id on
 id parentPanel
+id performance
 id pooling_container_listener_holder_tag
 id progress_circular
 id progress_horizontal
 id radio
 id report_drawn
+id restart
+id reverse
 id right_icon
 id right_side
 id screen
@@ -810,6 +851,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id software
 id spacer
 id special_effects_controller_view_tag
 id split_action_bar
@@ -907,6 +949,8 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+mipmap ic_launcher
+mipmap ic_launcher_round
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -990,6 +1034,21 @@ string common_retry
 string common_save
 string common_search
 string confirm
+string confirm_password_hint
+string connections_title
+string contact_about
+string contact_block
+string contact_call
+string contact_chat
+string contact_delete
+string contact_last_seen
+string contact_mute_notifications
+string contact_online
+string contact_share
+string contact_video
+string contacts_tab
+string create_account
+string data_cleared
 string date_today
 string date_yesterday
 string default_error_message
@@ -1013,9 +1072,21 @@ string discover_shop_subtitle
 string discover_shop_title
 string discover_title
 string dropdown_menu
+string error_empty_password
+string error_empty_username
+string error_password_mismatch
+string error_password_too_short
+string error_username_too_short
+string groups_entry
+string have_account
 string in_progress
 string indeterminate
+string invite_code_hint
+string invite_code_optional
 string loading
+string login_button
+string login_now
+string login_subtitle
 string logout_confirm
 string m3c_bottom_sheet_collapse_description
 string m3c_bottom_sheet_dismiss_description
@@ -1096,7 +1167,66 @@ string nav_discover
 string nav_messages
 string nav_profile
 string navigation_menu
+string new_friends_entry
+string new_friends_tab
+string no_account
+string no_contacts
 string not_selected
+string notifications_dnd
+string notifications_dnd_desc
+string notifications_dnd_title
+string notifications_general
+string notifications_group
+string notifications_group_desc
+string notifications_mentions
+string notifications_mentions_desc
+string notifications_messages
+string notifications_new_messages
+string notifications_new_messages_desc
+string notifications_preview
+string notifications_preview_desc
+string notifications_push
+string notifications_push_desc
+string notifications_sound
+string notifications_sound_desc
+string notifications_style
+string notifications_title
+string notifications_vibration
+string notifications_vibration_desc
+string official_accounts_entry
+string password_hint
+string privacy_account_security
+string privacy_add_by_group
+string privacy_add_by_group_desc
+string privacy_add_by_phone
+string privacy_add_by_phone_desc
+string privacy_add_by_qr
+string privacy_add_by_qr_desc
+string privacy_add_me
+string privacy_biometric
+string privacy_biometric_desc
+string privacy_blocked
+string privacy_blocked_users
+string privacy_blocked_users_desc
+string privacy_devices
+string privacy_devices_desc
+string privacy_last_seen
+string privacy_last_seen_desc
+string privacy_messages
+string privacy_online_status
+string privacy_online_status_desc
+string privacy_password
+string privacy_password_desc
+string privacy_photo_contacts
+string privacy_photo_everyone
+string privacy_photo_nobody
+string privacy_profile_photo
+string privacy_read_receipts
+string privacy_read_receipts_desc
+string privacy_title
+string privacy_typing
+string privacy_typing_desc
+string privacy_visibility
 string profile_about
 string profile_about_version
 string profile_appearance
@@ -1106,15 +1236,21 @@ string profile_favorites
 string profile_header_bio_default
 string profile_header_wave_id
 string profile_help
+string profile_moments
 string profile_notifications
 string profile_privacy
 string profile_services
 string profile_services_sub
 string profile_settings
+string profile_shop
+string profile_stickers
 string profile_storage
 string profile_title
 string range_end
 string range_start
+string register_button
+string register_now
+string register_subtitle
 string scan_album
 string scan_flash_off
 string scan_flash_on
@@ -1161,15 +1297,42 @@ string state_off
 string state_on
 string status_bar_notification_info_overflow
 string storage_audio
+string storage_auto_download
+string storage_auto_download_desc
+string storage_auto_download_media
+string storage_cache
+string storage_cleanup
+string storage_clear_all
+string storage_clear_all_confirm
+string storage_clear_all_desc
+string storage_clear_cache
+string storage_clear_cache_confirm
+string storage_clear_cache_desc
+string storage_data_saver
+string storage_data_saver_desc
+string storage_details
 string storage_documents
+string storage_download_mobile
+string storage_download_mobile_desc
+string storage_download_wifi
+string storage_download_wifi_desc
 string storage_images
+string storage_media_settings
+string storage_save_gallery
+string storage_save_gallery_desc
+string storage_title
 string storage_total
+string storage_total_used
+string storage_usage
 string storage_videos
 string switch_role
 string tab
+string tags_entry
 string template_percent
 string tooltip_description
 string tooltip_label
+string username_hint
+string welcome_back
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -1555,6 +1718,7 @@ styleable GradientColorItem android_color android_offset
 styleable LinearLayoutCompat android_gravity android_orientation android_baselineAligned android_baselineAlignedChildIndex android_weightSum divider dividerPadding measureWithLargestChild showDividers
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LottieAnimationView lottie_asyncUpdates lottie_autoPlay lottie_cacheComposition lottie_clipTextToBoundingBox lottie_clipToCompositionBounds lottie_colorFilter lottie_defaultFontFileExtension lottie_enableMergePathsForKitKatAndAbove lottie_fallbackRes lottie_fileName lottie_ignoreDisabledSystemAnimations lottie_imageAssetsFolder lottie_loop lottie_progress lottie_rawRes lottie_renderMode lottie_repeatCount lottie_repeatMode lottie_speed lottie_url lottie_useCompositionFrameRate
 styleable MenuGroup android_enabled android_id android_visible android_menuCategory android_orderInCategory android_checkableBehavior
 styleable MenuItem android_icon android_enabled android_id android_checked android_visible android_menuCategory android_orderInCategory android_title android_titleCondensed android_alphabeticShortcut android_numericShortcut android_checkable android_onClick actionLayout actionProviderClass actionViewClass alphabeticModifiers contentDescription iconTint iconTintMode numericModifiers showAsAction tooltipText
 styleable MenuView android_windowAnimationStyle android_itemTextAppearance android_horizontalDivider android_verticalDivider android_headerBackground android_itemBackground android_itemIconDisabledAlpha preserveIconSpacing subMenuArrow
@@ -1567,6 +1731,7 @@ styleable NavInclude graph
 styleable Navigator android_label android_id route
 styleable PopupWindow android_popupBackground android_popupAnimationStyle overlapAnchor
 styleable PopupWindowBackgroundState state_above_anchor
+styleable PreviewView implementationMode scaleType
 styleable RecycleListView paddingBottomNoButtons paddingTopNoTitle
 styleable SearchView android_focusable android_maxWidth android_inputType android_imeOptions closeIcon commitIcon defaultQueryHint goIcon iconifiedByDefault layout queryBackground queryHint searchHintIcon searchIcon submitBackground suggestionRowLayout voiceIcon
 styleable Spinner android_entries android_popupBackground android_prompt android_dropDownWidth popupTheme
@@ -1578,3 +1743,4 @@ styleable Toolbar android_gravity android_minHeight buttonGravity collapseConten
 styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
+xml locales_config

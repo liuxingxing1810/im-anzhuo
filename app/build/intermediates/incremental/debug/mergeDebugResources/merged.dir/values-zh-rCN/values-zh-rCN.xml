@@ -27,7 +27,7 @@
     <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"分享对象"</string>
     <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"与<ns1:g id="APPLICATION_NAME">%s</ns1:g>分享"</string>
     <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"收起"</string>
-    <string name="app_name">Aurora Wave</string>
+    <string name="app_name">星星IM</string>
     <string name="appearance_bg_blue">蓝色</string>
     <string name="appearance_bg_custom">自定义</string>
     <string name="appearance_bg_default">默认</string>
@@ -82,6 +82,19 @@
     <string name="common_save">保存</string>
     <string name="common_search">搜索</string>
     <string name="confirm">确认</string>
+    <string name="connections_title">联系人</string>
+    <string name="contact_about">个人简介</string>
+    <string name="contact_block">加入黑名单</string>
+    <string name="contact_call">语音</string>
+    <string name="contact_chat">发消息</string>
+    <string name="contact_delete">删除联系人</string>
+    <string name="contact_last_seen">最近活跃</string>
+    <string name="contact_mute_notifications">消息免打扰</string>
+    <string name="contact_online">在线</string>
+    <string name="contact_share">分享</string>
+    <string name="contact_video">视频</string>
+    <string name="contacts_tab">联系人</string>
+    <string name="data_cleared">所有数据已清除</string>
     <string name="date_today">今天</string>
     <string name="date_yesterday">昨天</string>
     <string msgid="8038256446254964252" name="default_error_message">"输入无效"</string>
@@ -105,6 +118,7 @@
     <string name="discover_shop_title">购物</string>
     <string name="discover_title">发现</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"下拉菜单"</string>
+    <string name="groups_entry">群聊</string>
     <string msgid="6827826412747255547" name="in_progress">"进行中"</string>
     <string msgid="7933458017204019916" name="indeterminate">"部分选中"</string>
     <string name="loading">加载中…</string>
@@ -188,21 +202,81 @@
     <string name="nav_messages">消息</string>
     <string name="nav_profile">我</string>
     <string msgid="542007171693138492" name="navigation_menu">"导航菜单"</string>
+    <string name="new_friends_entry">新的朋友</string>
+    <string name="new_friends_tab">新的朋友</string>
+    <string name="no_contacts">暂无联系人</string>
     <string msgid="6610465462668679431" name="not_selected">"未选择"</string>
-    <string name="profile_about">关于 Aurora Wave</string>
+    <string name="notifications_dnd">勿扰模式</string>
+    <string name="notifications_dnd_desc">在系统设置中配置</string>
+    <string name="notifications_dnd_title">系统勿扰模式</string>
+    <string name="notifications_general">通用</string>
+    <string name="notifications_group">群聊通知</string>
+    <string name="notifications_group_desc">接收群聊消息通知</string>
+    <string name="notifications_mentions">@提醒</string>
+    <string name="notifications_mentions_desc">有人@你时提醒</string>
+    <string name="notifications_messages">消息通知</string>
+    <string name="notifications_new_messages">新消息</string>
+    <string name="notifications_new_messages_desc">收到新消息时提醒</string>
+    <string name="notifications_preview">显示预览</string>
+    <string name="notifications_preview_desc">在通知中显示消息内容</string>
+    <string name="notifications_push">推送通知</string>
+    <string name="notifications_push_desc">应用关闭时也能接收通知</string>
+    <string name="notifications_sound">声音</string>
+    <string name="notifications_sound_desc">通知时播放声音</string>
+    <string name="notifications_style">通知方式</string>
+    <string name="notifications_title">通知</string>
+    <string name="notifications_vibration">振动</string>
+    <string name="notifications_vibration_desc">通知时振动</string>
+    <string name="official_accounts_entry">公众号</string>
+    <string name="privacy_account_security">账户安全</string>
+    <string name="privacy_add_by_group">通过群聊</string>
+    <string name="privacy_add_by_group_desc">允许群成员添加您</string>
+    <string name="privacy_add_by_phone">通过手机号</string>
+    <string name="privacy_add_by_phone_desc">允许他人通过手机号找到您</string>
+    <string name="privacy_add_by_qr">通过二维码</string>
+    <string name="privacy_add_by_qr_desc">允许他人通过扫描二维码添加您</string>
+    <string name="privacy_add_me">添加我的方式</string>
+    <string name="privacy_biometric">生物识别锁定</string>
+    <string name="privacy_biometric_desc">使用指纹或面容解锁</string>
+    <string name="privacy_blocked">黑名单</string>
+    <string name="privacy_blocked_users">黑名单</string>
+    <string name="privacy_blocked_users_desc">管理已屏蔽的用户</string>
+    <string name="privacy_devices">已登录设备</string>
+    <string name="privacy_devices_desc">管理您的登录设备</string>
+    <string name="privacy_last_seen">最后上线时间</string>
+    <string name="privacy_last_seen_desc">显示您上次在线的时间</string>
+    <string name="privacy_messages">消息隐私</string>
+    <string name="privacy_online_status">在线状态</string>
+    <string name="privacy_online_status_desc">显示您是否在线</string>
+    <string name="privacy_password">密码</string>
+    <string name="privacy_password_desc">修改您的密码</string>
+    <string name="privacy_photo_contacts">仅联系人</string>
+    <string name="privacy_photo_everyone">所有人</string>
+    <string name="privacy_photo_nobody">不展示</string>
+    <string name="privacy_profile_photo">头像</string>
+    <string name="privacy_read_receipts">已读回执</string>
+    <string name="privacy_read_receipts_desc">让对方知道您已读消息</string>
+    <string name="privacy_title">隐私与安全</string>
+    <string name="privacy_typing">正在输入</string>
+    <string name="privacy_typing_desc">显示您正在输入</string>
+    <string name="privacy_visibility">可见性</string>
+    <string name="profile_about">关于星星IM</string>
     <string name="profile_about_version">版本 1.0.0</string>
     <string name="profile_appearance">外观</string>
     <string name="profile_appearance_sub">主题、字体大小</string>
     <string name="profile_collections">收藏夹</string>
     <string name="profile_favorites">收藏</string>
-    <string name="profile_header_bio_default">你好，我正在使用 Aurora Wave!</string>
-    <string name="profile_header_wave_id">Wave ID: %1$s</string>
+    <string name="profile_header_bio_default">你好，我正在使用星星IM!</string>
+    <string name="profile_header_wave_id">星星ID: %1$s</string>
     <string name="profile_help">帮助与支持</string>
+    <string name="profile_moments">朋友圈</string>
     <string name="profile_notifications">通知</string>
     <string name="profile_privacy">隐私与安全</string>
     <string name="profile_services">服务</string>
     <string name="profile_services_sub">支付、卡包、出行</string>
     <string name="profile_settings">设置</string>
+    <string name="profile_shop">视频号</string>
+    <string name="profile_stickers">表情</string>
     <string name="profile_storage">存储与数据</string>
     <string name="profile_title">我</string>
     <string msgid="5941395253238309765" name="range_end">"范围终点"</string>
@@ -253,12 +327,37 @@
     <string msgid="1490883874751719580" name="state_on">"已开启"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
     <string name="storage_audio">音频</string>
+    <string name="storage_auto_download">自动下载</string>
+    <string name="storage_auto_download_desc">自动下载媒体文件</string>
+    <string name="storage_auto_download_media">自动下载媒体</string>
+    <string name="storage_cache">缓存</string>
+    <string name="storage_cleanup">存储清理</string>
+    <string name="storage_clear_all">清除所有数据</string>
+    <string name="storage_clear_all_confirm">确定要清除所有数据吗？这将删除所有已下载的媒体和缓存。您的消息不会受到影响。</string>
+    <string name="storage_clear_all_desc">删除所有已下载的媒体和缓存</string>
+    <string name="storage_clear_cache">清除缓存</string>
+    <string name="storage_clear_cache_confirm">确定要清除缓存吗？这不会删除您的消息或媒体文件。</string>
+    <string name="storage_clear_cache_desc">清除缓存数据以释放空间</string>
+    <string name="storage_data_saver">省流量模式</string>
+    <string name="storage_data_saver_desc">加载低质量媒体以减少流量消耗</string>
+    <string name="storage_details">存储详情</string>
     <string name="storage_documents">文档</string>
+    <string name="storage_download_mobile">移动数据下载</string>
+    <string name="storage_download_mobile_desc">使用移动数据自动下载</string>
+    <string name="storage_download_wifi">Wi-Fi下自动下载</string>
+    <string name="storage_download_wifi_desc">连接Wi-Fi时自动下载</string>
     <string name="storage_images">图片</string>
-    <string name="storage_total">总缓存</string>
+    <string name="storage_media_settings">媒体设置</string>
+    <string name="storage_save_gallery">保存到相册</string>
+    <string name="storage_save_gallery_desc">自动将收到的媒体保存到相册</string>
+    <string name="storage_title">存储与数据</string>
+    <string name="storage_total">总计</string>
+    <string name="storage_total_used">已使用</string>
+    <string name="storage_usage">存储使用</string>
     <string name="storage_videos">视频</string>
     <string msgid="2561197295334830845" name="switch_role">"开关"</string>
     <string msgid="1672349317127674378" name="tab">"标签页"</string>
+    <string name="tags_entry">标签</string>
     <string msgid="5946805113151406391" name="template_percent">"百分之 <ns1:g id="PERCENTAGE">%1$d</ns1:g>。"</string>
     <string msgid="3765533235322692011" name="tooltip_description">"提示"</string>
     <string msgid="3124740595719787496" name="tooltip_label">"显示提示"</string>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm_password_hint">确认密码</string>
+    <string name="create_account">创建账号</string>
+    <string name="error_empty_password">请输入密码</string>
+    <string name="error_empty_username">请输入账号</string>
+    <string name="error_password_mismatch">两次输入的密码不一致</string>
+    <string name="error_password_too_short">密码至少需要6个字符</string>
+    <string name="error_username_too_short">账号至少需要4个字符</string>
+    <string name="have_account">已有账号？</string>
+    <string name="invite_code_hint">邀请码</string>
+    <string name="invite_code_optional">可选：输入好友邀请码可获得额外奖励</string>
+    <string name="login_button">登录</string>
+    <string name="login_now">立即登录</string>
+    <string name="login_subtitle">登录您的星星IM账号</string>
+    <string name="no_account">还没有账号？</string>
+    <string name="password_hint">密码</string>
+    <string name="register_button">注册</string>
+    <string name="register_now">立即注册</string>
+    <string name="register_subtitle">加入星星IM，开启全新社交体验</string>
+    <string name="username_hint">账号</string>
+    <string name="welcome_back">欢迎回来</string>
+</resources>

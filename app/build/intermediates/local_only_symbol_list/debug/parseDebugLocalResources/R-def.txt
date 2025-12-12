@@ -1,5 +1,9 @@
 R_DEF: Internal format may change without notice
 local
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+mipmap ic_launcher
+mipmap ic_launcher_round
 string app_name
 string chat_empty_subtitle
 string chat_empty_title
@@ -19,9 +23,12 @@ string common_loading
 string common_retry
 string common_save
 string common_search
+string contacts_tab
 string date_today
 string date_yesterday
 string nav_connections
 string nav_discover
 string nav_messages
 string nav_profile
+string new_friends_tab
+xml locales_config

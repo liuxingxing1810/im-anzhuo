@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.aurora.wave.app-mergeDebugResources-67:/values-my/values-my.xml",
+            "outputFile": "com.aurora.wave.app-mergeDebugResources-73:/values-my/values-my.xml",
             "map": [
                 {
                     "source": "/Users/lxx/.gradle/caches/transforms-4/d814a15a815c0c18bc2715a0dfe54f43/transformed/foundation-release/res/values-my/values-my.xml",

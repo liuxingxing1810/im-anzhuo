@@ -64,33 +64,67 @@ object FakeContactsProvider {
     }
     
     fun generateFriendRequests(): List<FriendRequestUiModel> {
+        val colors = listOf("blue", "green", "orange", "purple")
         return listOf(
             FriendRequestUiModel(
                 id = "req_1",
                 userId = "user_101",
                 userName = "Michael Scott",
+                name = "Michael Scott",
                 userAvatar = null,
-                message = "Hi! We met at the conference last week.",
-                timestamp = "2 hours ago",
-                status = FriendRequestStatus.PENDING
+                avatarColor = colors[0],
+                message = "Hi! 我们上周在会议上见过面。",
+                timestamp = "2小时前",
+                status = FriendRequestStatus.PENDING,
+                isRecent = true
             ),
             FriendRequestUiModel(
                 id = "req_2",
                 userId = "user_102",
                 userName = "Jim Halpert",
+                name = "Jim Halpert",
                 userAvatar = null,
-                message = "Hey, want to connect?",
-                timestamp = "Yesterday",
-                status = FriendRequestStatus.PENDING
+                avatarColor = colors[1],
+                message = "嗨，想加个好友吗？",
+                timestamp = "昨天",
+                status = FriendRequestStatus.PENDING,
+                isRecent = true
             ),
             FriendRequestUiModel(
                 id = "req_3",
                 userId = "user_103",
                 userName = "Pam Beesly",
+                name = "Pam Beesly",
                 userAvatar = null,
-                message = null,
-                timestamp = "3 days ago",
-                status = FriendRequestStatus.PENDING
+                avatarColor = colors[2],
+                message = "我是Pam，希望能和你成为朋友",
+                timestamp = "前天",
+                status = FriendRequestStatus.PENDING,
+                isRecent = true
+            ),
+            FriendRequestUiModel(
+                id = "req_4",
+                userId = "user_104",
+                userName = "Dwight Schrute",
+                name = "Dwight Schrute",
+                userAvatar = null,
+                avatarColor = colors[3],
+                message = "你好，我是Dwight",
+                timestamp = "一周前",
+                status = FriendRequestStatus.ACCEPTED,
+                isRecent = false
+            ),
+            FriendRequestUiModel(
+                id = "req_5",
+                userId = "user_105",
+                userName = "Angela Martin",
+                name = "Angela Martin",
+                userAvatar = null,
+                avatarColor = colors[0],
+                message = "请通过我的好友请求",
+                timestamp = "两周前",
+                status = FriendRequestStatus.REJECTED,
+                isRecent = false
             )
         )
     }
