@@ -256,7 +256,7 @@ private fun PaymentSection(
                 Icon(
                     Icons.Default.AccountBalance,
                     contentDescription = null,
-                    tint = Color(0xFF07C160),
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(24.dp)
                 )
                 

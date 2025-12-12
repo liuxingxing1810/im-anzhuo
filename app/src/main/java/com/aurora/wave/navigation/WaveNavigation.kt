@@ -68,6 +68,10 @@ sealed class WaveRoute(val route: String) {
     data object Favorites : WaveRoute("favorites")
     data object Services : WaveRoute("services")
     data object HelpSupport : WaveRoute("help_support")
+    data object PayCode : WaveRoute("pay_code") // 收付款页面
+    data object DeviceManagement : WaveRoute("device_management") // 设备管理
+    data object ChangePassword : WaveRoute("change_password") // 修改密码
+    data object CallHistory : WaveRoute("call_history") // 通话记录
     
     // Call routes
     data class VoiceCall(val conversationId: String = "{conversationId}", val contactName: String = "{contactName}") : 

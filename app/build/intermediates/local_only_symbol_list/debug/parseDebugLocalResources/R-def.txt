@@ -31,4 +31,5 @@ string nav_discover
 string nav_messages
 string nav_profile
 string new_friends_tab
+xml file_paths
 xml locales_config

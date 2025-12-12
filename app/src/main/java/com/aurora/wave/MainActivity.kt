@@ -566,6 +566,41 @@ private fun MainRoot(themeState: ThemeState, userDataStore: UserDataStore) {
                     )
                 }
                 
+                // 收付款页面
+                composable(WaveRoute.PayCode.route) {
+                    com.aurora.wave.profile.PayCodeScreen(
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                // 设备管理页面
+                composable(WaveRoute.DeviceManagement.route) {
+                    com.aurora.wave.profile.DeviceManagementScreen(
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                // 修改密码页面
+                composable(WaveRoute.ChangePassword.route) {
+                    com.aurora.wave.profile.ChangePasswordScreen(
+                        onBackClick = { navController.popBackStackSafely() }
+                    )
+                }
+                
+                // 通话记录页面
+                composable(WaveRoute.CallHistory.route) {
+                    com.aurora.wave.profile.CallHistoryScreen(
+                        onBackClick = { navController.popBackStackSafely() },
+                        onCallClick = { callId, contactName, isVideo ->
+                            if (isVideo) {
+                                navController.navigateSafely(WaveRoute.VideoCall(callId, contactName).route)
+                            } else {
+                                navController.navigateSafely(WaveRoute.VoiceCall(callId, contactName).route)
+                            }
+                        }
+                    )
+                }
+                
                 // 通讯录子页面
                 composable(WaveRoute.NewFriends.route) {
                     NewFriendsScreen(

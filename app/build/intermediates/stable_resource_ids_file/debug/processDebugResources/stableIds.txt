@@ -1,4 +1,4 @@
-com.aurora.wave.dev:xml/locales_config = 0x7f100000
+com.aurora.wave.dev:xml/locales_config = 0x7f100001
 com.aurora.wave.dev:styleable/ViewBackgroundHelper = 0x7f0f0037
 com.aurora.wave.dev:styleable/View = 0x7f0f0036
 com.aurora.wave.dev:styleable/Toolbar = 0x7f0f0035
@@ -849,6 +849,7 @@ com.aurora.wave.dev:drawable/btn_checkbox_checked_mtrl = 0x7f07004f
 com.aurora.wave.dev:drawable/abc_vector_test = 0x7f07004e
 com.aurora.wave.dev:drawable/notification_bg_low_normal = 0x7f070062
 com.aurora.wave.dev:dimen/abc_cascading_menus_min_smallest_width = 0x7f060016
+com.aurora.wave.dev:xml/file_paths = 0x7f100000
 com.aurora.wave.dev:drawable/abc_textfield_search_activated_mtrl_alpha = 0x7f07004b
 com.aurora.wave.dev:drawable/abc_textfield_activated_mtrl_alpha = 0x7f070049
 com.aurora.wave.dev:drawable/abc_text_select_handle_middle_mtrl = 0x7f070047

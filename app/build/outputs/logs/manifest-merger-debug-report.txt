@@ -1,9 +1,20 @@
 -- Merging decision tree log ---
+provider#androidx.core.content.FileProvider
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:25:9-33:20
+	android:grantUriPermissions
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:29:13-47
+	android:authorities
+		INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:27:13-64
+	android:exported
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:26:13-62
 manifest
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-32:12
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:2:1-46:12
 MERGED from [:feature:messages] /Users/lxx/im-anzhuo/feature/messages/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:feature:connections] /Users/lxx/im-anzhuo/feature/connections/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
 MERGED from [:feature:discover] /Users/lxx/im-anzhuo/feature/discover/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-7:12
@@ -87,19 +98,19 @@ MERGED from [androidx.core:core:1.13.1] /Users/lxx/.gradle/caches/transforms-4/1
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/lxx/.gradle/caches/transforms-4/f75bd7ca8f912dd34423723d2b179d71/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.13.1] /Users/lxx/.gradle/caches/transforms-4/a2710a31d1143da09f8b1e2f91a015fc/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.jakewharton.timber:timber:5.0.1] /Users/lxx/.gradle/caches/transforms-4/6a16c5f98dc98518a1b4305b82c8efcb/transformed/timber-5.0.1/AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/lxx/.gradle/caches/transforms-4/111b08b50646cd1120b62ad2d6d2238f/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.room:room-ktx:2.6.1] /Users/lxx/.gradle/caches/transforms-4/3ec75d71de16ac95fe6c4759447bf3a5/transformed/room-ktx-2.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/lxx/.gradle/caches/transforms-4/111b08b50646cd1120b62ad2d6d2238f/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/lxx/.gradle/caches/transforms-4/d60c2443e67b7997a93e4903d7b2e708/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/lxx/.gradle/caches/transforms-4/ca473ed8358e2accfd2ec398ad0d3d25/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/ab756bad8092344178c04e0abe72dade/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/58f40a7b8bc80d558e1121067048ba24/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.datastore:datastore-core-android:1.1.1] /Users/lxx/.gradle/caches/transforms-4/c6e2ff25a70343e635860869a77594f1/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.datastore:datastore-android:1.1.1] /Users/lxx/.gradle/caches/transforms-4/0aa4f2c428988fa17d5ef69cae09d447/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /Users/lxx/.gradle/caches/transforms-4/0ecd606f8e78f1573cbf924082917db6/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/lxx/.gradle/caches/transforms-4/d60c2443e67b7997a93e4903d7b2e708/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/lxx/.gradle/caches/transforms-4/ca473ed8358e2accfd2ec398ad0d3d25/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/lxx/.gradle/caches/transforms-4/d08ea31e142f8733223395586e2dcdbc/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/lxx/.gradle/caches/transforms-4/783dfa23fac45aaa3cd58d7a7bb6494c/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lxx/.gradle/caches/transforms-4/b3bf55246f0c34c067a190cb79debd70/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lxx/.gradle/caches/transforms-4/6f2117a2c8d22029afa318da0900ab03/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lxx/.gradle/caches/transforms-4/b3bf55246f0c34c067a190cb79debd70/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/lxx/.gradle/caches/transforms-4/6ceac56e690299d1927f34b6adb0a76b/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/lxx/.gradle/caches/transforms-4/51a07070cc6ba49c0ed8855538adfb53/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lxx/.gradle/caches/transforms-4/b81350ed2b6155edc1b9b979ba02c9ee/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
@@ -132,9 +143,17 @@ uses-permission#android.permission.CAMERA
 ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:8:5-65
 	android:name
 		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:8:22-62
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:22-78
 application
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:5-30:19
-INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:10:5-30:19
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:12:5-44:19
+INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:12:5-44:19
 MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:7:5-20
 MERGED from [com.airbnb.android:lottie:6.4.0] /Users/lxx/.gradle/caches/transforms-4/5f4451d13f2b7db9436489f1583184f8/transformed/lottie-6.4.0/AndroidManifest.xml:7:5-20
 MERGED from [androidx.camera:camera-camera2:1.3.4] /Users/lxx/.gradle/caches/transforms-4/ae5b184fddf455076cffb3361f9f2902/transformed/camera-camera2-1.3.4/AndroidManifest.xml:23:5-34:19
@@ -164,45 +183,51 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lxx/.gradle/caches/t
 	android:extractNativeLibs
 		INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
 	android:localeConfig
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:16:9-51
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:18:9-51
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] /Users/lxx/.gradle/caches/transforms-4/10ef9852b61b121028159666982d9f93/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:18:9-35
-	android:label
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:15:9-41
-	android:roundIcon
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:17:9-54
-	tools:targetApi
 		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:20:9-35
+	android:label
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:17:9-41
+	android:roundIcon
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:19:9-54
+	tools:targetApi
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:22:9-35
 	android:icon
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:14:9-43
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:16:9-43
 	android:allowBackup
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:12:9-35
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:14:9-35
 	android:theme
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:19:9-72
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:21:9-72
 	android:enableOnBackInvokedCallback
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:13:9-51
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:15:9-51
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:11:9-32
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:13:9-32
 activity#com.aurora.wave.MainActivity
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:21:9-29:20
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:35:9-43:20
 	android:windowSoftInputMode
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:24:13-55
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:38:13-55
 	android:exported
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:23:13-36
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:37:13-36
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:22:13-41
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:36:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:25:13-28:29
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:39:13-42:29
 action#android.intent.action.MAIN
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:26:17-69
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:26:25-66
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:27:17-77
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:41:17-77
 	android:name
-		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:27:27-74
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:41:27-74
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:30:13-32:54
+	android:resource
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:32:17-51
+	android:name
+		ADDED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml:31:17-67
 uses-sdk
 INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/lxx/im-anzhuo/app/src/main/AndroidManifest.xml
@@ -373,10 +398,14 @@ MERGED from [androidx.core:core-ktx:1.13.1] /Users/lxx/.gradle/caches/transforms
 MERGED from [androidx.core:core-ktx:1.13.1] /Users/lxx/.gradle/caches/transforms-4/a2710a31d1143da09f8b1e2f91a015fc/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton.timber:timber:5.0.1] /Users/lxx/.gradle/caches/transforms-4/6a16c5f98dc98518a1b4305b82c8efcb/transformed/timber-5.0.1/AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton.timber:timber:5.0.1] /Users/lxx/.gradle/caches/transforms-4/6a16c5f98dc98518a1b4305b82c8efcb/transformed/timber-5.0.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/lxx/.gradle/caches/transforms-4/111b08b50646cd1120b62ad2d6d2238f/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/lxx/.gradle/caches/transforms-4/111b08b50646cd1120b62ad2d6d2238f/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
 MERGED from [androidx.room:room-ktx:2.6.1] /Users/lxx/.gradle/caches/transforms-4/3ec75d71de16ac95fe6c4759447bf3a5/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.room:room-ktx:2.6.1] /Users/lxx/.gradle/caches/transforms-4/3ec75d71de16ac95fe6c4759447bf3a5/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/lxx/.gradle/caches/transforms-4/111b08b50646cd1120b62ad2d6d2238f/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/lxx/.gradle/caches/transforms-4/111b08b50646cd1120b62ad2d6d2238f/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/lxx/.gradle/caches/transforms-4/d60c2443e67b7997a93e4903d7b2e708/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/lxx/.gradle/caches/transforms-4/d60c2443e67b7997a93e4903d7b2e708/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/lxx/.gradle/caches/transforms-4/ca473ed8358e2accfd2ec398ad0d3d25/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/lxx/.gradle/caches/transforms-4/ca473ed8358e2accfd2ec398ad0d3d25/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/ab756bad8092344178c04e0abe72dade/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/ab756bad8092344178c04e0abe72dade/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.7.0] /Users/lxx/.gradle/caches/transforms-4/58f40a7b8bc80d558e1121067048ba24/transformed/runtime-release/AndroidManifest.xml:5:5-44
@@ -387,18 +416,14 @@ MERGED from [androidx.datastore:datastore-android:1.1.1] /Users/lxx/.gradle/cach
 MERGED from [androidx.datastore:datastore-android:1.1.1] /Users/lxx/.gradle/caches/transforms-4/0aa4f2c428988fa17d5ef69cae09d447/transformed/datastore-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /Users/lxx/.gradle/caches/transforms-4/0ecd606f8e78f1573cbf924082917db6/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /Users/lxx/.gradle/caches/transforms-4/0ecd606f8e78f1573cbf924082917db6/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/lxx/.gradle/caches/transforms-4/d60c2443e67b7997a93e4903d7b2e708/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/lxx/.gradle/caches/transforms-4/d60c2443e67b7997a93e4903d7b2e708/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/lxx/.gradle/caches/transforms-4/ca473ed8358e2accfd2ec398ad0d3d25/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/lxx/.gradle/caches/transforms-4/ca473ed8358e2accfd2ec398ad0d3d25/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/lxx/.gradle/caches/transforms-4/d08ea31e142f8733223395586e2dcdbc/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/lxx/.gradle/caches/transforms-4/d08ea31e142f8733223395586e2dcdbc/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/lxx/.gradle/caches/transforms-4/783dfa23fac45aaa3cd58d7a7bb6494c/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/lxx/.gradle/caches/transforms-4/783dfa23fac45aaa3cd58d7a7bb6494c/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lxx/.gradle/caches/transforms-4/b3bf55246f0c34c067a190cb79debd70/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lxx/.gradle/caches/transforms-4/b3bf55246f0c34c067a190cb79debd70/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lxx/.gradle/caches/transforms-4/6f2117a2c8d22029afa318da0900ab03/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lxx/.gradle/caches/transforms-4/6f2117a2c8d22029afa318da0900ab03/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lxx/.gradle/caches/transforms-4/b3bf55246f0c34c067a190cb79debd70/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lxx/.gradle/caches/transforms-4/b3bf55246f0c34c067a190cb79debd70/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/lxx/.gradle/caches/transforms-4/6ceac56e690299d1927f34b6adb0a76b/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/lxx/.gradle/caches/transforms-4/6ceac56e690299d1927f34b6adb0a76b/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/lxx/.gradle/caches/transforms-4/51a07070cc6ba49c0ed8855538adfb53/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44

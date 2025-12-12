@@ -401,23 +401,23 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
     private static final class LazyClassKeyProvider {
       static String com_aurora_wave_messages_ConversationListViewModel = "com.aurora.wave.messages.ConversationListViewModel";
 
+      static String com_aurora_wave_connections_NewFriendsViewModel = "com.aurora.wave.connections.NewFriendsViewModel";
+
       static String com_aurora_wave_connections_ContactsViewModel = "com.aurora.wave.connections.ContactsViewModel";
 
       static String com_aurora_wave_messages_ChatDetailViewModel = "com.aurora.wave.messages.ChatDetailViewModel";
 
-      static String com_aurora_wave_connections_NewFriendsViewModel = "com.aurora.wave.connections.NewFriendsViewModel";
-
       @KeepFieldType
       ConversationListViewModel com_aurora_wave_messages_ConversationListViewModel2;
+
+      @KeepFieldType
+      NewFriendsViewModel com_aurora_wave_connections_NewFriendsViewModel2;
 
       @KeepFieldType
       ContactsViewModel com_aurora_wave_connections_ContactsViewModel2;
 
       @KeepFieldType
       ChatDetailViewModel com_aurora_wave_messages_ChatDetailViewModel2;
-
-      @KeepFieldType
-      NewFriendsViewModel com_aurora_wave_connections_NewFriendsViewModel2;
     }
   }
 
@@ -467,22 +467,22 @@ public final class DaggerWaveApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_aurora_wave_messages_ConversationListViewModel = "com.aurora.wave.messages.ConversationListViewModel";
-
       static String com_aurora_wave_connections_ContactsViewModel = "com.aurora.wave.connections.ContactsViewModel";
 
       static String com_aurora_wave_messages_ChatDetailViewModel = "com.aurora.wave.messages.ChatDetailViewModel";
 
-      static String com_aurora_wave_connections_NewFriendsViewModel = "com.aurora.wave.connections.NewFriendsViewModel";
+      static String com_aurora_wave_messages_ConversationListViewModel = "com.aurora.wave.messages.ConversationListViewModel";
 
-      @KeepFieldType
-      ConversationListViewModel com_aurora_wave_messages_ConversationListViewModel2;
+      static String com_aurora_wave_connections_NewFriendsViewModel = "com.aurora.wave.connections.NewFriendsViewModel";
 
       @KeepFieldType
       ContactsViewModel com_aurora_wave_connections_ContactsViewModel2;
 
       @KeepFieldType
       ChatDetailViewModel com_aurora_wave_messages_ChatDetailViewModel2;
+
+      @KeepFieldType
+      ConversationListViewModel com_aurora_wave_messages_ConversationListViewModel2;
 
       @KeepFieldType
       NewFriendsViewModel com_aurora_wave_connections_NewFriendsViewModel2;

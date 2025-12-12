@@ -1,5 +1,6 @@
 package com.aurora.wave.messages
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.aurora.wave.data.model.DeliveryStatus
 import com.aurora.wave.data.model.MessageContent
@@ -104,5 +105,170 @@ class ChatDetailViewModel @Inject constructor() : ViewModel() {
                 messages = currentState.messages.filter { it.id != messageId }
             )
         }
+    }
+    
+    /**
+     * 发送图片消息
+     * Send image message
+     */
+    fun sendImageMessage(uri: Uri) {
+        Timber.d("Sending image message: $uri")
+        _state.update { it.copy(isSending = true) }
+        
+        val newMessage = MessageUiModel(
+            id = UUID.randomUUID().toString(),
+            senderId = "user_me",
+            senderName = "Me",
+            senderAvatar = null,
+            type = MessageType.IMAGE,
+            content = MessageContent.Image(
+                url = uri.toString(),
+                thumbnailUrl = uri.toString(),
+                width = 0,
+                height = 0
+            ),
+            timestamp = "Just now",
+            fullTimestamp = System.currentTimeMillis(),
+            status = DeliveryStatus.SENDING,
+            isOutgoing = true,
+            isFirstInGroup = true,
+            isLastInGroup = true
+        )
+        
+        _state.update { currentState ->
+            currentState.copy(
+                messages = currentState.messages + newMessage,
+                isSending = false
+            )
+        }
+        
+        Timber.d("Image message sent successfully")
+        // TODO: In real app, upload image and send via repository
+    }
+    
+    /**
+     * 发送视频消息
+     * Send video message
+     */
+    fun sendVideoMessage(uri: Uri) {
+        Timber.d("Sending video message: $uri")
+        _state.update { it.copy(isSending = true) }
+        
+        val newMessage = MessageUiModel(
+            id = UUID.randomUUID().toString(),
+            senderId = "user_me",
+            senderName = "Me",
+            senderAvatar = null,
+            type = MessageType.VIDEO,
+            content = MessageContent.Video(
+                url = uri.toString(),
+                thumbnailUrl = uri.toString(),
+                durationSeconds = 0,
+                width = 0,
+                height = 0
+            ),
+            timestamp = "Just now",
+            fullTimestamp = System.currentTimeMillis(),
+            status = DeliveryStatus.SENDING,
+            isOutgoing = true,
+            isFirstInGroup = true,
+            isLastInGroup = true
+        )
+        
+        _state.update { currentState ->
+            currentState.copy(
+                messages = currentState.messages + newMessage,
+                isSending = false
+            )
+        }
+        
+        Timber.d("Video message sent successfully")
+        // TODO: In real app, upload video and send via repository
+    }
+    
+    /**
+     * 发送位置消息
+     * Send location message
+     */
+    fun sendLocationMessage(latitude: Double, longitude: Double, address: String?, name: String?) {
+        Timber.d("Sending location message: lat=$latitude, lng=$longitude")
+        _state.update { it.copy(isSending = true) }
+        
+        val newMessage = MessageUiModel(
+            id = UUID.randomUUID().toString(),
+            senderId = "user_me",
+            senderName = "Me",
+            senderAvatar = null,
+            type = MessageType.LOCATION,
+            content = MessageContent.Location(
+                latitude = latitude,
+                longitude = longitude,
+                address = address,
+                name = name
+            ),
+            timestamp = "Just now",
+            fullTimestamp = System.currentTimeMillis(),
+            status = DeliveryStatus.SENDING,
+            isOutgoing = true,
+            isFirstInGroup = true,
+            isLastInGroup = true
+        )
+        
+        _state.update { currentState ->
+            currentState.copy(
+                messages = currentState.messages + newMessage,
+                isSending = false
+            )
+        }
+        
+        Timber.d("Location message sent successfully")
+    }
+    
+    /**
+     * 撤回消息
+     * Recall message (within 2 minutes)
+     */
+    fun recallMessage(messageId: String) {
+        val message = _state.value.messages.find { it.id == messageId }
+        if (message == null) {
+            Timber.w("Message not found for recall: $messageId")
+            return
+        }
+        
+        // 检查是否是自己发送的消息
+        if (!message.isOutgoing) {
+            Timber.w("Cannot recall other's message: $messageId")
+            return
+        }
+        
+        // 检查是否在2分钟内
+        val twoMinutesAgo = System.currentTimeMillis() - 2 * 60 * 1000
+        if (message.fullTimestamp < twoMinutesAgo) {
+            Timber.w("Message too old to recall: $messageId")
+            return
+        }
+        
+        Timber.d("Recalling message: $messageId")
+        
+        // 将消息替换为撤回提示
+        val recalledMessage = message.copy(
+            type = MessageType.SYSTEM,
+            content = MessageContent.System(
+                text = "你撤回了一条消息",
+                action = "message_recalled"
+            ),
+            status = DeliveryStatus.READ
+        )
+        
+        _state.update { currentState ->
+            currentState.copy(
+                messages = currentState.messages.map { 
+                    if (it.id == messageId) recalledMessage else it 
+                }
+            )
+        }
+        
+        Timber.d("Message recalled successfully")
+        // TODO: In real app, send recall request via repository
     }
 }

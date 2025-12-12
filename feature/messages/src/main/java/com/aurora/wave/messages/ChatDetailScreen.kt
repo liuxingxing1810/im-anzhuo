@@ -48,6 +48,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
+import com.aurora.wave.messages.ui.MessageAction
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -55,6 +56,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aurora.wave.design.GrayStatusBar
 import com.aurora.wave.messages.ui.ChatInputBar
 import com.aurora.wave.messages.ui.MessageBubble
+import com.aurora.wave.messages.ui.rememberMediaPickerHandlers
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,6 +78,12 @@ fun ChatDetailScreen(
     
     // 灰色状态栏
     GrayStatusBar()
+    
+    // 媒体选择器
+    val mediaPickerHandlers = rememberMediaPickerHandlers(
+        onImageSelected = { uri -> viewModel.sendImageMessage(uri) },
+        onVideoSelected = { uri -> viewModel.sendVideoMessage(uri) }
+    )
     
     // 首次加载完成后滚动到底部（不使用动画，立即跳转）
     LaunchedEffect(state.isLoading, state.messages.size) {
@@ -300,6 +308,17 @@ fun ChatDetailScreen(
                                 MessageBubble(
                                     message = message,
                                     onAvatarClick = { senderId -> onContactClick(senderId) },
+                                    onMessageAction = { action, msg ->
+                                        when (action) {
+                                            MessageAction.RECALL -> viewModel.recallMessage(msg.id)
+                                            MessageAction.DELETE -> { /* TODO: 删除消息 */ }
+                                            MessageAction.FORWARD -> { /* TODO: 转发消息 */ }
+                                            MessageAction.REPLY -> { /* TODO: 回复消息 */ }
+                                            MessageAction.QUOTE -> { /* TODO: 引用消息 */ }
+                                            MessageAction.FAVORITE -> { /* TODO: 收藏消息 */ }
+                                            else -> { /* COPY 已在 MessageBubble 内部处理 */ }
+                                        }
+                                    },
                                     modifier = Modifier.padding(vertical = 2.dp)
                                 )
                             }
@@ -316,9 +335,15 @@ fun ChatDetailScreen(
                 onVoiceClick = { /* TODO */ },
                 onEmojiClick = { /* TODO */ },
                 onAttachClick = { /* TODO */ },
-                onCameraClick = { /* TODO */ },
+                onCameraClick = mediaPickerHandlers.onTakePhoto,
                 isSending = state.isSending,
-                onPanelStateChange = { isOpen -> isPanelOpen = isOpen }
+                onPanelStateChange = { isOpen -> isPanelOpen = isOpen },
+                onPhotoClick = mediaPickerHandlers.onPickPhoto,
+                onLocationClick = { /* TODO: 打开位置选择器 */ },
+                onRedPacketClick = { /* TODO: 打开红包页面 */ },
+                onTransferClick = { /* TODO: 打开转账页面 */ },
+                onVideoCallClick = onVideoCallClick,
+                onVoiceCallClick = onCallClick
             )
         }
     }

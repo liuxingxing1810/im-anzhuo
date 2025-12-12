@@ -28,7 +28,10 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.NotificationsOff
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material.icons.filled.Videocam
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -39,9 +42,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -67,13 +72,17 @@ fun ContactDetailScreen(
     onBackClick: () -> Unit,
     onChatClick: () -> Unit = {},
     onCallClick: () -> Unit = {},
-    onVideoCallClick: () -> Unit = {}
+    onVideoCallClick: () -> Unit = {},
+    onShareClick: () -> Unit = {}
 ) {
     // Mock data - would come from ViewModel
     val contactName = "Alice Anderson"
     val contactBio = "Life is beautiful 🌸"
     val isOnline = true
     var isMuted by remember { mutableStateOf(false) }
+    var isStarred by remember { mutableStateOf(false) }
+    var remark by remember { mutableStateOf("") }
+    var showRemarkDialog by remember { mutableStateOf(false) }
     
     // 灰色状态栏
     GrayStatusBar()
@@ -243,6 +252,33 @@ fun ContactDetailScreen(
                 )
             ) {
                 Column {
+                    // 设置备注
+                    SettingsRow(
+                        icon = Icons.Default.Edit,
+                        title = "设置备注",
+                        trailing = {
+                            Text(
+                                text = remark.ifEmpty { "未设置" },
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        },
+                        onClick = { showRemarkDialog = true }
+                    )
+                    
+                    // 星标好友
+                    SettingsRow(
+                        icon = if (isStarred) Icons.Default.Star else Icons.Default.StarBorder,
+                        title = "星标好友",
+                        trailing = {
+                            Switch(
+                                checked = isStarred,
+                                onCheckedChange = { isStarred = it }
+                            )
+                        }
+                    )
+                    
+                    // 消息免打扰
                     SettingsRow(
                         icon = if (isMuted) Icons.Default.NotificationsOff else Icons.Default.Notifications,
                         title = stringResource(R.string.contact_mute_notifications),
@@ -286,6 +322,39 @@ fun ContactDetailScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
         }
+    }
+    
+    // 备注对话框
+    if (showRemarkDialog) {
+        var tempRemark by remember { mutableStateOf(remark) }
+        AlertDialog(
+            onDismissRequest = { showRemarkDialog = false },
+            title = { Text("设置备注") },
+            text = {
+                OutlinedTextField(
+                    value = tempRemark,
+                    onValueChange = { tempRemark = it },
+                    label = { Text("备注名") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        remark = tempRemark
+                        showRemarkDialog = false
+                    }
+                ) {
+                    Text("确定")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showRemarkDialog = false }) {
+                    Text("取消")
+                }
+            }
+        )
     }
 }
 

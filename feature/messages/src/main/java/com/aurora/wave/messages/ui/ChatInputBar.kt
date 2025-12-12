@@ -36,7 +36,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.CardGiftcard
 import androidx.compose.material.icons.filled.ContactPage
 import androidx.compose.material.icons.filled.EmojiEmotions
 import androidx.compose.material.icons.filled.Folder
@@ -105,7 +104,14 @@ fun ChatInputBar(
     isSending: Boolean = false,
     onPanelStateChange: (Boolean) -> Unit = {},  // 面板状态变化回调：true=打开, false=关闭
     onVoiceRecordStart: () -> Unit = {},
-    onVoiceRecordStop: () -> Unit = {}
+    onVoiceRecordStop: () -> Unit = {},
+    // 媒体选择回调
+    onPhotoClick: () -> Unit = {},
+    onLocationClick: () -> Unit = {},
+    onRedPacketClick: () -> Unit = {},
+    onTransferClick: () -> Unit = {},
+    onVideoCallClick: () -> Unit = {},
+    onVoiceCallClick: () -> Unit = {}
 ) {
     val hasText = text.isNotBlank()
     
@@ -230,14 +236,13 @@ fun ChatInputBar(
                 ) + fadeOut(animationSpec = tween(150))
             ) {
                 ExtensionPanel(
-                    onPhotoClick = { /* TODO */ },
+                    onPhotoClick = onPhotoClick,
                     onCameraClick = onCameraClick,
-                    onVideoCallClick = { /* TODO */ },
-                    onVoiceCallClick = { /* TODO */ },
-                    onLocationClick = { /* TODO */ },
-                    onRedPacketClick = { /* TODO */ },
-                    onGiftClick = { /* TODO */ },
-                    onTransferClick = { /* TODO */ },
+                    onVideoCallClick = onVideoCallClick,
+                    onVoiceCallClick = onVoiceCallClick,
+                    onLocationClick = onLocationClick,
+                    onRedPacketClick = onRedPacketClick,
+                    onTransferClick = onTransferClick,
                     onVoiceInputClick = { /* TODO */ },
                     onFavoriteClick = { /* TODO */ },
                     onContactClick = { /* TODO */ },
@@ -463,7 +468,6 @@ private fun ExtensionPanel(
     onVoiceCallClick: () -> Unit,
     onLocationClick: () -> Unit,
     onRedPacketClick: () -> Unit,
-    onGiftClick: () -> Unit,
     onTransferClick: () -> Unit,
     onVoiceInputClick: () -> Unit,
     onFavoriteClick: () -> Unit,
@@ -479,7 +483,6 @@ private fun ExtensionPanel(
         ExtensionItem(Icons.Default.Phone, "语音通话", onVoiceCallClick),
         ExtensionItem(Icons.Default.LocationOn, "位置", onLocationClick),
         ExtensionItem(Icons.Default.Redeem, "红包", onRedPacketClick),
-        ExtensionItem(Icons.Default.CardGiftcard, "礼物", onGiftClick),
         ExtensionItem(Icons.Default.SwapHoriz, "转账", onTransferClick)
     )
     
